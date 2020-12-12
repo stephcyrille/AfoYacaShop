@@ -39,6 +39,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+INSTALLED_APPS += (
+    "account",
+    "cart",
+    "checkout",
+    "editorial",
+    "payment",
+    "products",
+    "settings",
+)
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -51,13 +61,15 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'afroyacaCore.urls'
 
+TEMPLATES_ROOT = os.path.join(BASE_DIR, "templates")
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATES_ROOT],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'settings.stores.processors.cart_items_number',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -66,6 +78,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'afroyacaCore.wsgi.application'
 
@@ -76,7 +89,7 @@ WSGI_APPLICATION = 'afroyacaCore.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'afroyacadrum',
+        'NAME': 'afroyacadrum_dev',
         'USER': 'afroyacadrum',
         'PASSWORD': 'afroyacadrum',
         'HOST': 'localhost',

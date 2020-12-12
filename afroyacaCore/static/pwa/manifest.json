@@ -1,0 +1,25 @@
+{
+  "name": "Afro Yaca Drum",
+  "short_name": "AYD",
+  "start_url": "/shop/",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "./icons/android-icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/favicon.ico",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
