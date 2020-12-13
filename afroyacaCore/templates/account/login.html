@@ -10,133 +10,6 @@
 
 
 {% block content %}
-
-   <header id="header">
-    <div class="header_top">
-      <div class="container">
-        <div class="row" style="margin-left: 0px; margin-right: 0px">
-          <div class="col-sm-6">
-            <div class="contactinfo">
-              <ul class="nav nav-pills">
-                <li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
-                <li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="social-icons pull-right">
-              <ul class="nav navbar-nav">
-                <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
-                <li><a href="#"><i class="fab fa-google-plus"></i></a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="header-middle">
-      <div class="container">
-        <div class="row" style="padding-top: 0; padding-bottom: 0 ">
-          <div class="col-md-4 clearfix">
-            <div class="logo pull-left">
-              <a href="/"><img class="img-fluid" width="120px" src="/static/images/logo.jpg" alt="" /></a>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="open_day_wrapper">
-              <span class="open_day_title">Heures d'ouverture</span> <br />
-              <span class="open_day">Lundi à Vendredi: 8h - 20h</span> <br />
-              <span class="open_day">Samedi: 8h - 20h</span> <br />
-            </div>
-          </div>
-          <div class="col-md-4 clearfix shop-menu-clear">
-            {% if not "/auth/web/login" == request.path %}
-            <div class="shop-menu clearfix pull-right">
-              <ul class="nav navbar-nav">
-                <li><a href="/favorites/"><i class="far fa-heart fa-2x"></i> <span class="heart-custom-badge badge badge-secondary">{{ favourite_items_quantity }}</span></a></li>
-                <li class="dropdown cart-link">
-                  <a href="/carts/" class="nav-link">
-                    <i class="fa fa-shopping-cart fa-2x"></i> <span class="custom-badge badge badge-secondary">{{ cart_items_quantity }}</span>
-                  </a>
-
-
-                  <!--div class={`shopping-cart_item_add_wrapper ${ new_item ? 'active' : null }`}-->
-                  <div class="shopping-cart_item_add_wrapper">
-                    <i class="fa fa-chevron-up fa-2x custom-fa"></i>
-                    <div class="shopping-cart_item_add">
-                      <div class="img-wrapper">
-                        <img src="/static/images/dress2.png"  class="cart_flash_add_image" alt="" />
-                      </div>
-                      <div class="btn-wrapper">
-                        <Button
-                          type="submit"
-                          fullWidth
-                          variant="contained"
-                          color="secondary"
-                        >
-                          Retirer du panier
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                  {% if user.is_authenticated %}
-                    <div class="logged_in_bloc">
-                      <span class="dropdown-toggle user_middle_nav" data-toggle="dropdown">
-                        <i class="fa fa-user fa-2x"></i>
-                      </span>
-                      <ul class="dropdown-menu" style="z-index : 2000">
-                        <li
-                          class="user_middle_nav_li"
-                          style="border-bottom: 1px solid lightgrey; padding-bottom: 10px"
-                        >
-                          <a href="/account/my-orders/">Mes commandes</a>
-                        </li>
-                        <li
-                          class="user_middle_nav_li"
-                          style="padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid lightgrey"
-                        >
-                          <a href="/account/service/oh-my-box/">Ma Box</a>
-                        </li>
-                        <li
-                          class="user_middle_nav_li"
-                          style="padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid lightgrey"
-                        >
-                          <a href="/account/settings/">Préférences</a>
-                        </li>
-                        <li
-                          class="user_middle_nav_li"
-                          style="padding-top: 10px"
-                        >
-                          <a href="/auth/web/logout">Se déconnecter</a>
-                        </li>
-                      </ul>
-                    </div>
-
-                  {% else %}
-                    <a href="/auth/web/login">
-                      <img
-                        src="/static/images/icons/login.png"
-                        alt="Icon login"
-                        style="width: 30px; margin-bottom: 15px"
-                      />
-                    </a>
-                  {% endif %}
-                </li>
-              </ul>
-            </div>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
@@ -168,7 +41,7 @@
                             </label>
                         </div>
                         <div>
-                            <a href="#" class="txt1">
+                            <a href="{% url 'password_reset' %}" class="txt1">
                                 Mot de passe oublié?
                             </a>
                         </div>
