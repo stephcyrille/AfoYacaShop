@@ -1,5 +1,5 @@
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
     position: relative;
     font-weight: 400px;
     background-color: #fff;

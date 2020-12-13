@@ -2,10 +2,11 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Se connecter | Afro Yaca Drum{% endblock %}
+{% block title %}Enregistrement | Afro Yaca Drum{% endblock %}
 
 {% block custom_style %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/login/login.css' %}?version=1" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login/registration.css' %}?version=1" />
 {% endblock %}
 
 
@@ -137,63 +138,86 @@
   </header>
 
 
-    <div class="limiter">
-        <div class="container-login100">
-            <div class="wrap-login100">
-                <form class="login100-form validate-form">
-                    <span class="login100-form-title p-b-43">
-                        Connectez-vous pour continuer
-                    </span>
-                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                        <input class="input100" type="text" name="email" autocomplete="false">
-                        <span class="focus-input100"></span>
-                        <span class="label-input100">Email</span>
-                    </div>
-                    <div class="wrap-input100 validate-input" data-validate="Password is required">
-                        <input class="input100" type="password" name="password" autocomplete="false">
-                        <span class="focus-input100"></span>
-                        <span class="label-input100">Mot de passe</span>
-                    </div>
-                    <div class="flex-sb-m w-full p-t-3 p-b-32">
-                        <div class="contact100-form-checkbox">
-                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                            <label class="label-checkbox100" for="ckb1">
-                                Se souvenir de moi
-                            </label>
-                        </div>
-                        <div>
-                            <a href="#" class="txt1">
-                                Mot de passe oublié?
-                            </a>
-                        </div>
-                    </div>
-                    <div class="container-login100-form-btn">
-                        <button class="login100-form-btn">
-                            Se connecter
-                        </button>
-                    </div>
-                    <div class="login100-form-social flex-c-m p-t-20 p-b-20">
-                        <span class="social_login_text text-center">Connectez-vous avec </span>
-                        <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-                            <i class="fab fa-facebook-f" aria-hidden="true"></i>
-                        </a>
-                        <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
-                            <i class="fab fa-twitter" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                    <hr />
-                    <div class="text-center">
-                        <h4>Première visite ?</h4>
-                        <p>Inscrivez-vous en un click !</p><br />
-                        <a href="{% url 'registration' %}" class="login100-form-btn">
-                            S'inscrire
-                        </a>
-                    </div>
-                </form>
-                <div class="login100-more" style="background-image: url('/static/images/styled.jpeg');">
+    <div class="container-fluid">
+      <div class="row" style="height: 100%">
+        <div class="col-md-6 col-xs-12">
+          <div class="container" style="padding-left: 60px; padding-top: 20px">
+            <a href="{% url 'login' %}">
+              <i class="fa fa-arrow-left" style="margin-right: 10px"></i>
+              <span class="">Revenir en arrière</span>
+            </a>
+          </div>
+          <form class="login100-form validate-form" autocomplete="off">
+              <span class="login100-form-title p-b-43">
+                  Inscrivez-vous
+              </span>
+              <div style="padding-bottom: 15px">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" checked>
+                  <label class="form-check-label" for="inlineRadio2">Madame</label>
                 </div>
-            </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                  <label class="form-check-label" for="inlineRadio1">Monsieur</label>
+                </div>
+              </div>
+              <div class="wrap-input100 validate-input" data-validate="Saisissez un nom">
+                  <input class="input100" type="text" name="name" autocomplete="off">
+                  <span class="focus-input100"></span>
+                  <span class="label-input100">Nom</span>
+              </div>
+              <div class="wrap-input100 validate-input" data-validate="Saisissez un prénom">
+                  <input class="input100" type="text" name="surname" autocomplete="off">
+                  <span class="focus-input100"></span>
+                  <span class="label-input100">Prénom</span>
+              </div>
+              <div class="wrap-input100 validate-input" data-validate="La date de naissance est obligatoire">
+                  <input class="input100" type="date" name="date" autocomplete="off">
+                  <span class="focus-input100"></span>
+              </div>
+              <div class="wrap-input100 validate-input" data-validate="Insérer une adresse email valide ex@abc.xyz">
+                  <input class="input100" type="text" name="email" autocomplete="off">
+                  <span class="focus-input100"></span>
+                  <span class="label-input100">Email</span>
+              </div>
+              <div class="wrap-input100 validate-input" data-validate="Le mot de passe est obligatoire">
+                  <input class="input100" type="password" name="password">
+                  <span class="focus-input100"></span>
+                  <span class="label-input100">Mot de passe</span>
+              </div>
+              <div class="form-check form-check-inline" style="padding-top: 10px">
+                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                <label class="form-check-label" for="inlineCheckbox1" style="padding-left: 10px">S'inscrire à la newsletter de AYD</label>
+              </div>
+              <div class="form-group" style="margin-top: 40px">
+                <label for="exampleFormControlTextarea1">Condition générales d'utilisation</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled="true" style="resize: none;">
+Les données identifiées par une * sont nécessaires pour ce traitement. Le fait de ne pas les communiquer rendrait impossible le traitement de votre demande.
+Vos données font l’objet d’un traitement par les sociétés BUNSHA SAS et KIABI Europe conjointement responsables, destiné au suivi de votre commande, au suivi du programme de fidélité si vous y avez souscrit, à la gestion de notre relation commerciale, et à l’envoi d’offres commerciales si vous donnez votre accord. Vous êtes susceptibles de recevoir nos offres commerciales par voie postale à votre adresse de facturation. Vous pouvez vous y opposer à tout moment en contactant les adresses mentionnées ci-dessous. Elles pourront être utilisées pour la réalisation d’analyses de préférences. Kiabi partage certaines données avec ses partenaires membres de l’alliance VALIUZ. Pour plus de détails sur les conditions de ce traitement ou pour vous opposer à ce traitement, cliquez ici www.valiuz.com ou pour vous opposer https://valiuz.com/mes-droits
+Vous disposez d’un droit d’accès, de rectification, de portabilité, de limitation, d’effacement, de transmission de directives anticipées et d’opposition aux données vous concernant en contactant contact@kiabi.com ou en cas de difficultés, vous pouvez envoyer un email à : dataprotectionofficer@kiabi.com
+
+Pour en savoir plus : Mes données personnelles
+
+                </textarea>
+              </div>
+              <div class="container-login100-form-btn">
+                  <button class="login100-form-btn">
+                      Valider mon inscription
+                  </button>
+              </div>
+
+              <div class="text-center p-t-46 p-b-20">
+                  <p class="txt2 text-center">
+                      Ce site est protégé par reCAPTCHA. <a href="https://policies.google.com/privacy">Les règles de confidentialité</a> et <a href="https://policies.google.com/terms">les conditions d’utilisation de Google</a> s’appliquent.
+                  </p>
+              </div>
+
+          </form>
         </div>
+        <div class="col-md-6 pic_bloc" style="padding: 0px; width: 100%; background-image: url('/static/images/rob2.jpg'); background-size: cover">
+          PIC
+        </div>
+      </div>
     </div>
 
 
