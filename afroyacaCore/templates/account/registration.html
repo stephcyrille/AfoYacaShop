@@ -163,31 +163,34 @@
                   <label class="form-check-label" for="male">Monsieur</label>
                 </div>
               </div>
+
+              <div class="error_form">{{ form.first_name.errors }}</div>
               <div class="wrap-input100 validate-input" data-validate="Saisissez un nom">
-                  {{ form.first_name.errors }}
                   {{ form.first_name }}
-                  <span class="focus-input100"></span>
+                  <span class="{% if not form.first_name.errors %}focus-input100{% else %}focus-input100_error{% endif %}"></span>
                   <span class="label-input100">Nom</span>
               </div>
+
+              <div class="error_form">{{ form.last_name.errors }}</div>
               <div class="wrap-input100 validate-input" data-validate="Saisissez un prénom">
-                  {{ form.last_name.errors }}
                   {{ form.last_name }}
-                  <span class="focus-input100"></span>
+                  <span class="{% if not form.last_name.errors %}focus-input100{% else %}focus-input100_error{% endif %}"></span>
                   <span class="label-input100">Prénom</span>
               </div>
+
+              <div class="error_form">{{ form.birth_date.errors }}</div>
               <div class="wrap-input100 validate-input" data-validate="La date de naissance est obligatoire">
-                  {{ form.birth_date.errors }}
                   {{ form.birth_date }}
-                  <span class="focus-input100"></span>
+                  <span class="{% if not form.birth_date.errors %}focus-input100{% else %}focus-input100_error{% endif %}"></span>
               </div>
+
+              <div class="error_form">{{ form.email.errors }}</div>
               <div class="wrap-input100 validate-input" data-validate="Insérer une adresse email valide ex@abc.xyz">
-                  {{ form.email.errors }}
                   {{ form.email }}
-                  <span class="focus-input100"></span>
+                  <span class="{% if not form.email.errors %}focus-input100{% else %}focus-input100_error{% endif %}"></span>
                   <span class="label-input100">Email</span>
               </div>
               <div class="wrap-input100 validate-input" data-validate="Le mot de passe est obligatoire">
-                  {{ form.password.errors }}
                   {{ form.password }}
                   <span class="focus-input100"></span>
                   <span class="label-input100">Mot de passe</span>

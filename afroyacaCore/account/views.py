@@ -39,15 +39,15 @@ class LoginView(TemplateView):
 
 class RegistrationView(TemplateView):
     template_name = 'account/registration.html'
+    file_path = os.path.join(BASE_DIR, 'datas', 'text', 'cgu.txt')
+    cgu = file_reader.read_file(file_path)
 
     def get(self, request, **kwargs):
-        file_path = os.path.join(BASE_DIR, 'datas', 'text', 'cgu.txt')
-        cgu = file_reader.read_file(file_path)
         form = AddEndUserForm()
 
         context = {
             "form": form,
-            "cgu": cgu,
+            "cgu": self.cgu,
         }
         return render(request, self.template_name, context)
 
@@ -56,10 +56,12 @@ class RegistrationView(TemplateView):
             form = AddEndUserForm(request.POST)
             if form.is_valid():
                 form.save()
+                return redirect('login')
         else:
             form = AddEndUserForm()
         context = {
             'form': form,
+            "cgu": self.cgu,
         }
 
         return render(request, self.template_name, context)
