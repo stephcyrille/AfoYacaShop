@@ -20,3 +20,49 @@
 form {
     font-size: 1.1em;
 }
+
+.login100-form-btn_2{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    width: 100%;
+    height: 50px;
+    border-radius: 10px;
+    background: #fff;
+    font-size: 12px;
+    color: #000;
+    border: 2px solid black;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    -webkit-transition: all .4s;
+    -o-transition: all .4s;
+    -moz-transition: all .4s;
+    transition: all .4s;
+}
+
+.login100-form-btn_2:hover{
+    background:#333;
+    color: #fff;
+}
+
+.error_message_login{
+    font-style: italic;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 0.9em;
+    color: #f56464;
+}
+
+@media(max-width:992px){
+    .login100-form-btn_2{
+        width:100%;
+        padding-left:30px;
+        padding-right:30px
+    }
+}

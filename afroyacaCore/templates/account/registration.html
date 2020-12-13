@@ -55,7 +55,7 @@
             </div>
           </div>
           <div class="col-md-4 clearfix shop-menu-clear">
-            {% if not "/auth/web/login" == request.path %}
+            {% if not "/auth/web/registration" == request.path %}
             <div class="shop-menu clearfix pull-right">
               <ul class="nav navbar-nav">
                 <li><a href="/favorites/"><i class="far fa-heart fa-2x"></i> <span class="heart-custom-badge badge badge-secondary">{{ favourite_items_quantity }}</span></a></li>
@@ -147,41 +147,48 @@
               <span class="">Revenir en arrière</span>
             </a>
           </div>
-          <form class="login100-form validate-form" autocomplete="off">
+          <form class="login100-form validate-form" autocomplete="off" method="post" action="{% url 'registration' %}">
+              {% csrf_token %}
+              {{ form.non_field_errors }}
               <span class="login100-form-title p-b-43">
                   Inscrivez-vous
               </span>
-              <div style="padding-bottom: 15px">
+              <div style="padding-bottom: 15px" class="text-center">
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" checked>
-                  <label class="form-check-label" for="inlineRadio2">Madame</label>
+                  <input class="form-check-input" type="radio" name="gender" id="female" value="female" checked>
+                  <label class="form-check-label" for="female">Madame</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                  <label class="form-check-label" for="inlineRadio1">Monsieur</label>
+                  <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+                  <label class="form-check-label" for="male">Monsieur</label>
                 </div>
               </div>
               <div class="wrap-input100 validate-input" data-validate="Saisissez un nom">
-                  <input class="input100" type="text" name="name" autocomplete="off">
+                  {{ form.first_name.errors }}
+                  {{ form.first_name }}
                   <span class="focus-input100"></span>
                   <span class="label-input100">Nom</span>
               </div>
               <div class="wrap-input100 validate-input" data-validate="Saisissez un prénom">
-                  <input class="input100" type="text" name="surname" autocomplete="off">
+                  {{ form.last_name.errors }}
+                  {{ form.last_name }}
                   <span class="focus-input100"></span>
                   <span class="label-input100">Prénom</span>
               </div>
               <div class="wrap-input100 validate-input" data-validate="La date de naissance est obligatoire">
-                  <input class="input100" type="date" name="date" autocomplete="off">
+                  {{ form.birth_date.errors }}
+                  {{ form.birth_date }}
                   <span class="focus-input100"></span>
               </div>
               <div class="wrap-input100 validate-input" data-validate="Insérer une adresse email valide ex@abc.xyz">
-                  <input class="input100" type="text" name="email" autocomplete="off">
+                  {{ form.email.errors }}
+                  {{ form.email }}
                   <span class="focus-input100"></span>
                   <span class="label-input100">Email</span>
               </div>
               <div class="wrap-input100 validate-input" data-validate="Le mot de passe est obligatoire">
-                  <input class="input100" type="password" name="password">
+                  {{ form.password.errors }}
+                  {{ form.password }}
                   <span class="focus-input100"></span>
                   <span class="label-input100">Mot de passe</span>
               </div>
@@ -192,12 +199,7 @@
               <div class="form-group" style="margin-top: 40px">
                 <label for="exampleFormControlTextarea1">Condition générales d'utilisation</label>
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled="true" style="resize: none;">
-Les données identifiées par une * sont nécessaires pour ce traitement. Le fait de ne pas les communiquer rendrait impossible le traitement de votre demande.
-Vos données font l’objet d’un traitement par les sociétés BUNSHA SAS et KIABI Europe conjointement responsables, destiné au suivi de votre commande, au suivi du programme de fidélité si vous y avez souscrit, à la gestion de notre relation commerciale, et à l’envoi d’offres commerciales si vous donnez votre accord. Vous êtes susceptibles de recevoir nos offres commerciales par voie postale à votre adresse de facturation. Vous pouvez vous y opposer à tout moment en contactant les adresses mentionnées ci-dessous. Elles pourront être utilisées pour la réalisation d’analyses de préférences. Kiabi partage certaines données avec ses partenaires membres de l’alliance VALIUZ. Pour plus de détails sur les conditions de ce traitement ou pour vous opposer à ce traitement, cliquez ici www.valiuz.com ou pour vous opposer https://valiuz.com/mes-droits
-Vous disposez d’un droit d’accès, de rectification, de portabilité, de limitation, d’effacement, de transmission de directives anticipées et d’opposition aux données vous concernant en contactant contact@kiabi.com ou en cas de difficultés, vous pouvez envoyer un email à : dataprotectionofficer@kiabi.com
-
-Pour en savoir plus : Mes données personnelles
-
+                    {{ cgu }}
                 </textarea>
               </div>
               <div class="container-login100-form-btn">

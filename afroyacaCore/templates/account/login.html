@@ -140,24 +140,30 @@
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
-                <form class="login100-form validate-form">
+                <form method="post" action="{% url 'login' %}" class="login100-form validate-form">
+                    {% csrf_token %}
                     <span class="login100-form-title p-b-43">
                         Connectez-vous pour continuer
                     </span>
-                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                    {% if message %}
+                        <ul class='form-errors error_message_login'>
+                          <li>{{ message }}</li>
+                        </ul>
+                    {% endif %}
+                    <div class="wrap-input100 validate-input" data-validate="Adresse emæil invalide: ex@abc.xyz">
                         <input class="input100" type="text" name="email" autocomplete="false">
                         <span class="focus-input100"></span>
                         <span class="label-input100">Email</span>
                     </div>
-                    <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    <div class="wrap-input100 validate-input" data-validate="Le mot de passe est obligatoire">
                         <input class="input100" type="password" name="password" autocomplete="false">
                         <span class="focus-input100"></span>
                         <span class="label-input100">Mot de passe</span>
                     </div>
                     <div class="flex-sb-m w-full p-t-3 p-b-32">
                         <div class="contact100-form-checkbox">
-                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                            <label class="label-checkbox100" for="ckb1">
+                            <input class="input-checkbox100" id="remember-me" type="checkbox" name="remember-me">
+                            <label class="label-checkbox100" for="remember-me">
                                 Se souvenir de moi
                             </label>
                         </div>
@@ -178,14 +184,14 @@
                             <i class="fab fa-facebook-f" aria-hidden="true"></i>
                         </a>
                         <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
-                            <i class="fab fa-twitter" aria-hidden="true"></i>
+                            <i class="fab fa-twitter-square" aria-hidden="true"></i>
                         </a>
                     </div>
                     <hr />
-                    <div class="text-center">
+                    <div class="text-center pt-3">
                         <h4>Première visite ?</h4>
                         <p>Inscrivez-vous en un click !</p><br />
-                        <a href="{% url 'registration' %}" class="login100-form-btn">
+                        <a href="{% url 'registration' %}" class="login100-form-btn_2">
                             S'inscrire
                         </a>
                     </div>
