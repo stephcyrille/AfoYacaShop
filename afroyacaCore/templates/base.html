@@ -125,6 +125,7 @@
                     </div>
                   </div>
                 </li>
+                <li>
                   {% if user.is_authenticated %}
                     <div class="logged_in_bloc">
                       <span class="dropdown-toggle user_middle_nav" data-toggle="dropdown">
@@ -153,13 +154,13 @@
                           class="user_middle_nav_li"
                           style="padding-top: 10px"
                         >
-                          <a href="/auth/web/logout">Se déconnecter</a>
+                          <a href="{% url 'logout' %}">Se déconnecter</a>
                         </li>
                       </ul>
                     </div>
 
                   {% else %}
-                    <a href="/auth/web/login">
+                    <a href="{% url 'signin' %}">
                       <img
                         src="/static/images/icons/login.png"
                         alt="Icon login"

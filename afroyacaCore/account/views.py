@@ -56,7 +56,7 @@ class RegistrationView(TemplateView):
             form = AddEndUserForm(request.POST)
             if form.is_valid():
                 form.save()
-                return redirect('login')
+                return redirect('signin')
         else:
             form = AddEndUserForm()
         context = {
@@ -65,11 +65,3 @@ class RegistrationView(TemplateView):
         }
 
         return render(request, self.template_name, context)
-
-
-class LogoutView(TemplateView):
-    template_name = 'account/login.html'
-
-    def get(self, request, **kwargs):
-        logout(request)
-        redirect('login')
