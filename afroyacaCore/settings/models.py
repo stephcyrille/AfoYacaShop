@@ -30,7 +30,63 @@ class MainMenuNavPicture(CoreTrackedModel):
     editorial = models.FileField(upload_to=main_menu_pic_upload_path, null=True, blank=True)
 
     def __str__(self):
-        return self.pk
+        return "banner - %s" % self.pk
+
+    def get_clothing_picture(self):
+        """
+        Get only one picture
+        """
+        picture = self.clothing.url
+        return picture
+
+    def get_shoe_picture(self):
+        """
+        Get only one picture
+        """
+        picture = self.shoes.url
+        return picture
+
+    def get_bag_picture(self):
+        """
+        Get only one picture
+        """
+        picture = self.bag.url
+        return picture
+
+    def get_accessory_picture(self):
+        """
+        Get only one picture
+        """
+        picture = self.accessory.url
+        return picture
+
+    def get_jewelry_picture(self):
+        """
+        Get only one picture
+        """
+        picture = self.jewelery.url
+        return picture
+
+    def get_lingerie_picture(self):
+        """
+        Get only one picture
+        """
+        picture = self.lingerie.url
+        return picture
+
+    def get_beauty_picture(self):
+        """
+        Get only one picture
+        """
+        picture = self.beauty.url
+        return picture
+
+    def get_editorial_picture(self):
+        """
+        Get only one picture
+        """
+        picture = self.editorial.url
+        return picture
 
 
 class SeoPage(CoreTrackedModel):

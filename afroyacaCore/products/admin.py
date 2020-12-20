@@ -1,3 +1,16 @@
 from django.contrib import admin
+from .models import *
 
-# Register your models here.
+all_models = [
+    Product,
+    Variety,
+    Group,
+    Category,
+    Catalog,
+    Size,
+    Color,
+    Collection
+]
+
+for m in all_models:
+    admin.site.register(m)

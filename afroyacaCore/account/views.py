@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import *
 from django.views.generic import TemplateView
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login
 from django.conf import settings
 
 import os

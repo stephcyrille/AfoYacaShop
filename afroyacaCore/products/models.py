@@ -1,3 +1,4 @@
+import random
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
@@ -136,6 +137,34 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse("single_product", kwargs={"slug": self.slug})
+
+    def get_pictures(self):
+        """
+        Get max 4 pictures
+        """
+        pics = []
+        # si le queryset services_of_pack est grand
+        v = Variety.objects.filter(product=self).first()
+
+        if v is not None:
+            if v.picture1:
+                pics.append(v.picture1.url)
+            if v.picture2:
+                pics.append(v.picture2.url)
+            if v.picture3:
+                pics.append(v.picture3.url)
+            if v.picture4:
+                pics.append(v.picture4.url)
+
+        return pics
+
+    def get_single_picture(self):
+        """
+        Get only one picture
+        """
+        pictures = self.get_pictures()
+        pic = random.choice(pictures)
+        return pic
 
 
 class Color(models.Model):

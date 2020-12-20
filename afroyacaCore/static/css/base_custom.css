@@ -1,0 +1,8 @@
+.mega_nav_pic_title{
+    color: #585858;
+    transition: ease-in 0.7s:
+}
+.mega_nav_pic_title:hover{
+    color: #000;
+    transition: ease-out 0.7s:
+}
