@@ -42,3 +42,15 @@ class Article(models.Model):
 
     def __str__(self):
         return '%s - %s' % (self.title, self.author)
+
+    def get_cover_picture(self):
+        """
+        Get only one picture
+        """
+        return self.coverImage.url
+
+    def get_article_picture(self):
+        """
+        Get only one picture
+        """
+        return self.articleImage.url

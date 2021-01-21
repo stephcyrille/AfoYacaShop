@@ -116,4 +116,11 @@ class Banner(CoreTrackedModel):
     def __str__(self):
         return '%s' % self.name
 
+    def get_picture(self):
+        """
+        Get only one picture
+        """
+        picture = self.picture.url
+        return picture
+
 
