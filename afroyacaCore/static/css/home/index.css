@@ -94,6 +94,7 @@
     padding-top: 15px;
     line-height: 1.2;
     font-weight: normal;
+    color: rgba(0, 0, 0, 0.85) !important;
 }
 
 .home_news_pic_block{
@@ -134,6 +135,7 @@
     padding-top: 15px;
     line-height: 1.2;
     font-weight: normal;
+    color: rgba(0, 0, 0, 0.85)
     /* padding-bottom: 10px; */
 }
 

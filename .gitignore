@@ -1,6 +1,7 @@
-frontend/node_modules/
+horizontal_scroll/node_modules/
 *.pyc
 afroyacaCore/.idea
 afroyacaCore/.cache
 afroyacaCore/media
 py3venv/
+VPS/

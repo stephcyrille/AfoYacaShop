@@ -83,6 +83,12 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse("single_category", kwargs={"slug": self.slug})
 
+    def get_single_picture(self):
+        """
+        Get only one picture
+        """
+        return self.picture.url
+
 
 # Dress, skirt, Polo, shirt, Jeans, etc.
 class Group(models.Model):
