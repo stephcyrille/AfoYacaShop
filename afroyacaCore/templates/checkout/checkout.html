@@ -1,0 +1,189 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta_tags %}
+  <meta name="description" content="Vente des vêtements afro, chics et tendances."
+      xmlns:padding-left="http://www.w3.org/1999/xhtml"/>
+  <meta name="keywords" content="AFY,Fashion,Mode,Afro" />
+  <meta property="og:description" content="Vente des vêtements afro, chics et tendances" />
+  <meta property="og:title" content="Afro Yaca Drum" />
+  <meta property="og:url" content="http://www.afroyacadrum.cm" />
+  <meta property="og:image" content="http://www.afroyacadrum.cm/static/images/acc.jpg" />
+{% endblock %}
+
+{% block title %}Checkout | Afro Yaca Drum{% endblock %}
+
+{% block custom_style %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/checkout/checkout.css' %}?version=1" />
+{% endblock %}
+
+{% block content %}
+  <section style="padding-top: 50px; padding-bottom: 50px">
+      <div class="container whole_stepper_content">
+          <div class="row justify-content-center">
+            <div class="col-sm-8">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="step_two_bloc">
+                    <h2>Adresse de Livraison</h2>
+                    <p>
+                      Saisissez votre adresse de livraison pour connaître les options de livraison et les délais.
+                      Les restrictions de livraison appliquées peuvent nous contraindre à refuser votre commande.
+                    </p>
+                    <div class="row" style="margin-right: 0; margin-left: 0">
+                      <div class="col-6" style="padding-left: 0">
+                        <div
+                          class="ddress_bloc active"
+                          onClick={ this.handleChangeAddress.bind(this, val.id) }
+                        >
+                          <div class="add_address_bloc">
+                            <h5 style="text-transform: uppercase">
+                              <!--{ user ? `${user.userprofile.first_name} ${user.userprofile.last_name}` : null }-->
+                              John Doe
+                            </h5>
+                            <h5>Douala, Cameroun</h5>
+                            <h6>Logpom, Carrefour Express</h6>
+                            <h6>Tél: 690998877</h6>
+                          </div>
+                        </div>
+                      </div>
+
+
+                        <div class="col-6" style="padding-right: 0">
+                          <div class="address_bloc_new" onClick={ this.handleSetDialogOpen.bind(this) }>
+                            <div class=".address_bloc_new">
+                              <h6>Nouvelle adresse</h6>
+                            </div>
+                            <div class="plus_box">
+                              <i class="fa fa-plus"></i>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="place_delivery_choice">
+                      <h2>Obtenir votre commande</h2>
+                      <div
+                        class="delivery_method standard_delivery active"
+                        onClick={ this.handleChangeDelivery.bind(this) }
+                      >
+                        <h6>D'ici Samedi 25 Juillet </h6>
+                        <p>
+                          <i class="fas fa-truck" style="margin-right: 10"></i>
+                          <span class="">Livraison Standard</span>
+                        </p>
+                        <p class="delivery_hour">
+                          08:00 - 18:00
+                        </p>
+                      </div>
+    
+                      <div
+                        class="delivery_method fast_delivery active"
+                        onClick={ this.handleChangeDelivery.bind(this) }
+                      >
+                        <h6>D'ici Samedi 25 Juillet </h6>
+                        <p>
+                          <i class="fas fa-shipping-fast" style="margin-right: 10"></i>
+                          <span class="">Livraison Express</span>
+                        </p>
+                        <p class="delivery_hour">
+                          08:00 - 18:00
+                        </p>
+                      </div>
+                    </div>
+    
+                    <div class="cgv">
+                      <!--FormControl component="fieldset">
+                        <span style="margin-bottom: 10"><b>Email: </b>mailtest@gmail.com</span>
+                        <FormGroup>
+                          <FormControlLabel
+                            control={<Checkbox checked={same_info} color="default" onChange={this.handleChange} name="same_info" />}
+                            label={"Mes informations de livraison et de facturation sont les mêmes."}
+                          />
+                          {/* <FormControlLabel
+                            control={<Checkbox checked={major} color="default" onChange={this.handleChange} name="major" />}
+                            label={"J'ai plus de 16 ans Pourquoi est-ce important?"}
+                          />
+                          <FormControlLabel
+                            control={<Checkbox checked={newsletter} color="default" onChange={this.handleChange} name="newsletter" />}
+                            label={"Je communique mes coordonnées afin qu'adidas m'informe des produits et services de Afro qui peuvent me correspondre. Je sais que je peux demander à adidas de cesser toute communication avec moi à tout moment. J'accepte de recevoir des messages personnalisés de marketing via le courrier électronique de la part des Responsables de traitements (« Afro Yaca »). COMMENT?"}
+                          /> */}
+                        </FormGroup>
+                      </--FormControl-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-4">
+              <div class="row" style="width: 100%; margin-right: 0; margin-left: 0">
+                <div class="command-summary-wrapper" style="width: 100%">
+                  <div class="command-summary">
+                    <h5 class="">Synthèse de la commande</h5>
+                    <br />
+                    <div class="command-total-group">
+                      <div class="row">
+                        <div class="col-sm-6"><h6 class="">Sous total</h6></div>
+                        <div class="col-sm-6"><p class="">{% if cart %}{{ cart.total }}{% endif %} FCFA</p></div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-6"><h6 class="">Livraison</h6></div>
+                        <div class="col-sm-6"><p class="">{% if cart %}{{ 0 }}{% endif %} FCFA</p></div>
+                      </div>
+
+                      <div class="row">
+                          <div class="col-sm-6"><h6 class="">Livraison express</h6></div>
+                          <div class="col-sm-6"><p class=""> {% if cart %}{{ cart.cart_express_delivery_price }}{% endif %} FCFA</p></div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-sm-6"><h6 class="">Réduction</h6></div>
+                        <div class="col-sm-6"><p class=""> 0 % </p></div>
+                      </div>
+                      <div class="row">
+                        <div class="col-sm-6"><h6 class="">Taxe total</h6></div>
+                        <div class="col-sm-6"><p class=""> 0 FCFA</p></div>
+                      </div>
+                    </div>
+                    <div class="row line-total">
+                      <div class="col-sm-6"><h5 class="">Montant Total</h5></div>
+                      <div class="col-sm-6"><h5 class="price-total">{% if cart %}{{ cart.total | add:cart.cart_express_delivery_price }}{% endif %} FCFA</h5></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="command-product-wrapper row" style="width: 100%; margin-right: 0; margin-left: 0">
+                <h5 class="">Articles</h5>
+                {% if cart_items %}
+                  {% for item in cart_items %}
+                    <div class="row product-row" key={key}>
+                      <div class="col-sm-6 command-picture-box">
+                        <div class="command-img-wrapper">
+                          <a href="{% url 'single_product' slug=item.variety.product.slug %}" class="">
+                            <img class="img-fluid" src={{ item.variety.product.get_single_picture }} alt="{{ item.variety.product.title }}" />
+                          </a>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 command-picture-summary">
+                        <h6 class="" style="text-align: justify">{{ item.variety.product.title }}</h6>
+                        <p class="">
+                          <span class="">{{ item.variety.color.title }}</span> <br />
+                          <span class="">Taille : {{ item.variety.size.name }}</span> <br />
+                          <span class="">Quantité : {{ item.quantity }}</span> <br />
+                          <span class="">{{ item.line_total }} FCFA</span> <br />
+                        </p>
+                      </div>
+                    </div>
+                  {% endfor %}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+      </div>
+  </section>
+{% endblock %}
+
+{% block custom_js %}
+{% endblock %}

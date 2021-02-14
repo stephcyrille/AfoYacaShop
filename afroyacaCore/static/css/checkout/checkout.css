@@ -1,0 +1,158 @@
+.command-summary-wrapperr{
+    padding: 20px;
+    width: 100%;
+}
+
+.command-summary{
+    border: 1px solid black;
+    width: 100%;
+    padding: 20px;
+}
+
+.command-total-group p{
+    text-align: right;
+}
+
+.command-total-group{
+    /* border-bottom: 1px solid lightgray; */
+}
+
+.line-total .price-total{
+    text-align: right;
+}
+
+.line-total{
+    padding-top: 10px;
+}
+
+
+.product-row{
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+    border-bottom: 1px solid lightgray;
+    padding: 10px 0;
+}
+
+.command-product-wrapper {
+    margin-top: 30px;
+}
+
+.command-product-wrapper h5{
+    padding-bottom: 10px;
+    border-bottom: 1px solid black;
+    width: 100%;
+}
+
+.command-picture-box, .command-picture-summary{
+    padding-left: 0px;
+}
+
+
+.step4-wrapper{
+    position: relative;
+    width: 100%;
+    height: 50vh;
+}
+
+.step4-body{
+    position: absolute;
+    width: 100%;
+    top: 25%;
+}
+
+.step4-body h2{
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.whole_stepper_content{
+    padding: 20px 30px;
+}
+
+.step_two_bloc h2{
+    text-transform: uppercase;
+}
+
+.address_bloc, .address_bloc_new{
+    height: 200px;
+    border: 1px solid lightgray;
+    padding: 20px;
+    margin-top: 20px;
+}
+.address_bloc_new:hover{
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.address_bloc:hover{
+    border: 1px solid black;
+    cursor: pointer;
+}
+.address_bloc.active{
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.plus_box i:hover{
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+
+.place_delivery_choice{
+    margin-top: 40px;
+}
+
+.place_delivery_choice h2{
+    text-transform: uppercase;
+}
+
+
+.delivery_method{
+    border: 1px solid lightgray;
+    margin: 20px 0;
+    padding: 10px 20px;
+}
+.delivery_method.active{
+    border: 1px solid black;
+}
+.delivery_method:hover{
+    border: 1px solid black;
+    cursor: pointer;
+}
+.delivery_method p{
+    margin-bottom: 5px !important;
+}
+.delivery_method h6{
+    text-transform: uppercase;
+}
+
+.delivery_hour{
+    padding-left: 28px;
+}
+
+.cgv{
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+.step3 .anticon.anticon-right.ant-collapse-arrow{
+    padding-top: 30px !important;
+}
+
+.step3-detail{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.mompay-wrapper{
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    margin: 0 auto;
+}
+
+.logo-momo{
+    margin-right: 10px;
+}

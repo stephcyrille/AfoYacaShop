@@ -23,6 +23,36 @@ class Cart(models.Model):
     def __str__(self):
         return "Cart n° %s" % self.ref
 
+    def cart_total_price(self):
+        total_price = 0
+        cart_items = CartItem.objects.filter(cart=self, is_archived=False)
+        for i in cart_items:
+            quantity = i.quantity
+            product_price = i.variety.product.price
+            line_total = product_price * quantity
+            total_price = total_price + line_total
+        self.total = total_price
+        self.save()
+        return total_price
+
+    def cart_quantity(self):
+        total_quantity = 0
+        cart_items = CartItem.objects.filter(cart=self, is_archived=False)
+        for i in cart_items:
+            quantity = i.quantity
+            total_quantity = total_quantity + quantity
+        return total_quantity
+
+    @staticmethod
+    def cart_delivery_price():
+        price = 2000
+        return price
+
+    @staticmethod
+    def cart_express_delivery_price():
+        price = 10000
+        return price
+
     def save(self, *args, **kwargs):
         """ On save, update timestamps """
         if not self.id:

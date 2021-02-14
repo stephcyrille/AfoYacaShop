@@ -1,0 +1,166 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+{% load static %}
+{% load get_single_variety_pictures %}
+
+{% block meta_tags %}
+  <meta name="description" content="Vente des vêtements afro, chics et tendances."
+      xmlns:padding-left="http://www.w3.org/1999/xhtml"/>
+  <meta name="keywords" content="AFY,Fashion,Mode,Afro" />
+  <meta property="og:description" content="Vente des vêtements afro, chics et tendances" />
+  <meta property="og:title" content="{{ product.title }}" />
+  <meta property="og:url" content="http://www.afroyacadrum.cm" />
+  <meta property="og:image" content="{{ variety.get_single_picture }}" />
+{% endblock %}
+
+{% block title %}{{ product.title }} | Afro Yaca Drum{% endblock %}
+
+{% block custom_style %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/products/single.css' %}?version=1" />
+{% endblock %}
+
+{% block content %}
+  <section style="padding-top: 10px">
+      <div class="container single-product">
+          <div class="row">
+          <div class="col-xs-12 col-sm-12">
+
+            <div class="product-details">
+              <div class="row" style="margin-right: 0; margin-left: 0">
+                <div class="col-sm-2 thumbnail_master_body">
+                  <div class="row thumnail_center">
+                    {% if product %}
+                      {% for picture in variety.get_pictures  %}
+                        <div class="col-4 variety_thumnail" onClick={ this._handleChangeVarietyImage.bind(this, key) }>
+                          <!--div class={`variety_thumnail_opak ${ key==thumbnail_picture_key ? 'active' : 0 }`} key={key}-->
+                          <div class="variety_thumnail_opak active">
+                          </div>
+                          <img class="" src="{{ picture }}" alt="" />
+                        </div>
+                      {% endfor  %}
+                    {% endif  %}
+                  </div>
+                </div>
+                <div class="col-sm-5">
+                  <div class="view-product">
+                    <div class="row">
+                      <div class="single_product_img">
+                        <img class="" src="{{ variety.get_single_picture }}" alt="" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-sm-5 product_info_wrapper">
+                  <div class="product-information">
+                    <img src="images/product-details/new.jpg" class="newarrival" alt="" />
+                    <h2 class="display-4">{{ product.title }}</h2>
+                    <p>Ref: {{ product.ref }}</p>
+    
+                    <h5 class="price-row">{{ product.price }} FCFA</h5>
+    
+                    <div class="row product-size" style="margin-left: 0px; margin-right: 0px">
+                      <div class="col-sm-6" style="padding-left: 0px; padding-right: 0px">
+                        <h6>Selectionner la taille</h6>
+                        <p class="size">
+                          {% if varieties %}
+                            {% for variety in varieties %}
+                              <a href="#" >{{ variety.size.name }} &nbsp;</a>
+                            {% endfor  %}
+                          {% endif  %}
+                        </p>
+                        <br>
+                      </div>
+                      <div class="col-sm-6 link-size" style="padding-left: 0px; padding-right: 0px">
+                        <a href="#" class="btn btn-link">Tableau tailles</a>
+                      </div>
+                    </div>
+
+                    <div class="col-sm-12 variety-color" style="padding-left: 0px; padding-right: 0px">
+                      <div class="">
+                        {% if varieties %}
+                          {% for variety in varieties %}
+                                <div key={key} style="display: inline-block">
+                                  <a
+                                    href="#"
+                                    onClick={this._handleChangeVariety.bind(this, key, val.quantity)}
+                                    data-toggle="tooltip" data-placement="bottom" title={{ variety.color.title }}
+                                    style="padding-right: 5"
+                                  >
+                                    <img
+                                      src="{{ variety.color.get_picture }}"
+                                      width="30"
+                                      height="30"
+                                      style="border-radius: 5"
+                                    />
+                                  </a>
+                                </div>
+                          {% endfor  %}
+                        {% endif  %}
+                      </div>
+                    </div>
+
+                    <form method="POST" action="{% url 'cart_add_product' slug=product.slug %}">
+                      {% csrf_token %}
+                      <div class="row color-and-qty" style="margin-left: 0px; margin-right: 0px">
+                        <div class="col-sm-12 cart_quantity_wrapper" style="padding-left: 0px; padding-right: 0px">
+                          <div class="cart_quantity_button">
+                            <input
+                              class="cart_quantity_input"
+                              type="number"
+                              name="quantity" 
+                              min="1"
+                              max="100"
+                              value="1"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                      <input type="hidden" name="variety_id" id="variety_id" value="{{ variety.id }}"/>
+                      <div class="row whishlist-and-cart" style="margin-left: 0px; margin-right: 0px">
+                        <button
+                          type="submit"
+                          class="col-sm-2 add-to-wishlist-wrapper btn btn-outline-secondary"
+                          style="border-radius: 0px;
+                                 padding-left: 0px;
+                                 padding-right: 0px;
+                                 border-top: none;">
+                            <i class="fa fa-heart"></i>
+                        </button>
+                        <div class="col-sm-10 add-to-cart-wrapper" style="padding-left: 0px; padding-right: 0px">
+                          <button 
+                            type="submit"
+                            class="btn btn-fefault cart full-cart"
+                          >
+                            <i class="fa fa-shopping-cart"></i>
+                            &nbsp; Ajouter au panier
+                          </button>
+                        </div>
+                        <div style="padding-top: 20px">
+
+                        </div>
+                      </div>
+                    </form>
+                    
+                    <div class="row description-resume">
+                      <div class="col-sm-12">
+
+                      </div>
+                    </div>
+    
+                  </div>
+                </div>
+
+              </div>
+            </div>
+    
+          </div>
+          </div>
+        </div>
+  </section>
+
+
+
+{% endblock %}
+
+{% block custom_js %}
+{% endblock %}

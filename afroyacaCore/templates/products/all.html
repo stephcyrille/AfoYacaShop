@@ -1,0 +1,98 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta_tags %}
+  <meta name="description" content="Vente des vêtements afro, chics et tendances."
+      xmlns:padding-left="http://www.w3.org/1999/xhtml"/>
+  <meta name="keywords" content="AFY,Fashion,Mode,Afro" />
+  <meta property="og:description" content="Vente des vêtements afro, chics et tendances" />
+  <meta property="og:title" content="Afro Yaca Drum" />
+  <meta property="og:url" content="http://www.afroyacadrum.cm" />
+  <meta property="og:image" content="http://www.afroyacadrum.cm/static/images/acc.jpg" />
+{% endblock %}
+
+{% block title %}Products | Afro Yaca Drum{% endblock %}
+
+{% block custom_style %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/products/all.css' %}?version=1" />
+{% endblock %}
+
+{% block content %}
+  <section style="padding-top: 40px">
+      <div class="container">
+        <div class="row">
+          <!-- We will set categories of each group -->
+          <div class="col-sm-12 padding-right" style="margin-bottom: 20px">
+
+
+              <div class="features_items">
+                <h2 class="title text-center" style="opacity: 0">Features Items</h2>
+                <div class="row">
+                    {% if products %}
+                        {% for val in products %}
+                          <div class="col-sm-3">
+                            <div class="product-image-wrapper">
+                              <div class="single-products">
+                                  <div class="productinfo text-center">
+                                    <img
+                                      src="{{ val.get_single_picture }}"
+                                      alt="{{ val.title }}"
+                                    />
+                                    <h2>{{val.price}} {{'FCFA'}}</h2>
+                                    <p style="text-transform: uppercase; font-weight: bold">{{ val.title }}</p>
+                                  </div>
+                                  <a
+                                    href="{{ val.get_absolute_url }}"
+                                    class="product-overlay"
+                                  >
+                                    <div class="overlay-content">
+                                      <!--a href="{{ val.get_absolute_url }}" class="btn btn-default add-to-cart"><i class="fa fa-eye"></i>Details</a-->
+                                    </div>
+                                  </a>
+                              </div>
+                              <div class="choose">
+                                <ul class="nav nav-pills nav-justified">
+                                  <li>
+                                    <a
+                                      href="#"
+                                      data-toggle="tooltip"
+                                      data-placement="top"
+                                      title="Ajouter au panier"
+                                      class="custom-tooltip"
+                                    >
+                                      <i class="fa fa-shopping-cart"></i>
+                                    </a>
+                                  </li>
+                                  <li>
+                                    <a
+                                      href=""
+                                      data-toggle="tooltip"
+                                      data-placement="top"
+                                      title="Ajouter à la liste des souhaits"
+                                      class="custom-tooltip"
+                                    >
+                                      <i class="fa fa-heart"></i>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </div>
+                            </div>
+                          </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+              </div>
+
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+{% endblock %}
+
+{% block custom_js %}
+{% endblock %}

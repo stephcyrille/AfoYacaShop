@@ -1,0 +1,182 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta_tags %}
+  <meta name="description" content="Vente des vêtements afro, chics et tendances."
+      xmlns:padding-left="http://www.w3.org/1999/xhtml"/>
+  <meta name="keywords" content="AFY,Fashion,Mode,Afro" />
+  <meta property="og:description" content="Vente des vêtements afro, chics et tendances" />
+  <meta property="og:title" content="Afro Yaca Drum" />
+  <meta property="og:url" content="http://www.afroyacadrum.cm" />
+  <meta property="og:image" content="http://www.afroyacadrum.cm/static/images/acc.jpg" />
+{% endblock %}
+
+{% block title %}Cart {% if cart %}({{ cart.cart_quantity }}){% endif %} | Afro Yaca Drum{% endblock %}
+
+{% block custom_style %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/cart/cart.css' %}?version=1" />
+{% endblock %}
+
+{% block content %}
+  <section style="padding-top: 50px; padding-bottom: 50px">
+      <div class="container">
+        <div class="row" style="margin-left: 0; margin-right: 0">
+          <div class="col-sm-8">
+            <div class="row">
+              <h3 class="cart_main_title">Panier</h3>
+            </div>
+
+            <div class="row cart-header">
+              <div class="col-sm-2">
+                <h6 class="">Produit</h6>
+              </div>
+              <div class="col-sm-3">
+                <h6 class="">Description</h6>
+              </div>
+              <div class="col-sm-2">
+                <h6 class="">Taille</h6>
+              </div>
+              <div class="col-sm-2">
+                <h6 class="">Qté</h6>
+              </div>
+              <div class="col-sm-2">
+                <h6 class="">prix</h6>
+              </div>
+              <div class="col-sm-1"></div>
+            </div>
+
+            {% if cart_items %}
+              {% for item in cart_items %}
+                <form class="row" action="{% url 'remove_cart_item' %}" method="POST">
+                  {% csrf_token %}
+                  <input type="hidden" name="cart_item_id" value="{{ item.id }}"/>
+                  <div class="col-4 col-sm-2 picture-box">
+                    <div class="cart_item-img-wrapper">
+                      <a href="{% url 'single_product' slug=item.variety.product.slug %}" class="">
+                        <img class="img-fluid" src={{ item.variety.product.get_single_picture }} alt="{{ item.variety.product.title }}" />
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-8 col-sm-3 cart-description-text">
+                    <h6 class="">
+                      <a href="{% url 'single_product' slug=item.variety.product.slug %}" class="">
+                        {{ item.variety.product.title }}
+                      </a>
+                    </h6>
+                    <p class="">{{ item.variety.color.title }}</p>
+                    <div class="cart-size-mobile">
+                      <h6 class="">Taille: {{ item.variety.size.name }}</h6>
+                      <h6 class="">Quantité: {{ item.quantity }}</h6>
+                      <button
+                        type="button"
+                        class="btn btn-outline-secondary btn-sm"
+                        onClick={this._handleRemoveItem.bind(this, val.id)}
+                      >
+                        Retirer le produit
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-sm-2 cart-description-text-hide">
+                    <h6 class="">{{ item.variety.size.name }}</h6>
+                  </div>
+                  <div class="col-sm-2 cart-description-text-hide">
+                    <h6 class="">{{ item.quantity }}</h6>
+                  </div>
+                  <div class="col-sm-2 cart-description-text-hide">
+                    <h6 class="">{{ item.line_total }} FCFA</h6>
+                  </div>
+                  <div class="col-sm-1 delete-item">
+                    <button
+                      type="submit"
+                      class="btn btn-link"
+                      onClick={this._handleRemoveItem.bind(this, val.id)}
+                    >
+                      <i class="fa fa-times"></i>
+                    </button>
+                  </div>
+                </form>
+              {% endfor %}
+            {% else %}
+              <h5 class="text-center" style="padding: 20">Votre panier est encore vide</h5>
+            {% endif %}
+
+          </div>
+
+          <!-- Bill Price informations and checkout way details -->
+          <div class="col-sm-4">
+            {% if cart %}
+            <div class="row">
+              <div class="checkout-button">
+                <a
+                  href="{% url 'checkout' %}"
+                  class="btn btn-secondary"
+                >
+                  Procéder au payment
+                </a>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="bill-info-wrapper">
+                <div class="bill-info">
+                  <h5 class="">Sommaire</h5>
+                  <br />
+                  <div class="total-group">
+                    <div class="row">
+                      <div class="col-6 col-sm-6"><h6 class="">Sous total</h6></div>
+                      <div class="col-6 col-sm-6"><p class="">{{ cart.total }} FCFA</p></div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6 col-sm-6"><h6 class="">Livraison</h6></div>
+                      <div class="col-6 col-sm-6">
+                        <p class="">
+                          {% if cart.total == 0 %}
+                            {{ 0 }} FCFA
+                          {% else %}
+                            {{ cart.cart_delivery_price }} FCFA
+                          {% endif %}
+                        </p></div>
+                    </div>
+                  </div>
+                  <div class="row line-total">
+                    <div class="col-6 col-sm-6"><h5 class="">Montant Total</h5></div>
+                    <div class="col-6 col-sm-6">
+                      <h5 class="price-total">
+                        {% if cart.total != 0 %}
+                          {{ cart.total | add:cart.cart_delivery_price }} FCFA
+                        {% else %}
+                          {{ cart.total }} FCFA
+                        {% endif %}
+                      </h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <br />
+            
+            <div class="row">
+              <div class="checkout-button continue_shop">
+                <a 
+                  href="{% url 'trending_products' %}"
+                  class="btn btn-outline-secondary"
+                >
+                  Continuer vos achats
+                </a>
+              </div>
+            </div>
+
+          {% endif %}
+            
+
+
+          </div>
+        </div>
+      </div>
+  </section>
+{% endblock %}
+
+{% block custom_js %}
+{% endblock %}

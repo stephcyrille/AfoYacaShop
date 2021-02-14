@@ -164,6 +164,18 @@ class Product(models.Model):
 
         return pics
 
+    def get_varieties(self):
+        varieties = Variety.objects.filter(product=self)
+        varieties_list = []
+        for v in varieties:
+            variety = {
+                'id': v.id,
+                'pictures': v.get_pictures()
+            }
+            varieties_list.append(variety)
+        print(varieties_list)
+        return varieties_list
+
     def get_single_picture(self):
         """
         Get only one picture
@@ -180,6 +192,12 @@ class Color(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_picture(self):
+        """
+        Get only one picture
+        """
+        return self.picture.url
 
 
 class Variety(models.Model):
@@ -203,6 +221,31 @@ class Variety(models.Model):
 
     def __str__(self):
         return '%s - %s' % (self.product.title, self.color.title)
+
+    def get_pictures(self):
+        """
+        Get max 4 pictures
+        """
+        pics = []
+        # si le queryset services_of_pack est grand
+
+        if self.picture1:
+            pics.append(self.picture1.url)
+        if self.picture2:
+            pics.append(self.picture2.url)
+        if self.picture3:
+            pics.append(self.picture3.url)
+        if self.picture4:
+            pics.append(self.picture4.url)
+        return pics
+
+    def get_single_picture(self):
+        """
+        Get only one picture
+        """
+        pictures = self.get_pictures()
+        pic = random.choice(pictures)
+        return pic
 
 
 class Size(models.Model):
