@@ -32,35 +32,40 @@
                       Les restrictions de livraison appliquées peuvent nous contraindre à refuser votre commande.
                     </p>
                     <div class="row" style="margin-right: 0; margin-left: 0">
-                      <div class="col-6" style="padding-left: 0">
-                        <div
-                          class="ddress_bloc active"
-                          onClick={ this.handleChangeAddress.bind(this, val.id) }
-                        >
-                          <div class="add_address_bloc">
-                            <h5 style="text-transform: uppercase">
-                              <!--{ user ? `${user.userprofile.first_name} ${user.userprofile.last_name}` : null }-->
-                              John Doe
-                            </h5>
-                            <h5>Douala, Cameroun</h5>
-                            <h6>Logpom, Carrefour Express</h6>
-                            <h6>Tél: 690998877</h6>
+                      {% if contacts %}
+                        {% for contact in contacts %}
+                          <div class="col-6" style="padding-left: 0">
+                            <div
+                              class="ddress_bloc {% if contact.main %}active{% endif %}"
+                              onClick={ this.handleChangeAddress.bind(this, val.id) }
+                            >
+                              <div class="add_address_bloc">
+                                <h5 style="text-transform: uppercase">
+                                  <!--{ user ? `${user.userprofile.first_name} ${user.userprofile.last_name}` : null }-->
+                                  John Doe
+                                </h5>
+                                <h5>Douala, Cameroun</h5>
+                                <h6>Logpom, Carrefour Express</h6>
+                                <h6>Tél: 690998877</h6>
+                              </div>
+                            </div>
+                          </div>
+                        {% endfor %}
+                      {% endif %}
+
+                      <div class="col-md-6" style="padding-right: 0; {% if not contacts %}padding-left: 0{% endif %}">
+                        <div class="address_bloc_new" onClick={ this.handleSetDialogOpen.bind(this) }>
+                          <div class=".address_bloc_new">
+                            <h6>Nouvelle adresse</h6>
+                          </div>
+                          <div class="plus_box">
+                            <i class="fa fa-plus"></i>
                           </div>
                         </div>
                       </div>
 
-
-                        <div class="col-6" style="padding-right: 0">
-                          <div class="address_bloc_new" onClick={ this.handleSetDialogOpen.bind(this) }>
-                            <div class=".address_bloc_new">
-                              <h6>Nouvelle adresse</h6>
-                            </div>
-                            <div class="plus_box">
-                              <i class="fa fa-plus"></i>
-                            </div>
-                          </div>
-                        </div>
                     </div>
+
                     <div class="place_delivery_choice">
                       <h2>Obtenir votre commande</h2>
                       <div
@@ -78,7 +83,7 @@
                       </div>
     
                       <div
-                        class="delivery_method fast_delivery active"
+                        class="delivery_method fast_delivery"
                         onClick={ this.handleChangeDelivery.bind(this) }
                       >
                         <h6>D'ici Samedi 25 Juillet </h6>

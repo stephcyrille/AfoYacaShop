@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import *
 from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login
 from django.conf import settings
@@ -16,14 +15,29 @@ class LoginView(TemplateView):
     template_name = 'account/login.html'
 
     def get(self, request, **kwargs):
+        try:
+            request.session['next'] = None
+            request.session['next'] = request.GET.get('next')
+        except Exception as e:
+            print("Not next parameter", e.__str__())
         return render(request, self.template_name)
 
     def post(self, request, **kwargs):
         username = request.POST.get('email', False)
         password = request.POST.get('password', False)
         user = authenticate(username=username, password=password)
+        try:
+            next_param = request.session['next']
+        except Exception as e:
+            print("Not next parameter, we will set it as none", e.__str__())
+            next_param = None
+
         if user is not None and user.is_active:
             login(request, user)
+            if next_param:
+                # Cleaning session next param
+                request.session['next'] = None
+                return redirect(next_param)
             return redirect('home')
         message = ""
 

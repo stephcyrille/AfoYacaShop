@@ -141,5 +141,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTHENTICATION_BACKENDS = ["account.auth_backend.EmailBackend"]
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+LOGIN_URL = 'signin'
 LOGOUT_REDIRECT_URL = "signin"
+
 CORS_ALLOW_ALL_ORIGINS = True

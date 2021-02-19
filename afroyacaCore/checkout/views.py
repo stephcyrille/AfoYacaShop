@@ -1,11 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
+from account.models import Contact
 from cart.models import Cart, CartItem
 
-
+@login_required
 def checkout(request):
     template_name = "checkout/checkout.html"
-    context = {}
+    contacts_list = Contact.objects.filter(is_archived=False)
+    try:
+        contacts = contacts_list[:2]
+    except Exception as e:
+        print("List is empty, contact not souscriptable!! ", e.__str__())
+        contacts = []
 
     try:
         the_id = request.session['cart_id']
@@ -14,9 +22,9 @@ def checkout(request):
     except Exception as e:
         print("No cart found on session ", e.__str__())
         the_id = None
+        return redirect(reverse('home'))
 
     if the_id:
-        empty = False
         new_total = 0.00
         for item in cart_items:
             line_total = item.line_total
@@ -26,11 +34,9 @@ def checkout(request):
         cart.save()
         context = {
             "cart": cart,
-            "cart_items": cart_items
+            "cart_items": cart_items,
         }
     else:
-        empty = True
-        empty_message = "Votre panier est vide."
         cart = []
         cart_items = []
         context = {
@@ -38,4 +44,5 @@ def checkout(request):
             "cart_items": cart_items
         }
 
+    context["contacts"] = contacts
     return render(request, template_name, context)
