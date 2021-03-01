@@ -1,0 +1,154 @@
+<!-- templates/home.html-->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta_tags %}
+  <meta name="description" content="Vente des vêtements afro, chics et tendances."
+      xmlns:padding-left="http://www.w3.org/1999/xhtml"/>
+  <meta name="keywords" content="AFY,Fashion,Mode,Afro" />
+  <meta property="og:description" content="Vente des vêtements afro, chics et tendances" />
+  <meta property="og:title" content="Afro Yaca Drum" />
+  <meta property="og:url" content="http://www.afroyacadrum.cm" />
+  <meta property="og:image" content="http://www.afroyacadrum.cm/static/images/girl1.jpg" />
+{% endblock %}
+
+{% block title %}Oh Ma Box! | Afro Yaca Drum{% endblock %}
+
+{% block custom_style %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/services/main.css' %}?version=1" />
+{% endblock %}
+
+{% block content %}
+  <section style="">
+    <div class="container home_cover">
+      <div class="row" style="margin-left: 0; margin-right: 0">
+        <div class="col-md-6 picBckg">
+        </div>
+        <div class="col-md-6 text_cover">
+          <h3 class="display-4 mainTitle">Découvrez le service OH! My box chez Afro Yaca Drum</h3>
+          <h4 class="display-4 subTitle">Composez votre sélection de vêtements à votre manière et sélectionnez ceux qui vous plaisent uniquement</h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="presentation">
+      <h3 class="display-4 mainTitle text-center" style="color: white">C'est quoi Oh! My Box</h3>
+      <div class="container presentation_body display-4">
+        <ul>
+          <li class="li_items">
+            Oh, ma box! est un programme exclusif de Afro yaca drum qui vous permet d’essayer avant d’acheter des articles de notre marque.Vous disposez de 24h pour essayer les articles à la maison et vous ne serez facturé que pour les articles que vous décidez de conserver.
+          </li>
+          <li class="li_items">
+            Oh, ma box! est un programme exclusif de Afro yaca drum qui vous permet d’essayer avant d’acheter des articles de notre marque.Vous disposez de 24h pour essayer les articles à la maison et vous ne serez facturé que pour les articles que vous décidez de conserver.
+          </li>
+          <li class="li_items">
+            C’est un service disponible pour le moment uniquement dans la ville de yaounde et ouvert aux clients fidèles de la boutique AFRO YACA DRUM d’autres villes qui eux disposent de 72h pour le choix et le retour des articles.
+          </li> 
+        </ul>
+      </div>
+    </div>
+
+    <div class="bundles">
+      <h3 class="display-4 mainTitle text-center">Nos formules</h3>
+      <div class="container presentation_body display-4 text-center">
+        <p style="color: black">
+          Le service OH,MA BOX! Est ouvert à tous ceux qui désirent s’habiller chic et à la mode sans sortir de chez eux. Ceci étant, les clients ont le choix soit de payer directement leur BOX sans s’abonner, soit  de bénéficier d’un traitement VIP avec un abonnement mensuel prépayé.
+        </p>
+      </div>
+      <div class=container>
+        <section class="lis-bg-light" style="padding-top: 30px">
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-4 wow fadeInUp mb-5 mb-lg-0 text-center" style="visibility: visible; animation-name: fadeInUp">
+                <div class="price-table">
+                  <div class="price-header lis-bg-primary-first text-white lis-rounded-top py-4 border border-bottom-0 lis-brd-light">
+                    <h5 class="text-uppercase lis-latter-spacing-2 text-white">Formule BRONZE</h5>
+                    <h1 class="display-4 lis-font-weight-500 text-white"><sup>FCFA</sup> 10K <small>/mo</small></h1>
+                    <p class="mb-0">Formule membre basique</p>
+                  </div>
+                  <div class="border border-top-0 lis-brd-light bg-white py-5 lis-rounded-bottom">
+                    <ul class="list-unstyled lis-line-height-3">
+                      <li>
+                        Réception choix à domicile 3 fois / mois  
+                      </li>
+                      <li style="opacity: 0">One Listing</li>
+                      <li style="opacity: 0">90 Days Availability</li>
+                      <li style="opacity: 0">Featured In Search Results</li>
+                      <li style="opacity: 0">24/7 Support</li>
+                    </ul> 
+                    <a href="#" class="btn btn-primary-outline btn-md lis-rounded-circle-50" data-abc="true">
+                      <i class="fa fa-shopping-cart pl-2"></i>
+                      Souscrire maintenant
+                    </a>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col-12 col-md-6 col-lg-4 wow fadeInUp mb-5 mb-lg-0 text-center" style="visibility: visible; animation-name: fadeInUp">
+                <div class="price-table active">
+                  <div class="price-header lis-bg-primary py-4 text-white lis-rounded-top">
+                    <h5 class="text-uppercase lis-latter-spacing-2 text-white">Formule SILVER</h5>
+                    <h1 class="display-4 lis-font-weight-500 text-white"><sup>FCFA</sup> 15K <small>/mo</small></h1>
+                    <p class="mb-0">Formule membre premium</p>
+                  </div>
+                  <div class="border border-top-0 lis-brd-light bg-white py-5 lis-rounded-bottom">
+                    <ul class="list-unstyled lis-line-height-3">
+                      <li>
+                        Réception choix à domicile 3 fois / mois  
+                      </li>
+                      <li>
+                        Accompagnement personnalisé en ligne
+                      </li>
+                      <li>
+                        Réduction de 15% sur articles achetés
+                      </li>
+                      <li style="opacity: 0">Featured In Search Results</li>
+                      <li style="opacity: 0">24/7 Support</li>
+                    </ul> 
+                    <a href="#" class="btn btn-primary btn-md lis-rounded-circle-50" data-abc="true">
+                      <i class="fa fa-shopping-cart pl-2"></i>
+                      Souscrire maintenant
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-6 col-lg-4 wow fadeInUp text-center" style="visibility: visible; animation-name: fadeInUp">
+                <div class="price-table">
+                  <div class="price-header lis-bg-primary-last text-white lis-rounded-top py-4 border border-bottom-0 lis-brd-light">
+                    <h5 class="text-uppercase lis-latter-spacing-2 text-white">Formule GOLD</h5>
+                    <h1 class="display-4 lis-font-weight-500 text-white"><sup>FCFA</sup> 30K <small>/mo</small></h1>
+                    <p class="mb-0">Formule membre gold</p>
+                  </div>
+                  <div class="border border-top-0 lis-brd-light bg-white py-5 lis-rounded-bottom">
+                    <ul class="list-unstyled lis-line-height-3">
+                      <li>
+                        + de 8 Articles dans votre box 
+                      </li>
+                      <li>
+                        Conseiller vestimentaire 
+                      </li>
+                      <li>
+                        Box 4/mois
+                      </li>
+                      <li>
+                        Conception tenu sur mésur
+                      </li>
+                      <li>
+                        Réduction 25% sur articles achetés
+                      </li>
+                    </ul> 
+                    <a href="#" class="btn btn-primary-outline btn-md lis-rounded-circle-50" data-abc="true"><i class="fa fa-shopping-cart pl-2"></i>Souscrire maintenant</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block custom_js %}
+{% endblock %}
