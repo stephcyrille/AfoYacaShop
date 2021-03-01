@@ -34,7 +34,8 @@ class App extends Component {
         errorMessage: null,
       },
       // Toggle when adding on cart is a success
-      success: false
+      success: false,
+      products: [],
     }
 
     this.checkForOverflow = this.checkForOverflow.bind(this)
@@ -49,9 +50,26 @@ class App extends Component {
     this.container = null
   }
 
+  _fetchProductFlashSale(){    
+    fetch('http://localhost:8000/api/list/products/flash_sales/'
+      ,{
+        headers : {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
+      .then((res) => res.json())
+      .then((res) => {
+        this.setState({
+          products: res
+        });
+      });
+  }
+
   componentDidMount() {
     this.checkForOverflow()
     this.checkForScrollPosition()
+    this._fetchProductFlashSale()
 
     this.container.addEventListener(
       'scroll',
@@ -95,7 +113,7 @@ class App extends Component {
   }
 
   buildItems() {
-    var products = this.props.products ? this.props.products : items
+    var products = this.state.products ? this.state.products : []
 
     return products.map((val, key) => {
       return (

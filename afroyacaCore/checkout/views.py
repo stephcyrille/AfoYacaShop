@@ -5,10 +5,11 @@ from django.contrib.auth.decorators import login_required
 from account.models import Contact
 from cart.models import Cart, CartItem
 
+
 @login_required
 def checkout(request):
     template_name = "checkout/checkout.html"
-    contacts_list = Contact.objects.filter(is_archived=False)
+    contacts_list = Contact.objects.filter(profile=request.user.userprofile, is_archived=False)
     try:
         contacts = contacts_list[:2]
     except Exception as e:
@@ -44,5 +45,9 @@ def checkout(request):
             "cart_items": cart_items
         }
 
+    if request.method == "POST":
+        print("POSTED VALUES", request.POST)
+    dim_contact = len(contacts)
     context["contacts"] = contacts
+    context["dim_contact"] = dim_contact
     return render(request, template_name, context)
