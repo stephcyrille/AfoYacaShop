@@ -10,12 +10,14 @@ from cart.models import Cart, CartItem
 def checkout(request):
     template_name = "checkout/checkout.html"
     contacts_list = Contact.objects.filter(profile=request.user.userprofile, is_archived=False)
+
     try:
         contacts = contacts_list[:2]
     except Exception as e:
         print("List is empty, contact not souscriptable!! ", e.__str__())
         contacts = []
 
+    # Getting only 2 contacts for the connected user
     try:
         the_id = request.session['cart_id']
         cart = Cart.objects.get(id=the_id)
@@ -25,6 +27,7 @@ def checkout(request):
         the_id = None
         return redirect(reverse('home'))
 
+    # Getting cart id
     if the_id:
         new_total = 0.00
         for item in cart_items:
@@ -45,9 +48,56 @@ def checkout(request):
             "cart_items": cart_items
         }
 
+    try:
+        step = request.session['checkout_step']
+    except Exception as e:
+        print("No step initialized on the current session ", e.__str__())
+        step = 1
+        request.session['checkout_step'] = step
+
+    # Proceed all operations on checkout stepper ther
     if request.method == "POST":
-        print("POSTED VALUES", request.POST)
+        print("POSTED VALUES", request.POST, request.session['checkout_step'])
+        # step += 1
+        # request.session['checkout_step'] = step
+        try:
+            if "Suivant" == request.POST['next']:
+                if step > 2:
+                    print("DO NOTHING THERE")
+                else:
+                    step += 1
+                    request.session['checkout_step'] = step
+                    print("BERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR")
+        except:
+            pass
+
+        try:
+            if "Précédent" == request.POST['previous']:
+                if 1 == step:
+                    return redirect(reverse('my_cart'))
+                else:
+                    step -= 1
+                    request.session['checkout_step'] = step
+                    print("KKKKAAAAAAAAAAAABOOOOOOUUUUUUUUUUUUUUUUUUU")
+        except:
+            pass
+
+        try:
+            if "Suivre ma commande" == request.POST['next']:
+                del request.session['checkout_step']
+                return redirect(reverse('home'))
+        except:
+            pass
+
+        try:
+            if "Terminer" == request.POST['next']:
+                del request.session['checkout_step']
+                return redirect(reverse('home'))
+        except:
+            pass
+
     dim_contact = len(contacts)
     context["contacts"] = contacts
     context["dim_contact"] = dim_contact
+    context["step"] = step
     return render(request, template_name, context)

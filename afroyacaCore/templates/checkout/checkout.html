@@ -24,104 +24,187 @@
         {% csrf_token %}
         <div class="row justify-content-center">
           <div class="col-sm-8">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="step_two_bloc">
-                  <h2>Adresse de Livraison</h2>
-                  <p>
-                    Saisissez votre adresse de livraison pour connaître les options de livraison et les délais.
-                    Les restrictions de livraison appliquées peuvent nous contraindre à refuser votre commande.
-                  </p>
-                  <div class="row" style="margin-right: 0; margin-left: 0">
-                    {% if contacts %}
-                      {% for contact in contacts %}
-                        <div class="col-6" style="padding-left: 0">
-                          <div
-                            class="address_bloc {% if contact.main is True %}active{% endif %}"
-                            onClick={ this.handleChangeAddress.bind(this, val.id) }
-                          >
-                            <div class="add_address_bloc">
-                              <h5 style="text-transform: uppercase">
-                                <!--{ user ? `${user.userprofile.first_name} ${user.userprofile.last_name}` : null }-->
-                                {{ contact.profile.last_name }} {{ contact.profile.first_name }}
-                              </h5>
-                              <h5>{{ contact.city }}, {{ contact.country }}</h5>
-                              <h6>{{ contact.address }}, {{ contact.address_precision }}</h6>
-                              <h6>Tél: (+237) {{ contact.phone }}</h6>
+            {% if 1 == step %}
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="step_one_bloc">
+                    <h2>Adresse de Livraison</h2>
+                    <p>
+                      Saisissez votre adresse de livraison pour connaître les options de livraison et les délais.
+                      Les restrictions de livraison appliquées peuvent nous contraindre à refuser votre commande.
+                    </p>
+                    <div class="row" style="margin-right: 0; margin-left: 0">
+                      {% if contacts %}
+                        {% for contact in contacts %}
+                          <div class="col-6" style="padding-left: 0">
+                            <div
+                              class="address_bloc {% if contact.main is True %}active{% endif %}"
+                              onClick={ this.handleChangeAddress.bind(this, val.id) }
+                            >
+                              <div class="add_address_bloc">
+                                <h5 style="text-transform: uppercase">
+                                  <!--{ user ? `${user.userprofile.first_name} ${user.userprofile.last_name}` : null }-->
+                                  {{ contact.profile.last_name }} {{ contact.profile.first_name }}
+                                </h5>
+                                <h5>{{ contact.city }}, {{ contact.country }}</h5>
+                                <h6>{{ contact.address }}, {{ contact.address_precision }}</h6>
+                                <h6>Tél: (+237) {{ contact.phone }}</h6>
+                              </div>
+                            </div>
+                          </div>
+                        {% endfor %}
+                      {% endif %}
+
+                      {% if dim_contact < 2 %}
+                        <div class="col-md-6" style="padding-right: 0; {% if not contacts %}padding-left: 0{% endif %}">
+                          <div class="address_bloc_new" onClick={ this.handleSetDialogOpen.bind(this) }>
+                            <div class=".address_bloc_new">
+                              <h6>Nouvelle adresse</h6>
+                            </div>
+                            <div class="plus_box">
+                              <i class="fa fa-plus"></i>
                             </div>
                           </div>
                         </div>
-                      {% endfor %}
-                    {% endif %}
+                      {% endif %}
 
-                    {% if dim_contact < 2 %}
-                      <div class="col-md-6" style="padding-right: 0; {% if not contacts %}padding-left: 0{% endif %}">
-                        <div class="address_bloc_new" onClick={ this.handleSetDialogOpen.bind(this) }>
-                          <div class=".address_bloc_new">
-                            <h6>Nouvelle adresse</h6>
-                          </div>
-                          <div class="plus_box">
-                            <i class="fa fa-plus"></i>
-                          </div>
+                    </div>
+
+                    <div class="place_delivery_choice">
+                      <h2>Obtenir votre commande</h2>
+                      <div
+                        class="delivery_method standard_delivery active"
+                        onClick={ this.handleChangeDelivery.bind(this) }
+                      >
+                        <h6>D'ici Samedi 25 Juillet </h6>
+                        <p>
+                          <i class="fas fa-truck" style="margin-right: 10"></i>
+                          <span class="">Livraison Standard</span>
+                        </p>
+                        <p class="delivery_hour">
+                          08:00 - 18:00
+                        </p>
+                      </div>
+
+                      <div
+                        class="delivery_method fast_delivery"
+                        onClick={ this.handleChangeDelivery.bind(this) }
+                      >
+                        <h6>D'ici Samedi 25 Juillet </h6>
+                        <p>
+                          <i class="fas fa-shipping-fast" style="margin-right: 10"></i>
+                          <span class="">Livraison Express</span>
+                        </p>
+                        <p class="delivery_hour">
+                          08:00 - 18:00
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="cgv" style="font-size: 1.1em">
+                      <div class="form-group">
+                        <span style="margin-bottom: 10"><b>Email: </b>mailtest@gmail.com</span>
+                      </div>
+                      <div class="form-group">
+                        <div class="custom-control custom-checkbox" style="margin-bottom: 5px">
+                          <input type="checkbox" class="custom-control-input" id="bill_delivery_info" name="bill_delivery_info">
+                          <label class="custom-control-label" for="bill_delivery_info">
+                            Mes informations de livraison et de facturation sont les mêmes.
+                          </label>
+                        </div>
+
+                        <div class="custom-control custom-checkbox" >
+                          <input type="checkbox" class="custom-control-input" id="majority_checker" name="majority_checker">
+                          <label class="custom-control-label" for="majority_checker">
+                            J'ai plus de 18 ans.
+                          </label>
                         </div>
                       </div>
-                    {% endif %}
 
-                  </div>
-
-                  <div class="place_delivery_choice">
-                    <h2>Obtenir votre commande</h2>
-                    <div
-                      class="delivery_method standard_delivery active"
-                      onClick={ this.handleChangeDelivery.bind(this) }
-                    >
-                      <h6>D'ici Samedi 25 Juillet </h6>
-                      <p>
-                        <i class="fas fa-truck" style="margin-right: 10"></i>
-                        <span class="">Livraison Standard</span>
-                      </p>
-                      <p class="delivery_hour">
-                        08:00 - 18:00
-                      </p>
+                      <div class="form-group">
+                        <p style="text-align: justify">
+                          Je communique mes coordonnées afin que AYD m'informe des produits et services qui peuvent me correspondre. Je sais que je peux demander à AYD de cesser toute communication avec moi à tout moment. J'accepte de recevoir des messages personnalisés de marketing via le courrier électronique de la part des Responsables de traitements (« Afro Yaca Drum»).
+                        </p>
+                      </div>
                     </div>
-
-                    <div
-                      class="delivery_method fast_delivery"
-                      onClick={ this.handleChangeDelivery.bind(this) }
-                    >
-                      <h6>D'ici Samedi 25 Juillet </h6>
-                      <p>
-                        <i class="fas fa-shipping-fast" style="margin-right: 10"></i>
-                        <span class="">Livraison Express</span>
-                      </p>
-                      <p class="delivery_hour">
-                        08:00 - 18:00
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="cgv">
-                    <!--FormControl component="fieldset">
-                      <span style="margin-bottom: 10"><b>Email: </b>mailtest@gmail.com</span>
-                      <FormGroup>
-                        <FormControlLabel
-                          control={<Checkbox checked={same_info} color="default" onChange={this.handleChange} name="same_info" />}
-                          label={"Mes informations de livraison et de facturation sont les mêmes."}
-                        />
-                        {/* <FormControlLabel
-                          control={<Checkbox checked={major} color="default" onChange={this.handleChange} name="major" />}
-                          label={"J'ai plus de 16 ans Pourquoi est-ce important?"}
-                        />
-                        <FormControlLabel
-                          control={<Checkbox checked={newsletter} color="default" onChange={this.handleChange} name="newsletter" />}
-                          label={"Je communique mes coordonnées afin qu'adidas m'informe des produits et services de Afro qui peuvent me correspondre. Je sais que je peux demander à adidas de cesser toute communication avec moi à tout moment. J'accepte de recevoir des messages personnalisés de marketing via le courrier électronique de la part des Responsables de traitements (« Afro Yaca »). COMMENT?"}
-                        /> */}
-                      </FormGroup>
-                    </--FormControl-->
                   </div>
                 </div>
               </div>
-            </div>
+
+            {% elif 2 == step %}
+              <div class="step_two_bloc">
+                <h2>Methodes de paiement</h2>
+                <div class='step3-detail' style="font-size: 1.1em">
+                  <p style="text-align: justify">
+                    <span>
+                      Vous seriez rediriger vers le système de paiement sécurisé de votre opérateur pour vérifier vos informations.
+                    </span>
+                    <br />
+                    <span>
+                      <b>NB: </b> Notre système est sécurisé et nous travaillons chaque jour à l'amélioration de celui ci pour éviter tout délits.
+                    </span>
+                  </p>
+                </div>
+
+
+
+                <div>
+                  <div id="accordion" class="">
+
+                    <div class="card">
+                      <div class="card-header">
+                        <a class="card-link" data-toggle="collapse" href="#collapseOne" style="color: #000; text-transform: uppercase">
+                          <b>Cash</b>
+                        </a>
+                      </div>
+                      <div id="collapseOne" class="collapse show" data-parent="#accordion">
+                        <div class="card-body" style="font-size: 1.1em">
+                          <div class="custom-control custom-radio">
+                            <input type="radio" id="pay_to_go" name="paiement" value="pay_to_go" class="custom-control-input" checked>
+                            <label class="custom-control-label" for="pay_to_go">Paiement à la livraison</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="card">
+                      <div class="card-header">
+                        <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo" style="color: #000; text-transform: uppercase">
+                          <b>Paiement mobile</b>
+                        </a>
+                      </div>
+                      <div id="collapseTwo" class="collapse" data-parent="#accordion">
+                        <div class="card-body" style="font-size: 1.1em">
+                          <div class="mompay-wrapper">
+                            <p>
+                              <span>
+                                Choisir votre operateur*.
+                              </span>
+                              <br />
+                            </p>
+                            <div class="custom-control custom-radio" style="margin-bottom: 5px">
+                              <input type="radio" id="momo" name="paiement" value="momo" class="custom-control-input">
+                              <label class="custom-control-label" for="momo">MTN Mobile Money</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                              <input type="radio" id="om" name="paiement" value="om" class="custom-control-input">
+                              <label class="custom-control-label" for="om">Orange Money</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            {% elif 3 == step %}
+              <div class="step4-wrapper">
+                <div class="step4-body">
+                  <h2 class="">Commande réussie</h2>
+                </div>
+              </div>
+            {% endif %}
           </div>
 
           <div class="col-sm-4">
@@ -190,26 +273,59 @@
           </div>
         </div>
 
-        <div class="container">
-          <div class="row">
-            <div class="checkout-submit-button">
-              <input
-                name="previous"
-                type="submit"
-                class="btn btn-outline-secondary"
-                value="Précédent"
-              >
-            </div> &nbsp; &nbsp;
-            <div class="checkout-submit-button">
-              <input
-                name="next"
-                type="submit"
-                class="btn btn-secondary"
-                value="Suivant"
-              />
+        {% if 1 == step or 2 == step %}
+          <div class="container checkout_btn_wrapper">
+            <div class="row">
+              <div class="checkout-submit-button">
+                <input
+                  name="previous"
+                  type="submit"
+                  class="btn btn-outline-secondary"
+                  value="Précédent"
+                >
+              </div> &nbsp; &nbsp;
+              <div class="checkout-submit-button">
+                <input
+                  name="next"
+                  type="submit"
+                  class="btn btn-secondary"
+                  value="Suivant"
+                />
+              </div>
             </div>
           </div>
-        </div>
+        {% elif 3 == step %}
+          <div class="container checkout_btn_wrapper">
+            <div class="row">
+              <div class="checkout-submit-button">
+                <input
+                  name="previous"
+                  type="submit"
+                  class="btn btn-outline-secondary"
+                  value="Précédent"
+                >
+              </div> &nbsp; &nbsp;
+              <div class="checkout-submit-button">
+                <input
+                  name="my_order"
+                  type="submit"
+                  class="btn btn-secondary"
+                  value="Suivre ma commande"
+                />
+              </div> &nbsp; &nbsp;
+              <div class="checkout-submit-button">
+                <input
+                  name="next"
+                  type="submit"
+                  class="btn btn-secondary"
+                  value="Terminer"
+                />
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+
       </form>
   </section>
 {% endblock %}

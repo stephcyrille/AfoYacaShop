@@ -70,7 +70,7 @@
     padding: 20px 30px;
 }
 
-.step_two_bloc h2{
+.step_one_bloc h2, .step_two_bloc h2, .step_three_bloc h2{
     text-transform: uppercase;
 }
 
@@ -161,4 +161,18 @@
      border-radius: 0px;
      padding: 8px 40px;
      text-transform: uppercase;
+}
+
+
+
+
+/* --------Responsive--------- */
+/* XS */
+@media (max-width: 767px) {
+    .checkout_btn_wrapper {
+        padding-top: 30px;
+        text-align: center;
+        margin: 0 auto;
+        width: 90%;
+    }
 }
