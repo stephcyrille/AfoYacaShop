@@ -1,0 +1,202 @@
+.styled_left {
+    padding: 0;
+    height: 200px;
+    width: 100%;
+    background-image: url('/static/images/styled.jpeg');
+}
+
+.h4_article_title {
+    text-transform: uppercase;
+    font-weight: 200;
+    margin-bottom: 10px;
+}
+
+.editorial {
+    background-color: #fff;
+    padding: 20px 20px;
+    border-radius: 10px;
+}
+
+.paraf_edito {
+    font-size: 1.025rem;
+    font-weight: 300;
+    letter-spacing: 1.3px;
+    text-align: justify;
+}
+
+.cover_wrapper {
+    height: 400px;
+    width: 100%;
+    background-image: url('/static/images/banner4.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
+  
+.cover_text_wrapper {
+    margin: 0;
+    position: absolute;
+    top: 6%;
+    right: 13%;
+    width: 100%;
+}
+
+.edito_title {
+    margin-bottom: 10;
+}
+
+.guess {
+    padding-top 40;
+}
+
+.guess_words {
+    font-size: 1.25rem;
+    font-weight: 300;
+    text-align: center;
+    height: 440px;
+    vertical-align: middle;
+    display: table-cell;
+    line-height: 200%;
+}
+
+.guess_pic {
+    height: 440px;
+    width: 350px;
+    float: right;
+    margin-right: 40px;
+    background-image: url('/static/images/opra.jpg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-top: 20px;
+}
+  
+.colored_bloc {
+    background: rgb(4,0,36);
+    background: linear-gradient(0deg, rgba(4,0,36,1) 0% rgba(217,184,66,1) 0% rgba(253,202,35,1) 100%);
+    margin-top: 40px;
+    padding: 20px;
+}
+
+.colored_title {
+    width: 100%;
+    color: #fff;
+    font-size: 2.5rem;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.colored_subtitle {
+    color: #fff;
+    width: 100%;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.col_article {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.bloc_col_wrapper_1 {
+    padding: 0 10px 0 10px;
+}
+
+.bloc_col_wrapper_2 {
+    padding: 40px 10px 0 10px;
+}
+
+.bloc_col_wrapper_3 {
+    padding: 80px 10px 0 10px;
+}
+
+.img_container {
+    height: 400px;
+    width: 100%;
+    background-image: url('/static/images/dress.jpg');
+    background-size: cover;
+}
+
+.img_legend {
+    padding-top: 20px;
+}
+  
+.col_article_title {
+    text-transform: uppercase;
+    font-weight: 200;
+    margin-bottom: 10px;
+}
+  
+.col_article_description {
+    color: black;
+}
+.col_article_date {
+    color: gray;
+}
+.styled_left {
+    padding: 0;
+    height: 450px;
+    width: 100%;
+    background-image: url('/static/images/styled.jpeg');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.styled_right {
+    height: 350px;
+    margin-top: 50px;
+    margin-left: -50px;
+    background-color: #fff;
+    width: 100%;
+    padding-top: 20px;
+},
+
+.styled_shop_now {
+    position: absolute;
+    bottom: 0;
+}
+
+.styled_button_shop_now:hover{
+  border-bottom: 1px solid rgba(0,0,0,1);
+  transition: ease-in;
+  transition-duration: 0.4s;
+}
+
+.styled_button_shop_now {
+    font-weight: 400;
+    padding-bottom: 5px;
+    color: black;
+    border-bottom: 1px solid rgba(0,0,0,0);
+    transition: ease-in;
+    transition-duration: 0.4s;
+}
+
+.dont_miss_color {
+    background-color: black;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    margin-top: 40px;
+}
+
+.dont_miss_article_title {
+    text-transform: uppercase;
+    font-weight: 200;
+    margin-bottom: 10px;
+    color: white !important;
+}
+
+.dont_miss_article_description {
+    color: white;
+}
+
+.dont_miss_article_date {
+    color: white;
+}
+
+.dont_miss_img_container {
+    height: 300px;
+    width: 100%;
+    background-image: url('/static/images/styled.jpeg');
+    background-size: cover;
+}
