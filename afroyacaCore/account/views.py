@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login
@@ -79,3 +80,11 @@ class RegistrationView(TemplateView):
         }
 
         return render(request, self.template_name, context)
+
+
+@login_required
+def my_orders(request):
+    template_name = "account/dashboard/my_orders.html"
+    context = {}
+
+    return render(request, template_name, context)

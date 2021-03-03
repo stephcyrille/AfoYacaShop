@@ -171,8 +171,5 @@
 @media (max-width: 767px) {
     .checkout_btn_wrapper {
         padding-top: 30px;
-        text-align: center;
-        margin: 0 auto;
-        width: 90%;
     }
 }
