@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'webpack_loader',
 ]
 
 INSTALLED_APPS += (
@@ -147,3 +148,11 @@ LOGIN_URL = 'signin'
 LOGOUT_REDIRECT_URL = "signin"
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+# Webpack configurations
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'dist/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack_stats/webpack-stats.json'),
+    }
+}

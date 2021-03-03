@@ -5,3 +5,6 @@ afroyacaCore/.cache
 afroyacaCore/media
 py3venv/
 VPS/
+afroyacaCore/node_modules/
+afroyacaCore/webpack_stats/
+afroyacaCore/static/dist/
