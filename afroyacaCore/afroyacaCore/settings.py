@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'webpack_loader',
+    'rest_framework',
 ]
 
 INSTALLED_APPS += (

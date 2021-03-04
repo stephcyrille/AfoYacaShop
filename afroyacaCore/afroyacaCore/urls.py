@@ -16,6 +16,7 @@ urlpatterns = [
     path('services/', include('services.urls')),
     path('', home, name="home"),
     path('api/list/products/flash_sales/', ProductFlashSaleAPIView.as_view(), name="product_flash_sales"),
+    path('api/account/', include('account.api_url')),
 ]
 
 if settings.DEBUG:

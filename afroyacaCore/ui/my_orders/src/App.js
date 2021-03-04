@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import MyOrders from './components/my_orders/index'
 import { clearUser, initAxios, getUser } from "./utils/auth_utils";
 
 
@@ -14,7 +15,7 @@ class App extends Component {
 
     return (
         <div>
-          <h1>Test my_orders</h1>
+          <MyOrders />
         </div>
 
     );
