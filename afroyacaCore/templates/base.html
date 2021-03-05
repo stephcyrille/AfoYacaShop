@@ -1,4 +1,5 @@
-{% load staticfiles %}
+{% load render_bundle from webpack_loader %}
+{% load static %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -49,10 +50,11 @@
 
     {% block custom_style %}
     {% endblock %}
-
   </head>
 
   <body>
+    <div id="page_loader"></div>
+
     <header id="header">
     <div class="header_top">
       <div class="container">
@@ -640,6 +642,10 @@
   {% endif %}
   </header>
 
+  <div class="drawer_menu">
+    <div id="mobile_navbar"></div>
+  </div>
+
 
     {% block content %}
     {% endblock %}
@@ -741,7 +747,10 @@
     })
   </script>
 
-    {% block custom_js %}
-    {% endblock %}
+  {% render_bundle 'loader' 'js' %}
+  {% render_bundle 'mobile_navbar' 'js' %}
+
+  {% block custom_js %}
+  {% endblock %}
 
 </html>

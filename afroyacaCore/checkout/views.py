@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 from account.models import Contact
 from cart.models import Cart, CartItem
+from .models import Order
 
 
 @login_required
@@ -55,9 +56,22 @@ def checkout(request):
         step = 1
         request.session['checkout_step'] = step
 
+    active_user = request.user.userprofile
+    active_cart = cart
+    active_contact = contacts_list.get(main=True)
+    status = "initialized"
+    subtotal = cart.total
+    tax_total = 0
+    delivery_fees = 0
+    final_total = subtotal + tax_total + delivery_fees
+
     # Proceed all operations on checkout stepper ther
     if request.method == "POST":
         print("POSTED VALUES", request.POST, request.session['checkout_step'])
+        if "payment" in request.POST:
+            my_order = Order(user=active_user, cart=active_cart , contact=active_contact, status=status, sub_total=subtotal, tax_total=tax_total, delivery_fees=delivery_fees, final_total=final_total, payment_method=request.POST['payment'])
+            my_order.save()
+
         # step += 1
         # request.session['checkout_step'] = step
         try:

@@ -160,7 +160,7 @@
                       <div id="collapseOne" class="collapse show" data-parent="#accordion">
                         <div class="card-body" style="font-size: 1.1em">
                           <div class="custom-control custom-radio">
-                            <input type="radio" id="pay_to_go" name="paiement" value="pay_to_go" class="custom-control-input" checked>
+                            <input type="radio" id="pay_to_go" name="payment" value="pay_to_go" class="custom-control-input" checked>
                             <label class="custom-control-label" for="pay_to_go">Paiement à la livraison</label>
                           </div>
                         </div>
@@ -183,11 +183,11 @@
                               <br />
                             </p>
                             <div class="custom-control custom-radio" style="margin-bottom: 5px">
-                              <input type="radio" id="momo" name="paiement" value="momo" class="custom-control-input">
+                              <input type="radio" id="momo" name="payment" value="momo" class="custom-control-input">
                               <label class="custom-control-label" for="momo">MTN Mobile Money</label>
                             </div>
                             <div class="custom-control custom-radio">
-                              <input type="radio" id="om" name="paiement" value="om" class="custom-control-input">
+                              <input type="radio" id="om" name="payment" value="om" class="custom-control-input">
                               <label class="custom-control-label" for="om">Orange Money</label>
                             </div>
                           </div>
@@ -296,15 +296,7 @@
           </div>
         {% elif 3 == step %}
           <div class="container checkout_btn_wrapper">
-            <div class="row">
-              <div class="checkout-submit-button">
-                <input
-                  name="previous"
-                  type="submit"
-                  class="btn btn-outline-secondary"
-                  value="Précédent"
-                >
-              </div> &nbsp; &nbsp;
+            <div class="row"> &nbsp;
               <div class="checkout-submit-button">
                 <input
                   name="my_order"

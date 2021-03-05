@@ -154,9 +154,6 @@
     margin-bottom: 50px;
 }
 
-.drawer_menu{
-    display: none;
-}
 
 
 
@@ -200,9 +197,6 @@
     .showcase-pic-wrapper img {
         width: 100%;
         height: 100%;
-    }
-    .drawer_menu{
-        display: block;
     }
     .home_news_pic_block{
         width: 100%;

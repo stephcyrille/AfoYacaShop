@@ -1,5 +1,6 @@
 <!-- templates/home.html-->
 {% extends 'base.html' %}
+{% load render_bundle from webpack_loader %}
 {% load static %}
 
 {% block meta_tags %}
@@ -16,7 +17,6 @@
 
 {% block custom_style %}
   <link rel="stylesheet" type="text/css" href="{% static 'css/home/index.css' %}?version=1" />
-  <link rel="stylesheet" type="text/css" href="{% static 'css/home/horizontal.css' %}?version=1" />
 {% endblock %}
 
 
@@ -208,7 +208,7 @@
         <!-- End Jewelery, accessories and beauty tools -->
 
         <div class="row selling-showcase" style="margin-left: 0; margin-right: 0; width: 100%">
-          <div id="horizontalScroll" style="width: 100%" />
+          <div id="horizontal_scroll" style="width: 100%" />
         </div>
 
       </div>
@@ -219,8 +219,9 @@
 
 {% endblock %}
 
+{% block bundle %}
+  {% render_bundle 'horizontal_scroll' 'js' %}
+{% endblock %}
+
 {% block custom_js %}
-  <script src="{% static 'js/hscroll.js' %}?version=1"></script>
-  <script src="{% static 'js/2.chunk.js' %}?version=1"></script>
-  <script src="{% static 'js/horizontal_scroll.js' %}?version=1"></script>
 {% endblock %}

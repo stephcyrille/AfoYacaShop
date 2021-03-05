@@ -7,7 +7,10 @@ module.exports = {
   mode: "development",
 
   entry: {
-    my_orders: './ui/my_orders/src/index.js'
+    my_orders: './ui/my_orders/src/index.js',
+    loader: './ui/loader/src/index.js',
+    mobile_navbar: './ui/mobile_navbar/src/index.js',
+    horizontal_scroll: './ui/horizontal_scroll/src/index.js'
   },
   output: {
     path: path.join(__dirname, "static/dist"),
@@ -70,7 +73,13 @@ module.exports = {
   }
   ,
   resolve: {
-    modules: [path.resolve(__dirname, './ui/my_orders/src'), 'node_modules'],
+    modules: [
+                path.resolve(__dirname, './ui/my_orders/src'),
+                'node_modules',
+                path.resolve(__dirname, './ui/loader/src'),
+                path.resolve(__dirname, './ui/horizontal_scroll/src'),
+                path.resolve(__dirname, './ui/mobile_navbar/src')
+             ],
     extensions: ['.js', '.jsx', '.json'],
     alias: {
       "app-js": path.resolve(__dirname, './src')
