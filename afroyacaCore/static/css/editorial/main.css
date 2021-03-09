@@ -36,7 +36,7 @@
 .cover_text_wrapper {
     margin: 0;
     position: absolute;
-    top: 6%;
+    top: 40%;
     right: 13%;
     width: 100%;
 }
@@ -200,3 +200,19 @@
     background-image: url('/static/images/styled.jpeg');
     background-size: cover;
 }
+
+
+
+/* --------Responsive--------- */
+/* XS */
+@media (max-width: 767px) {
+    .cover_text_wrapper {
+        /* margin: 0; */
+        position: absolute;
+        top: 55%;
+        right: 0%;
+        width: 100%;
+        padding: 20px;
+    }
+}
+
