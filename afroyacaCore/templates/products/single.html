@@ -1,7 +1,7 @@
 <!-- templates/home.html-->
 {% extends 'base.html' %}
+{% load render_bundle from webpack_loader %}
 {% load static %}
-{% load get_single_variety_pictures %}
 
 {% block meta_tags %}
   <meta name="description" content="Vente des vêtements afro, chics et tendances."
@@ -15,11 +15,19 @@
 
 {% block title %}{{ product.title }} | Afro Yaca Drum{% endblock %}
 
-{% block custom_style %}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/products/single.css' %}?version=1" />
-{% endblock %}
+{% comment %}
+  {% block custom_style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/products/single.css' %}?version=1" />
+  {% endblock %}
+{% endcomment %}
 
 {% block content %}
+
+  <div id="single_product" style="background-color: white">
+      <!-- React will load here -->
+  </div>
+
+  {% comment %}
   <section style="padding-top: 10px">
       <div class="container single-product">
           <div class="row">
@@ -157,9 +165,12 @@
           </div>
         </div>
   </section>
+  {% endcomment %}
 
+{% endblock %}
 
-
+{% block bundle %}
+  {% render_bundle 'single_product' 'js' %}
 {% endblock %}
 
 {% block custom_js %}

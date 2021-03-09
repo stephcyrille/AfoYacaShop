@@ -19,11 +19,6 @@ def single_product(request, slug):
         varieties = []
         variety = {}
 
-    try:
-        q = request.GET.get('q')
-    except:
-        q = None
-
     context = {
         "product": product,
         "varieties": varieties,

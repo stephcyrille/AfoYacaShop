@@ -46,7 +46,6 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = ["id", "title", "slug", "price", "pictures", "product_url"]
 
 
-
 class ProductFlashSaleAPIView(APIView):
     queryset = Product.objects.none()
     serializer_class = ProductSerializer
