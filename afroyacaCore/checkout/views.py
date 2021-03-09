@@ -23,6 +23,9 @@ def checkout(request):
         the_id = request.session['cart_id']
         cart = Cart.objects.get(id=the_id)
         cart_items = CartItem.objects.filter(cart=cart, is_archived=False)
+
+        if len(cart_items) == 0:
+            return redirect(reverse('home'))
     except Exception as e:
         print("No cart found on session ", e.__str__())
         the_id = None
@@ -99,6 +102,7 @@ def checkout(request):
         try:
             if "Suivre ma commande" == request.POST['next']:
                 del request.session['checkout_step']
+                del request.session['cart_id']
                 return redirect(reverse('home'))
         except:
             pass
@@ -106,6 +110,7 @@ def checkout(request):
         try:
             if "Terminer" == request.POST['next']:
                 del request.session['checkout_step']
+                del request.session['cart_id']
                 return redirect(reverse('home'))
         except:
             pass
