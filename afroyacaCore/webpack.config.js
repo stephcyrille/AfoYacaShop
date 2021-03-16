@@ -10,6 +10,7 @@ module.exports = {
     my_orders: './ui/my_orders/src/index.js',
     loader: './ui/loader/src/index.js',
     mobile_navbar: './ui/mobile_navbar/src/index.js',
+    all_products: './ui/all_products/src/index.js',
     single_product: './ui/single_product/src/index.js',
     horizontal_scroll: './ui/horizontal_scroll/src/index.js'
   },
@@ -75,11 +76,12 @@ module.exports = {
   ,
   resolve: {
     modules: [
-                path.resolve(__dirname, './ui/my_orders/src'),
                 'node_modules',
+                path.resolve(__dirname, './ui/my_orders/src'),
                 path.resolve(__dirname, './ui/loader/src'),
                 path.resolve(__dirname, './ui/horizontal_scroll/src'),
                 path.resolve(__dirname, './ui/single_product/src'),
+                path.resolve(__dirname, './ui/all_products/src'),
                 path.resolve(__dirname, './ui/mobile_navbar/src')
              ],
     extensions: ['.js', '.jsx', '.json'],

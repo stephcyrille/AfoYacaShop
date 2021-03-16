@@ -90,7 +90,7 @@
     cursor: pointer;
 }
 .address_bloc.active{
-    border: 2px solid black;
+    border: 1px solid black;
     cursor: pointer;
 }
 

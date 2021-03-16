@@ -14,7 +14,7 @@ export default
 }))
 class Loader extends React.Component {
 
-  componentWillMount(){
+  UNSAFE_componentWillMount(){
     this.props.dispatch(loaderCStoreActions.setLoading(true))
 
     setTimeout(() => {
