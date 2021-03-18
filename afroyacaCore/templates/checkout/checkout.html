@@ -19,7 +19,7 @@
 {% endblock %}
 
 {% block content %}
-  <section style="padding-top: 50px; padding-bottom: 50px">
+  <section style="padding-top: 50px; padding-bottom: 50px; background-color: white">
       <form class="container whole_stepper_content" action="" method="POST">
         {% csrf_token %}
         <div class="row justify-content-center">
@@ -76,7 +76,7 @@
                         class="delivery_method standard_delivery active"
                         onClick={ this.handleChangeDelivery.bind(this) }
                       >
-                        <h6>D'ici Samedi 25 Juillet </h6>
+                        <h6>D'ici 2 à 3 jours </h6>
                         <p>
                           <i class="fas fa-truck" style="margin-right: 10"></i>
                           <span class="">Livraison Standard</span>
@@ -90,7 +90,7 @@
                         class="delivery_method fast_delivery"
                         onClick={ this.handleChangeDelivery.bind(this) }
                       >
-                        <h6>D'ici Samedi 25 Juillet </h6>
+                        <h6>Aujourd'hui ou demain matin </h6>
                         <p>
                           <i class="fas fa-shipping-fast" style="margin-right: 10"></i>
                           <span class="">Livraison Express</span>
@@ -114,7 +114,7 @@
                         </div>
 
                         <div class="custom-control custom-checkbox" >
-                          <input type="checkbox" class="custom-control-input" id="majority_checker" name="majority_checker">
+                          <input type="checkbox" class="custom-control-input" id="majority_checker" name="majority_checker" checked>
                           <label class="custom-control-label" for="majority_checker">
                             J'ai plus de 18 ans.
                           </label>
