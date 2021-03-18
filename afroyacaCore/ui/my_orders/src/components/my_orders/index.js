@@ -26,7 +26,6 @@ import appConfig from '../../config/index'
 import './style.local.css';
 
 
-
 const useRowStyles = makeStyles({
   root: {
     '& > *': {
@@ -57,7 +56,7 @@ function Row(props) {
         <TableCell align="right">{row.contact}</TableCell>
         <TableCell align="right">
           <span
-            className={`badge ${row.status == 'initialized' && 'badge-primary'} ${row.status == 'delivered' && 'badge-success'} ${row.status == 'pending' && 'badge-warning'} ${row.status == 'canceled' && 'badge-danger'}`}>
+            className={`badge ${row.status == 'confirmed' && 'badge-primary'} ${row.status == 'delivered' && 'badge-success'} ${row.status == 'pending' && 'badge-warning'} ${row.status == 'canceled' && 'badge-danger'}`}>
             {row.status}
           </span>
         </TableCell>
@@ -76,7 +75,7 @@ function Row(props) {
                     <TableCell>Nom du produit</TableCell>
                     <TableCell align="right">P.U</TableCell>
                     <TableCell align="right">Quantité</TableCell>
-                    <TableCell align="right">Prix total (FCFA)</TableCell>
+                    <TableCell align="right">Total ligne (FCFA)</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -93,6 +92,15 @@ function Row(props) {
                       </TableCell>
                     </TableRow>
                   ))}
+                  <TableRow>
+                      <TableCell component="th" scope="row"></TableCell>
+                      <TableCell></TableCell>
+                      <TableCell align="right"></TableCell>
+                      <TableCell align="right"><b style={{ fontSize: "1.31em" }}>Prix total</b></TableCell>
+                      <TableCell align="right">
+                        <b style={{ fontSize: "1.31em" }}>{row.products.reduce((a, v) => a=a+(v.quantity * v.price), 0)}</b>
+                    </TableCell>
+                  </TableRow>
                 </TableBody>
               </Table>
             </Box>
@@ -102,26 +110,6 @@ function Row(props) {
     </React.Fragment>
   );
 }
-
-Row.propTypes = {
-  row: PropTypes.shape({
-    calories: PropTypes.number.isRequired,
-    carbs: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    products: PropTypes.arrayOf(
-      PropTypes.shape({
-        amount: PropTypes.number.isRequired,
-        price: PropTypes.number.isRequired,
-        title: PropTypes.string.isRequired,
-        ref: PropTypes.string.isRequired,
-      }),
-    ).isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    protein: PropTypes.number.isRequired,
-  }).isRequired,
-};
-
 
 
 const useStyles = theme => ({
