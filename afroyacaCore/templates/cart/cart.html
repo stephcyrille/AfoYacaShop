@@ -19,7 +19,7 @@
 {% endblock %}
 
 {% block content %}
-  <section style="padding-top: 50px; padding-bottom: 50px; background-color: white">
+  <section style="padding-top: 50px; padding-bottom: 0px; background-color: white">
       <div class="container">
         <div class="row" style="margin-left: 0; margin-right: 0">
           <div class="col-sm-8">
@@ -106,72 +106,83 @@
           <!-- Bill Price informations and checkout way details -->
           <div class="col-sm-4">
             {% if cart %}
-            <div class="row">
-              <div class="checkout-button">
-                <a
-                  href="{% url 'checkout' %}"
-                  class="btn btn-secondary"
-                >
-                  Procéder au payment
-                </a>
+              <div class="row">
+                <div class="checkout-button">
+                  <a
+                    href="{% url 'checkout' %}"
+                    class="btn btn-secondary"
+                  >
+                    Procéder au payment
+                  </a>
+                </div>
               </div>
-            </div>
 
-            <div class="row">
-              <div class="bill-info-wrapper">
-                <div class="bill-info">
-                  <h5 class="">Sommaire</h5>
-                  <br />
-                  <div class="total-group">
-                    <div class="row">
-                      <div class="col-6 col-sm-6"><h6 class="">Sous total</h6></div>
-                      <div class="col-6 col-sm-6"><p class="">{{ cart.total }} FCFA</p></div>
+              <div class="row">
+                <div class="bill-info-wrapper">
+                  <div class="bill-info">
+                    <h5 class="">Sommaire</h5>
+                    <br />
+                    <div class="total-group">
+                      <div class="row">
+                        <div class="col-6 col-sm-6"><h6 class="">Sous total</h6></div>
+                        <div class="col-6 col-sm-6"><p class="">{{ cart.total }} FCFA</p></div>
+                      </div>
+                      <div class="row">
+                        <div class="col-6 col-sm-6"><h6 class="">Livraison</h6></div>
+                        <div class="col-6 col-sm-6">
+                          <p class="">
+                            {% if cart.total == 0 %}
+                              {{ 0 }} FCFA
+                            {% else %}
+                              {{ cart.cart_delivery_price }} FCFA
+                            {% endif %}
+                          </p></div>
+                      </div>
                     </div>
-                    <div class="row">
-                      <div class="col-6 col-sm-6"><h6 class="">Livraison</h6></div>
+                    <div class="row line-total">
+                      <div class="col-6 col-sm-6"><h5 class="">Montant Total</h5></div>
                       <div class="col-6 col-sm-6">
-                        <p class="">
-                          {% if cart.total == 0 %}
-                            {{ 0 }} FCFA
+                        <h5 class="price-total">
+                          {% if cart.total != 0 %}
+                            {{ cart.total | add:cart.cart_delivery_price }} FCFA
                           {% else %}
-                            {{ cart.cart_delivery_price }} FCFA
+                            {{ cart.total }} FCFA
                           {% endif %}
-                        </p></div>
-                    </div>
-                  </div>
-                  <div class="row line-total">
-                    <div class="col-6 col-sm-6"><h5 class="">Montant Total</h5></div>
-                    <div class="col-6 col-sm-6">
-                      <h5 class="price-total">
-                        {% if cart.total != 0 %}
-                          {{ cart.total | add:cart.cart_delivery_price }} FCFA
-                        {% else %}
-                          {{ cart.total }} FCFA
-                        {% endif %}
-                      </h5>
+                        </h5>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <br />
-            
-            <div class="row">
-              <div class="checkout-button continue_shop">
-                <a 
-                  href="{% url 'trending_products' %}"
-                  class="btn btn-outline-secondary"
-                >
-                  Continuer vos achats
-                </a>
+              <br />
+
+              <div class="row">
+                <div class="checkout-button continue_shop">
+                  <a
+                    href="{% url 'trending_products' %}"
+                    class="btn btn-outline-secondary"
+                  >
+                    Continuer vos achats
+                  </a>
+                </div>
               </div>
-            </div>
+            {% endif %}
 
-          {% endif %}
-            
+          </div>
+        </div>
+      </div>
 
-
+      <div class="row" style="margin: 0;">
+        <div class="checkout_policies" style="width: 100%; margin-top: 90px; background-color: #fbfbfb; padding: 20px 0">
+          <div class="container">
+            <h3>Conditions de paiement et de retours</h3>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
           </div>
         </div>
       </div>
