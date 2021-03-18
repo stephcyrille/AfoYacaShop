@@ -16,6 +16,59 @@
 
 {% block custom_style %}
   <link rel="stylesheet" type="text/css" href="{% static 'css/checkout/checkout.css' %}?version=1" />
+
+  <style>
+      .delivery_type{
+        border: 1px solid lightgray;
+        margin: 20px 0;
+        padding: 10px 20px;
+        display: block;
+        width: 100%;
+        transition: 0.3s ease-in;
+      }
+
+      .delivery_type:hover{
+        cursor: pointer;
+        border: 1px solid black;
+        transition: 0.3s ease-out;
+      }
+
+      #delivery_radioboxes input[type=radio]{
+        display: none;
+      }
+
+      #delivery_radioboxes input[type=radio]:checked + .delivery_type{
+        border: 1px solid black;
+      }
+
+      .address_entry, .add_ddress_bloc_new{
+        height: 200px;
+        border: 1px solid lightgray;
+        margin: 20px 0;
+        padding: 10px 20px;
+        display: block;
+        width: 100%;
+        transition: 0.3s ease-in;
+      }
+
+      .plus_box i{
+        color: black;
+      }
+
+      .address_entry:hover, .add_ddress_bloc_new:hover{
+        cursor: pointer;
+        border: 1px solid black;
+        transition: 0.3s ease-out;
+      }
+
+      #address_radioboxes input[type=radio]{
+        display: none;
+      }
+
+      #address_radioboxes input[type=radio]:checked + .address_entry{
+        border: 1px solid black;
+      }
+    </style>
 {% endblock %}
 
 {% block content %}
@@ -25,46 +78,54 @@
         <div class="row justify-content-center">
           <div class="col-sm-8">
             {% if 1 == step %}
-              <div class="row">
+              <div class="row" style="width: 100%; margin-right: 0; margin-left: 0">
                 <div class="col-md-12">
                   <div class="step_one_bloc">
                     <h2>Adresse de Livraison</h2>
                     <p>
-                      Saisissez votre adresse de livraison pour connaître les options de livraison et les délais.
+                      Sélectionner votre adresse de livraison pour connaître les options de livraison et les délais.
                       Les restrictions de livraison appliquées peuvent nous contraindre à refuser votre commande.
                     </p>
                     <div class="row" style="margin-right: 0; margin-left: 0">
                       {% if contacts %}
                         {% for contact in contacts %}
                           <div class="col-6" style="padding-left: 0">
-                            <div
-                              class="address_bloc {% if contact.main is True %}active{% endif %}"
-                              onClick={ this.handleChangeAddress.bind(this, val.id) }
-                            >
-                              <div class="add_address_bloc">
-                                <h5 style="text-transform: uppercase">
-                                  <!--{ user ? `${user.userprofile.first_name} ${user.userprofile.last_name}` : null }-->
-                                  {{ contact.profile.last_name }} {{ contact.profile.first_name }}
-                                </h5>
-                                <h5>{{ contact.city }}, {{ contact.country }}</h5>
-                                <h6>{{ contact.address }}, {{ contact.address_precision }}</h6>
-                                <h6>Tél: (+237) {{ contact.phone }}</h6>
-                              </div>
+                            <div id="address_radioboxes">
+                              {% if contact.main is True %}
+                                <input type="radio" name="address_entry" value="{{ contact.id }}" id="contact_{{ contact.id }}" checked required />
+                              {% else %}
+                                <input type="radio" name="address_entry" value="{{ contact.id }}" id="contact_{{ contact.id }}" required />
+                              {% endif %}
+                              <label for="contact_{{ contact.id }}" class="address_entry">
+                                <div
+                                  class="address_bloc"
+                                >
+                                  <div class="add_address_bloc">
+                                    <h5 style="text-transform: uppercase">
+                                      {{ contact.profile.last_name }} {{ contact.profile.first_name }}
+                                    </h5>
+                                    <h5>{{ contact.city }}, {{ contact.country }}</h5>
+                                    <h6>{{ contact.address }}, {{ contact.address_precision }}</h6>
+                                    <h6>Tél: (+237) {{ contact.phone }}</h6>
+                                  </div>
+                                </div>
+                              </label>
                             </div>
+
                           </div>
                         {% endfor %}
                       {% endif %}
 
                       {% if dim_contact < 2 %}
                         <div class="col-md-6" style="padding-right: 0; {% if not contacts %}padding-left: 0{% endif %}">
-                          <div class="address_bloc_new" onClick={ this.handleSetDialogOpen.bind(this) }>
-                            <div class=".address_bloc_new">
+                          <a href="#" class="add_ddress_bloc_new">
+                            <div class="">
                               <h6>Nouvelle adresse</h6>
                             </div>
                             <div class="plus_box">
                               <i class="fa fa-plus"></i>
                             </div>
-                          </div>
+                          </a>
                         </div>
                       {% endif %}
 
@@ -72,32 +133,37 @@
 
                     <div class="place_delivery_choice">
                       <h2>Obtenir votre commande</h2>
-                      <div
-                        class="delivery_method standard_delivery active"
-                        onClick={ this.handleChangeDelivery.bind(this) }
-                      >
-                        <h6>D'ici 2 à 3 jours </h6>
-                        <p>
-                          <i class="fas fa-truck" style="margin-right: 10"></i>
-                          <span class="">Livraison Standard</span>
-                        </p>
-                        <p class="delivery_hour">
-                          08:00 - 18:00
-                        </p>
-                      </div>
-
-                      <div
-                        class="delivery_method fast_delivery"
-                        onClick={ this.handleChangeDelivery.bind(this) }
-                      >
-                        <h6>Aujourd'hui ou demain matin </h6>
-                        <p>
-                          <i class="fas fa-shipping-fast" style="margin-right: 10"></i>
-                          <span class="">Livraison Express</span>
-                        </p>
-                        <p class="delivery_hour">
-                          08:00 - 18:00
-                        </p>
+                      <div id="delivery_radioboxes">
+                        <input type="radio" name="delivery_method" value="standard" id="standard" checked required />
+                        <label for="standard" class="delivery_type">
+                          <div
+                            class="delivery_method standard_delivery"
+                          >
+                            <h6>D'ici 2 à 3 jours </h6>
+                            <p>
+                              <i class="fas fa-truck" style="margin-right: 10"></i>
+                              <span class="">Livraison Standard</span>
+                            </p>
+                            <p class="delivery_hour">
+                              08:00 - 18:00
+                            </p>
+                          </div>
+                        </label>
+                        <input type="radio" name="delivery_method" value="express" id="express" required />
+                        <label for="express" class="delivery_type">
+                          <div
+                            class="delivery_method fast_delivery"
+                          >
+                            <h6>Aujourd'hui ou demain matin </h6>
+                            <p>
+                              <i class="fas fa-shipping-fast" style="margin-right: 10"></i>
+                              <span class="">Livraison Express</span>
+                            </p>
+                            <p class="delivery_hour">
+                              08:00 - 18:00
+                            </p>
+                          </div>
+                        </label>
                       </div>
                     </div>
 
@@ -107,14 +173,14 @@
                       </div>
                       <div class="form-group">
                         <div class="custom-control custom-checkbox" style="margin-bottom: 5px">
-                          <input type="checkbox" class="custom-control-input" id="bill_delivery_info" name="bill_delivery_info">
-                          <label class="custom-control-label" for="bill_delivery_info">
-                            Mes informations de livraison et de facturation sont les mêmes.
+                          <input type="checkbox" class="custom-control-input" id="promotion_ayd_products" name="promotion_ayd_products">
+                          <label class="custom-control-label" for="promotion_ayd_products">
+                            Je communique mes coordonnées afin que AYD m'informe des produits et services qui peuvent me correspondre. Je sais que je peux demander à AYD de cesser toute communication avec moi à tout moment. J'accepte de recevoir des messages personnalisés de marketing via le courrier électronique de la part des responsables de traitements (« Afro Yaca Drum»).
                           </label>
                         </div>
 
                         <div class="custom-control custom-checkbox" >
-                          <input type="checkbox" class="custom-control-input" id="majority_checker" name="majority_checker" checked>
+                          <input type="checkbox" class="custom-control-input" id="majority_checker" name="majority_checker" required>
                           <label class="custom-control-label" for="majority_checker">
                             J'ai plus de 18 ans.
                           </label>
@@ -123,7 +189,7 @@
 
                       <div class="form-group">
                         <p style="text-align: justify">
-                          Je communique mes coordonnées afin que AYD m'informe des produits et services qui peuvent me correspondre. Je sais que je peux demander à AYD de cesser toute communication avec moi à tout moment. J'accepte de recevoir des messages personnalisés de marketing via le courrier électronique de la part des Responsables de traitements (« Afro Yaca Drum»).
+
                         </p>
                       </div>
                     </div>
@@ -200,8 +266,12 @@
               </div>
             {% elif 3 == step %}
               <div class="step4-wrapper">
-                <div class="step4-body">
-                  <h2 class="">Commande réussie</h2>
+                <div class="offset-md-1 col-md-10 text-center">
+                  <h2 class="">Fin de la commande</h2>
+                  <p class="text-center">
+                    Vous êtes entrain cloturer la commande, bien vouloir vérifier que toutes les informations transmisent sont correct avant de terminer le processus.
+                    <br /> Notez que si vous confirmez cette commande, vous ne pourriez plus l'éditer dans le système.
+                  </p>
                 </div>
               </div>
             {% endif %}
@@ -214,30 +284,30 @@
                   <h5 class="">Synthèse de la commande</h5>
                   <br />
                   <div class="command-total-group">
-                    <div class="row">
+                    <div class="row" style="width: 100%; margin-right: 0; margin-left: 0">
                       <div class="col-sm-6"><h6 class="">Sous total</h6></div>
                       <div class="col-sm-6"><p class="">{% if cart %}{{ cart.total }}{% endif %} FCFA</p></div>
                     </div>
-                    <div class="row">
+                    <div class="row" style="width: 100%; margin-right: 0; margin-left: 0">
                       <div class="col-sm-6"><h6 class="">Livraison</h6></div>
                       <div class="col-sm-6"><p class="">{% if cart %}{{ 0 }}{% endif %} FCFA</p></div>
                     </div>
 
-                    <div class="row">
+                    <div class="row" style="width: 100%; margin-right: 0; margin-left: 0">
                         <div class="col-sm-6"><h6 class="">Livraison express</h6></div>
                         <div class="col-sm-6"><p class=""> {% if cart %}{{ cart.cart_express_delivery_price }}{% endif %} FCFA</p></div>
                     </div>
 
-                    <div class="row">
+                    <div class="row" style="width: 100%; margin-right: 0; margin-left: 0">
                       <div class="col-sm-6"><h6 class="">Réduction</h6></div>
                       <div class="col-sm-6"><p class=""> 0 % </p></div>
                     </div>
-                    <div class="row">
+                    <div class="row" style="width: 100%; margin-right: 0; margin-left: 0">
                       <div class="col-sm-6"><h6 class="">Taxe total</h6></div>
                       <div class="col-sm-6"><p class=""> 0 FCFA</p></div>
                     </div>
                   </div>
-                  <div class="row line-total">
+                  <div class="row line-total" style="width: 100%; margin-right: 0; margin-left: 0">
                     <div class="col-sm-6"><h5 class="">Montant Total</h5></div>
                     <div class="col-sm-6"><h5 class="price-total">{% if cart %}{{ cart.total | add:cart.cart_express_delivery_price }}{% endif %} FCFA</h5></div>
                   </div>
@@ -249,7 +319,7 @@
               <h5 class="">Articles</h5>
               {% if cart_items %}
                 {% for item in cart_items %}
-                  <div class="row product-row" key={key}>
+                  <div class="row product-row" key={key} style="width: 100%; margin-right: 0; margin-left: 0">
                     <div class="col-sm-6 command-picture-box">
                       <div class="command-img-wrapper">
                         <a href="{% url 'single_product' slug=item.variety.product.slug %}" class="">
@@ -275,7 +345,7 @@
 
         {% if 1 == step or 2 == step %}
           <div class="container checkout_btn_wrapper">
-            <div class="row">
+            <div class="row" style="width: 100%; margin-right: 0; margin-left: 0">
               <div class="checkout-submit-button">
                 <input
                   name="previous"
@@ -296,13 +366,13 @@
           </div>
         {% elif 3 == step %}
           <div class="container checkout_btn_wrapper">
-            <div class="row"> &nbsp;
+            <div class="row" style="width: 100%; margin-right: 0; margin-left: 0"> &nbsp;
               <div class="checkout-submit-button">
                 <input
-                  name="my_order"
+                  name="previous"
                   type="submit"
-                  class="btn btn-secondary"
-                  value="Suivre ma commande"
+                  class="btn btn-outline-secondary"
+                  value="Précédent"
                 />
               </div> &nbsp; &nbsp;
               <div class="checkout-submit-button">

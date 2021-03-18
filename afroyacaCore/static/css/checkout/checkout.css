@@ -52,7 +52,7 @@
 .step4-wrapper{
     position: relative;
     width: 100%;
-    height: 50vh;
+    padding: 20px 0px 90px;
 }
 
 .step4-body{
@@ -74,25 +74,11 @@
     text-transform: uppercase;
 }
 
-.address_bloc, .address_bloc_new{
-    height: 200px;
-    border: 1px solid lightgray;
-    padding: 20px;
-    margin-top: 20px;
-}
-.address_bloc_new:hover{
-    border: 2px solid black;
-    cursor: pointer;
-}
 
-.address_bloc:hover{
-    border: 2px solid black;
-    cursor: pointer;
-}
-.address_bloc.active{
-    border: 1px solid black;
-    cursor: pointer;
-}
+
+
+
+
 
 .plus_box i:hover{
     cursor: pointer;
@@ -109,18 +95,19 @@
 }
 
 
-.delivery_method{
-    border: 1px solid lightgray;
-    margin: 20px 0;
-    padding: 10px 20px;
-}
-.delivery_method.active{
-    border: 1px solid black;
-}
-.delivery_method:hover{
-    border: 1px solid black;
-    cursor: pointer;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
 .delivery_method p{
     margin-bottom: 5px !important;
 }

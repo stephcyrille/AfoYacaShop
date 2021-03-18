@@ -61,30 +61,57 @@ def checkout(request):
 
     active_user = request.user.userprofile
     active_cart = cart
-    active_contact = contacts_list.get(main=True)
+    try:
+        active_contact = contacts_list.get(main=True)
+    except Exception as e:
+        active_contact = {}
+        print('No main contact found ', e.__str__())
     status = "initialized"
     subtotal = cart.total
     tax_total = 0
     delivery_fees = 0
     final_total = subtotal + tax_total + delivery_fees
 
+    try:
+        order_id = request.session['order_id']
+        session_order = Order.objects.get(id=order_id)
+    except Exception as e:
+        print('No order id found', e.__str__())
+        session_order = Order(
+                    user=active_user,
+                    cart=active_cart,
+                    contact=active_contact,
+                    status=status,
+                    sub_total=subtotal,
+                    tax_total=tax_total,
+                    delivery_fees=delivery_fees,
+                    final_total=final_total,
+                    payment_method='pay_to_go'
+                  )
+        session_order.save()
+        request.session['order_id'] = session_order.id
+
     # Proceed all operations on checkout stepper ther
     if request.method == "POST":
         print("POSTED VALUES", request.POST, request.session['checkout_step'])
-        if "payment" in request.POST:
-            my_order = Order(user=active_user, cart=active_cart , contact=active_contact, status=status, sub_total=subtotal, tax_total=tax_total, delivery_fees=delivery_fees, final_total=final_total, payment_method=request.POST['payment'])
-            my_order.save()
 
         # step += 1
         # request.session['checkout_step'] = step
         try:
             if "Suivant" == request.POST['next']:
-                if step > 2:
-                    print("DO NOTHING THERE")
-                else:
+                if step == 1:
                     step += 1
                     request.session['checkout_step'] = step
-                    print("BERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR")
+                elif 2 == step:
+                    if "payment" in request.POST:
+                        payment = request.POST['payment']
+                        print("MY PAAAAAAAAAAAAAAYYYYYYYYYYMÂNT", payment, session_order.payment_method)
+                        session_order.payment_method = payment
+                        session_order.save()
+                        step += 1
+                        request.session['checkout_step'] = step
+                else:
+                    print("BERRRRRRRRRRRR NO STEP INCREASING")
         except:
             pass
 
@@ -103,6 +130,7 @@ def checkout(request):
             if "Suivre ma commande" == request.POST['next']:
                 del request.session['checkout_step']
                 del request.session['cart_id']
+                del request.session['order_id']
                 return redirect(reverse('home'))
         except:
             pass
@@ -111,6 +139,9 @@ def checkout(request):
             if "Terminer" == request.POST['next']:
                 del request.session['checkout_step']
                 del request.session['cart_id']
+                del request.session['order_id']
+                session_order.status = 'confirmed'
+                session_order.save()
                 return redirect(reverse('home'))
         except:
             pass

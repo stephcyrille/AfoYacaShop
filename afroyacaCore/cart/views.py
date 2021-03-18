@@ -67,6 +67,11 @@ def cart_view(request):
     except Exception as e:
         print("No checkout step initialized ", e.__str__())
 
+    try:
+        del request.session['order_id']
+    except Exception as e:
+        print("No order session id initialized ", e.__str__())
+
     if the_id:
         empty = False
         new_total = 0.00
