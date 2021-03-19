@@ -118,7 +118,7 @@ class HorizontalScroll extends Component {
               </a>
             </div>
             <div className='showcase-pic-legend'>
-              <h4 style={{ marginBottom: 5 }}>{val.title}</h4>
+              <h5 className="categories_home ttle" style={{ marginBottom: 5, paddingBottom: 5 }}>{val.title}</h5>
               <p>
                 {/* The call list of products in the specific place */}
                 <a href="" className="horizontal_scroll_country">Cameroun</a><br />
