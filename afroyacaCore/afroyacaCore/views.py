@@ -11,7 +11,7 @@ def home(request):
 
     banner = Banner.objects.filter(is_home=True, is_published=True).first()
     cover = Article.objects.filter(is_home=True, is_published=True).first()
-    trending_products = list(Product.objects.filter(is_archived=False))
+    trending_products = list(Product.objects.filter(is_archived=False, trending=True))
     feature_products = random.sample(trending_products, 2)
     categories_list = list(Category.objects.filter(is_archived=False))
     categories = random.sample(categories_list, 3)

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load render_bundle from webpack_loader %}
+{% load static %}
+
+{% block meta_tags %}
+  <meta name="description" content="Vente des vêtements afro, chics et tendances."
+      xmlns:padding-left="http://www.w3.org/1999/xhtml"/>
+  <meta name="keywords" content="AFY,Fashion,Mode,Afro" />
+  <meta property="og:description" content="Vente des vêtements afro, chics et tendances" />
+  <meta property="og:title" content="Afro Yaca Drum" />
+  <meta property="og:url" content="http://www.afroyacadrum.cm" />
+  <meta property="og:image" content="http://www.afroyacadrum.cm/static/images/acc.jpg" />
+{% endblock %}
+
+{% block title %}My Box | Afro Yaca Drum{% endblock %}
+
+{% block custom_style %}
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+{% endblock %}
+
+{% block content %}
+  <section style="padding-top: 50px; padding-bottom: 50px; background-color: white !important">
+    <div id="my_orders">
+        <!-- React will load here -->
+    </div>
+  </section>
+{% endblock %}
+
+{% block bundle %}
+  {% render_bundle 'my_orders' 'js' %}
+{% endblock %}
+
+{% block custom_js %}
+{% endblock %}

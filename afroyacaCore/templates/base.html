@@ -145,13 +145,13 @@
                           class="user_middle_nav_li"
                           style="padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid lightgrey"
                         >
-                          <a href="/account/service/oh-my-box/">Ma Box</a>
+                          <a href="{% url 'my_box' %}">Ma Box</a>
                         </li>
                         <li
                           class="user_middle_nav_li"
                           style="padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid lightgrey"
                         >
-                          <a href="/account/settings/">Préférences</a>
+                          <a href="{% url 'settings' %}">Préférences</a>
                         </li>
                         <li
                           class="user_middle_nav_li"
@@ -658,11 +658,11 @@
               <div class="single-widget">
                 <h2>Navigation </h2>
                 <ul class="nav nav-pills nav-stacked custom">
-                  <li><a href="#">Accueil</a></li>
-                  <li><a href="#">Editorial</a></li>
-                  <li><a href="#">Oh my box</a></li>
-                  <li><a href="#">A propos</a></li>
-                  <li><a href="#">Contact’s</a></li>
+                  <li><a href="{% url 'home' %}">Accueil</a></li>
+                  <li><a href="{% url 'editorial' %}">Editorial</a></li>
+                  <li><a href="{% url 'oh_my_box' %}">Oh my box</a></li>
+                  <li><a href="{% url 'home' %}">A propos</a></li>
+                  <li><a href="{% url 'home' %}">Contact’s</a></li>
                 </ul>
               </div>
             </div>
@@ -670,11 +670,11 @@
               <div class="single-widget">
                 <h2>A la une</h2>
                 <ul class="nav nav-pills nav-stacked custom">
-                  <li><a href="#">Vêtements</a></li>
-                  <li><a href="#">Chaussures</a></li>
-                  <li><a href="#">Sacs</a></li>
-                  <li><a href="#">Accessoires</a></li>
-                  <li><a href="#">Bijoux</a></li>
+                  <li><a href="{% url 'clothing_products' %}">Vêtements</a></li>
+                  <li><a href="{% url 'shoes_products' %}">Chaussures</a></li>
+                  <li><a href="{% url 'bags_products' %}">Sacs</a></li>
+                  <li><a href="{% url 'accessories_products' %}">Accessoires</a></li>
+                  <li><a href="{% url 'jewelries_products' %}">Bijoux</a></li>
                 </ul>
               </div>
             </div>
@@ -682,11 +682,10 @@
               <div class="single-widget">
                 <h2>Achat rapide</h2>
                 <ul class="nav nav-pills nav-stacked custom">
-                  <li><a href="#">Accéssoires tendances</a></li>
-                  <li><a href="#">Articles de l'été</a></li>
-                  <li><a href="#">Bijoux éssentiels</a></li>
-                  <li><a href="#">Découverte du mois</a></li>
-                  <li><a href="#"></a></li>
+                  <li><a href="{% url 'accessories_products' %}">Accéssoires tendances</a></li>
+                  <li><a href="{% url 'trending_products' %}">Articles de l'été</a></li>
+                  <li><a href="{% url 'jewelries_products' %}">Bijoux éssentiels</a></li>
+                  <li><a href="{% url 'to_wear_products' %}">Découverte du mois</a></li>
                 </ul>
               </div>
             </div>
@@ -694,10 +693,10 @@
               <div class="single-widget">
                 <h2>Afro Yaca Drum</h2>
                 <ul class="nav nav-pills nav-stacked custom">
-                  <li><a href="#">Blog</a></li>
-                  <li><a href="#">Emploie</a></li>
-                  <li><a href="#">FAQ</a></li>
-                  <li><a href="#">CGV</a></li>
+                  <li><a href="{% url 'home' %}">Blog</a></li>
+                  <li><a href="{% url 'home' %}">Emploie</a></li>
+                  <li><a href="{% url 'home' %}">FAQ</a></li>
+                  <li><a href="{% url 'home' %}">CGV</a></li>
                 </ul>
               </div>
             </div>
@@ -722,7 +721,7 @@
         <div class="container">
           <div class="row">
             <div class="col-sm-6">
-              <p class="footer_copyright">Copyright © 2020 MASC Intelligence - Tous les droits reservés.</p>
+              <p class="footer_copyright">Copyright © 2020 MASC Intelligence - Tous les droits reservés (+237 693 458 540).</p>
             </div>
             <div class="col-sm-6">
 

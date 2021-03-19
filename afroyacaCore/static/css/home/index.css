@@ -51,7 +51,6 @@
 }
 
 .home-cover-wrapper{
-    height: 700px;
     width: 100%;
     margin-bottom: 30px;
 }
@@ -75,7 +74,7 @@
     color: rgb(37, 37, 37);
     display: inline-block;
     margin-top: 0px;
-    padding-top: 10px;
+    padding-top: 5px;
     padding-bottom: 5px;
     border-bottom: 1px solid black;
     transition: ease-in-out;
@@ -89,12 +88,17 @@
     transition-duration: 0.3s;
 }
 
+.what-to-buy-legend {
+    padding: 5px 0 20px;
+}
+
 .latest-legend h4{
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     padding-top: 15px;
     line-height: 1.2;
     font-weight: normal;
     color: rgba(0, 0, 0, 0.85) !important;
+    margin-bottom: 0px;
 }
 
 .home_news_pic_block{
@@ -107,7 +111,7 @@
     padding-left: 30px;
     padding-right: 0px;
 }
-.home-right-side .what-to-buy-title{
+.home-right-side .what-to-buy-title, .categories_home{
     text-transform: uppercase;
     padding-bottom: 20px;
     line-height: 1.2;
@@ -115,14 +119,15 @@
 }
 .home-what-to-buy .what-to-buy-legend p{
     color: rgb(92, 92, 92);
-    margin-bottom: 5px !important;
+    margin-bottom: 4px;
 }
 .home-what-to-buy .what-to-buy-legend span{
     color: rgb(92, 92, 92);
-    padding-bottom: 5px;
+    padding: 5px 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0);
     transition: ease-in-out;
     transition-duration: 0.3s;
+    border-bottom: 1px solid #d8d6d6;
 }
 .home-what-to-buy .what-to-buy-legend span:hover{
     border-bottom: 1px solid black;
@@ -132,10 +137,11 @@
 }
 
 .what-to-buy-legend h4{
-    padding-top: 15px;
+    padding-top: 5px;
     line-height: 1.2;
     font-weight: normal;
-    color: rgba(0, 0, 0, 0.85)
+    color: rgba(0, 0, 0, 0.85);
+    margin-bottom: 5px;
     /* padding-bottom: 10px; */
 }
 
@@ -156,6 +162,8 @@
 
 
 
+.image_new_products_home{
+}
 
 
 /* -----------Responsive------------- */
@@ -164,14 +172,11 @@
     .latest-articles-title{
         text-align: center;
     }
-    .latest-row {
-        padding: 0 10px;
+    .latest-legend {
+      text-align: center;
     }
     .latest-legend h4 {
-        font-size: 1.2rem;
-    }
-    .home-cover-wrapper {
-        height: 510px;
+        font-size: 1.12rem;
     }
     .home-right-side {
         padding-left: 15px;
@@ -180,6 +185,10 @@
     }
     .home-right-side .what-to-buy-title {
         padding-bottom: 0px;
+    }
+    .categories_home.ttle{
+      padding: 5px;
+      text-align: center;
     }
     .what-to-buy-legend h4 {
         padding-top: 6px;

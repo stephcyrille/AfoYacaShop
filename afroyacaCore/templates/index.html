@@ -59,13 +59,8 @@
             <!-- magazine cover -->
             <div class="row" style="margin-left: 0; margin-right: 0; width: 100%">
               <a href="#" class='home-cover-wrapper'> 
-                <div
-                  style="
-                    background-image: url({{ cover.get_cover_picture }});
-                    width: 100%;
-                    height: 100%;
-                    background-size: contain;
-                    background-repeat: no-repeat">
+                <div>
+                  <img class="img-fluid" src="{{ cover.get_cover_picture }}" alt="Couverture Magazine" />
                 </div>
               </a>
             </div>
@@ -77,14 +72,10 @@
             <div class="row latest-row" style="margin-left: 0; margin-right: 0; width: 100%">
               {% if feature_products %}
                 {% for val in feature_products %}
-                <div class=" col-6" style="padding-left: 0; padding-right: 10">
+                <div class="col-6" style="padding: 5px">
                   <a href="{% url 'single_product' slug=val.slug %}" class='home-latest-wrapper'>
-                  <div
-                      style="
-                        background-image: url({{ val.get_single_picture}});
-                        width: 100%;
-                        height: 400px;
-                        background-size: cover;">
+                    <div class="image_new_products_home">
+                      <img class="img-fluid" src="{{ val.get_single_picture}}" alt="{{ val.title}}" />
                     </div>
                     <div class="latest-legend display-4">
                       <h4 class='display-4'>{{ val.title }}</h4>
@@ -106,7 +97,7 @@
             <h5 class='what-to-buy-title'>Ce qu'il faut acheter</h5>
             <!-- What to buy -->
             <div class="row" style="margin-left: 0; margin-right: 0; width: 100%">
-              <a href="/shop/products/women/clothing?sort=robes" class='home-what-to-buy'>
+              <a href="{% url 'clothing_products' %}" class='home-what-to-buy'>
                 <div
                   style="
                     background-image: url(/static/images/rob2.jpg);
@@ -119,8 +110,8 @@
                   <p class=''>
                     Les plus belles robes de notre collection
                   </p>
-                  <span class="">
-                    Regorder le look
+                  <span class="{% url 'clothing_products' %}">
+                    Regarder le look
                   </span>
                 </div>
               </a>
@@ -129,7 +120,7 @@
 
             <!-- What to buy -->
             <div class="row" style="margin-left: 0; margin-right: 0; width: 100%; margin-top: 40; margin-bottom: 30">
-              <a href="/shop/products/women/bags?sort=luxe" class='home-what-to-buy'>
+              <a href="{% url 'bags_products' %}" class='home-what-to-buy'>
                 <div
                   style="
                     background-image: url(/static/images/sac.jpg);
@@ -142,8 +133,8 @@
                   <p class=''>
                     La collection des meilleurs sacs à chics de luxe
                   </p>
-                  <span href="#" class="">
-                    Acheter maintenant
+                  <span href="{% url 'bags_products' %}" class="">
+                    Regarder le look
                   </span>
                 </div>
               </a>
@@ -152,7 +143,7 @@
 
             <!-- What to buy -->
             <div class="row" style="margin-left: 0; margin-right: 0; width: 100%">
-              <a href="/shop/products/women/accessories?sort=afritude" class='home-what-to-buy'>
+              <a href="{% url 'accessories_products' %}" class='home-what-to-buy'>
                 <div
                   style="
                     background-image: url(/static/images/acc.jpg);
@@ -165,7 +156,7 @@
                   <p class=''>
                     Les accessoires Afro et chics à porter de de main
                   </p>
-                  <span href="#" class="">
+                  <span href="{% url 'accessories_products' %}" class="">
                     Regorder le look
                   </span>
                 </div>
@@ -177,33 +168,28 @@
 
         <!--  Jewelery, accessories and beauty tools -->
         <div class="row home-soft-category" style="margin-left: 0; margin-right: 0; width: 100%">
-        {% if categories %}
-          {% for val in categories %}
-          <div class="col-sm-4 home_categorie" style="padding-left: 0; padding-right: 10">
-            {% comment %}
-              <a href="{% url val.get_absolute_url slug=val.slug %}" class='home-latest-wrapper'></a>
-            {% endcomment %}
-            <a href="#" class='home-latest-wrapper'>
-              <div
-                  style="
-                    background-image: url({{ val.get_single_picture }});
-                    width: 100%;
-                    height: 300px;
-                    background-size: cover;">
-                </div>
-                <div class="latest-legend display-4">
-                  <h4 class='display-4'>{{ val.title }}</h4>
-                  <p class=''>
-                    Les plus belles robes de notre collection<br />
-                    <span class="">
-                      Acheter maintenant
-                    </span>
-                  </p>
-                </div>
-              </a>
-          </div>
-          {% endfor %}
-        {% endif %}
+          <h5 class='categories_home text-center' style="width: 100%">Catégories de vêtements</h5>
+          {% if categories %}
+            {% for val in categories %}
+            <div class="col-sm-4 home_categorie" style="padding-left: 0; padding-right: 10">
+              {% comment %}
+                <a href="{% url val.get_absolute_url slug=val.slug %}" class='home-latest-wrapper'></a>
+              {% endcomment %}
+              <a href="#" class='home-latest-wrapper'>
+                <div
+                    style="
+                      background-image: url({{ val.get_single_picture }});
+                      width: 100%;
+                      height: 300px;
+                      background-size: cover;">
+                  </div>
+                  <div class="" style="padding-top: 5px">
+                    <h6 class='categories_home ttle'>{{ val.title }}</h6>
+                  </div>
+                </a>
+            </div>
+            {% endfor %}
+          {% endif %}
         </div>
         <!-- End Jewelery, accessories and beauty tools -->
 

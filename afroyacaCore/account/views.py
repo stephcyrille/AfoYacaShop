@@ -88,3 +88,19 @@ def my_orders(request):
     context = {}
 
     return render(request, template_name, context)
+
+
+@login_required
+def my_box(request):
+    template_name = "account/dashboard/my_box.html"
+    context = {}
+
+    return render(request, template_name, context)
+
+
+@login_required
+def settings(request):
+    template_name = "account/dashboard/settings.html"
+    context = {}
+
+    return render(request, template_name, context)

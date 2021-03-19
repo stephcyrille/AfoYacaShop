@@ -14,5 +14,7 @@ urlpatterns = [
     path('reset/done', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
 
     # Dashboard url
-    path('dashboard/orders', my_orders , name="my_orders"),
+    path('dashboard/orders', my_orders, name="my_orders"),
+    path('dashboard/my-box', my_box, name="my_box"),
+    path('dashboard/settings', settings, name="settings"),
 ]
