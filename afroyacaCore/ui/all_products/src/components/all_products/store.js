@@ -3,7 +3,9 @@ import { createAction, createReducer } from "redux-act";
 const initialState = {
 	initial_values:{},
     products: [],
+    filtered_products: [],
     loading: false,
+    filter: false
 };
 
 const actions = { name: "allProductsCStoreActions" };
@@ -24,6 +26,16 @@ store.on(actions.setProducts, (state, value) => ({
 actions.setLoading = createAction("ALL_PRODUCTS__SET_LOADING");
 store.on(actions.setLoading, (state, value) => ({
   ...state, loading: value
+}));
+
+actions.unSetFilter = createAction("ALL_PRODUCTS__UNSET_FILTER");
+store.on(actions.unSetFilter, (state) => ({
+  ...state, filter: false
+}));
+
+actions.setFilter = createAction("ALL_PRODUCTS__SET_FILTER");
+store.on(actions.setFilter, (state, value) => ({
+  ...state, filter: true, filtered_products: value
 }));
 
 export { store as allProductsCStore, actions as allProductsCStoreActions };

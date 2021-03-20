@@ -746,8 +746,11 @@
     })
   </script>
 
-  {% render_bundle 'loader' 'js' %}
-  {% render_bundle 'mobile_navbar' 'js' %}
+  {% comment %}
+    <!-- TODO We will put the compiled file here, when we will moving to production -->
+    {% render_bundle 'loader' 'js' %}
+    {% render_bundle 'mobile_navbar' 'js' %}
+  {% endcomment %}
 
   {% block custom_js %}
   {% endblock %}

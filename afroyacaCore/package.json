@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "buildBox": "./node_modules/.bin/webpack --config ./webpack_config/webpack.configBox.js --watch --devtools --progress",
     "watch": "./node_modules/.bin/webpack --config webpack.config.js --watch --devtools --progress",
     "build": "webpack --mode production ./src/index.js --output ../static/dist/production/my_orders.js"
   },

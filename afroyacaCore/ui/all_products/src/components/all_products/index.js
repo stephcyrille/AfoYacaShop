@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { PulseLoader } from 'react-spinners';
 
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
@@ -32,12 +33,44 @@ export default
 }))
 @withStyles(useStyles)
 class AllProducts extends React.Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      range_values: [1, 30]
-    }
-  }
+  state = {
+    range_values: [1, 30],
+    /* TODO rename it to Category_filter */
+    filterList: [
+      {
+        id: 11,
+        name: "Accéssoires",
+        value: "accessories"
+      },
+      {
+        id: 12,
+        name: "Beauté",
+        value: "beauties"
+      },
+      {
+        id: 13,
+        name: "Bijoux",
+        value: "jewels"
+      },
+      {
+        id: 14,
+        name: "Chaussures",
+        value: "shoes"
+      },
+      {
+        id: 15,
+        name: "Sacs",
+        value: "bags"
+      },
+      {
+        id: 16,
+        name: "Vêtements",
+        value: "cloths"
+      }
+    ],
+    searchLists: this.props.allProductsCStore.products,
+    activeFilter: []
+  };
 
   UNSAFE_componentWillMount(){
     var url = window.location.pathname
@@ -78,13 +111,63 @@ class AllProducts extends React.Component {
     })
   };
 
+  handleCheckboxClick(e){
+    console.log(`Checkbox name: ${e.target.name} is checked:${e.target.checked}`)
+
+    const { products } = this.props.allProductsCStore
+
+    var result = products.filter(function(x) {
+        return x.category==e.target.name
+    })
+
+    this.props.dispatch(allProductsCStoreActions.setLoading(true))
+
+    if(e.target.checked){
+      this.props.dispatch(allProductsCStoreActions.setFilter(result))
+      setTimeout(() => {
+        this.props.dispatch(allProductsCStoreActions.setLoading(false))
+      }, 2000);
+    } else {
+      this.props.dispatch(allProductsCStoreActions.unSetFilter())
+      setTimeout(() => {
+        this.props.dispatch(allProductsCStoreActions.setLoading(false))
+      }, 2000);
+    }
+
+    console.log(`Initial products array`, products)
+    console.log(`New products array :`, result)
+  }
+
   valuetext(value) {
     return `${value}°C`;
   }
 
+  onFilterChange(filter) {
+    console.log("The filter is", filter)
+    const { filterList, activeFilter } = this.state;
+    if (filter === "ALL") {
+      if (activeFilter.length === filterList.length) {
+        this.setState({ activeFilter: [] });
+      } else {
+        this.setState({ activeFilter: filterList.map(filter => filter.value) });
+      }
+    } else {
+      if (activeFilter.includes(filter)) {
+        const filterIndex = activeFilter.indexOf(filter);
+        const newFilter = [...activeFilter];
+        newFilter.splice(filterIndex, 1);
+        this.setState({ activeFilter: newFilter });
+        console.log("New filter list", newFilter)
+      } else {
+        this.setState({ activeFilter: [...activeFilter, filter] });
+      }
+    }
+  }
+
+
 
   render() {
-    const { products } = this.props.allProductsCStore
+    const { products, loading, filter, filtered_products } = this.props.allProductsCStore
     const { classes } = this.props;
     const marks = [
       {
@@ -100,10 +183,36 @@ class AllProducts extends React.Component {
         label: '100k',
       },
     ];
+    var productList = filter ? filtered_products : products
+
+    const { filterList, activeFilter } = this.state;
+    let filteredList;
+    if (
+      activeFilter.length === 0 ||
+      activeFilter.length === filterList.length
+    ) {
+      filteredList = this.state.searchLists;
+    } else {
+      filteredList = this.state.searchLists.filter(item =>
+        this.state.activeFilter.includes(item.type)
+      );
+    }
+
 
     return (
       //<!-- Document Wrapper -->
       <div className="" style={{ backgroundColor: "#fff" }}>
+        { loading ? (
+            <div className='home-loading'>
+              <div className='reverse-spinner'>
+                <PulseLoader
+                  color={'#FE980F'}
+                  loading={loading}
+                />
+              </div>
+            </div>)
+          : ''
+        }
         <section style={{ paddingTop: 40, paddingBottom: 40  }}>
           <div className="container">
             <div className="row">
@@ -121,68 +230,69 @@ class AllProducts extends React.Component {
                         <FormControl component="fieldset" className={classes.formControl}>
                           <FormGroup>
                             <FormControlLabel
-                              control={<Checkbox name="accessory" iconStyle={{ fill: "#ddaa44" }} inputStyle={{ color: '#ddaa44' }}  style={{ color: "#ddaa44", padding: "5px 10px" }} />}
-                              label="Accéssoires"
+                              control={
+                                <Checkbox
+                                  name="ALL"
+                                  id="all"
+                                  onClick={() => this.onFilterChange("ALL")}
+                                  checked={activeFilter.length === filterList.length}
+                                  iconStyle={{ fill: "#ddaa44" }}
+                                  style={{ color: "#ddaa44", padding: "5px 10px" }} />
+                              }
+                              label="Tous"
                               className={style.checkBoxControlStyle}
                             />
-                            <FormControlLabel
-                              control={<Checkbox name="beauty" iconStyle={{ fill: "#ddaa44" }} inputStyle={{ color: '#ddaa44' }}  style={{ color: "#ddaa44", padding: "5px 10px" }} />}
-                              label="Beauté"
-                              className={style.checkBoxControlStyle}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox name="jewel" iconStyle={{ fill: "#ddaa44" }} inputStyle={{ color: '#ddaa44' }}  style={{ color: "#ddaa44", padding: "5px 10px" }} />}
-                              label="Bijoux"
-                              className={style.checkBoxControlStyle}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox name="shoes" iconStyle={{ fill: "#ddaa44" }} inputStyle={{ color: '#ddaa44' }}  style={{ color: "#ddaa44", padding: "5px 10px" }} />}
-                              label="Chaussures"
-                              className={style.checkBoxControlStyle}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox name="bags" iconStyle={{ fill: "#ddaa44" }} inputStyle={{ color: '#ddaa44' }} style={{ color: "#ddaa44", padding: "5px 10px" }} />}
-                              label="Sacs"
-                              className={style.checkBoxControlStyle}
-                            />
-                            <FormControlLabel
-                              control={<Checkbox name="clothes" iconStyle={{ fill: "#ddaa44" }} inputStyle={{ color: '#ddaa44' }}  style={{ color: "#ddaa44", padding: "5px 10px" }} />}
-                              label="Vêtements"
-                              className={style.checkBoxControlStyle}
-                            />
+
+
+                            {this.state.filterList.map(filter => (
+                              <FormControlLabel
+                                control={
+                                  <Checkbox
+                                    name="accessories"
+                                    id={filter.id}
+                                    checked={activeFilter.includes(filter.value)}
+                                    onClick={() => this.onFilterChange(filter.value)}
+                                    iconStyle={{ fill: "#ddaa44" }}
+                                    style={{ color: "#ddaa44", padding: "5px 10px" }} />
+                                }
+                                label={filter.name}
+                                className={style.checkBoxControlStyle}
+                              />
+                            ))}
                           </FormGroup>
                         </FormControl>
                       </Panel>
+
                       <Panel header="Groupe" key="2">
                         <FormControl component="fieldset" className={classes.formControl}>
                           <FormGroup>
                             <FormControlLabel
-                              control={<Checkbox name="bracelet" iconStyle={{ fill: "#ddaa44" }} inputStyle={{ color: '#ddaa44' }}  style={{ color: "#ddaa44", padding: "5px 10px" }} />}
+                              control={<Checkbox name="bracelet" value="bracelet" iconStyle={{ fill: "#ddaa44" }} style={{ color: "#ddaa44", padding: "5px 10px" }} />}
                               label="Bracelet"
                               className={style.checkBoxControlStyle}
                             />
                             <FormControlLabel
-                              control={<Checkbox name="echarpe" iconStyle={{ fill: "#ddaa44" }} inputStyle={{ color: '#ddaa44' }}  style={{ color: "#ddaa44", padding: "5px 10px" }} />}
+                              control={<Checkbox name="echarpe" value="echarpe" iconStyle={{ fill: "#ddaa44" }} style={{ color: "#ddaa44", padding: "5px 10px" }} />}
                               label="Echarpe"
                               className={style.checkBoxControlStyle}
                             />
                             <FormControlLabel
-                              control={<Checkbox name="escarpin" iconStyle={{ fill: "#ddaa44" }} inputStyle={{ color: '#ddaa44' }}  style={{ color: "#ddaa44", padding: "5px 10px" }} />}
+                              control={<Checkbox name="escarpin" value="escarpin" iconStyle={{ fill: "#ddaa44" }} style={{ color: "#ddaa44", padding: "5px 10px" }} />}
                               label="Escarpin"
                               className={style.checkBoxControlStyle}
                             />
                             <FormControlLabel
-                              control={<Checkbox name="parfume" iconStyle={{ fill: "#ddaa44" }} inputStyle={{ color: '#ddaa44' }}  style={{ color: "#ddaa44", padding: "5px 10px" }} />}
+                              control={<Checkbox name="parfume" value="parfume" iconStyle={{ fill: "#ddaa44" }} style={{ color: "#ddaa44", padding: "5px 10px" }} />}
                               label="Parfum"
                               className={style.checkBoxControlStyle}
                             />
                             <FormControlLabel
-                              control={<Checkbox name="wallet" iconStyle={{ fill: "#ddaa44" }} inputStyle={{ color: '#ddaa44' }} style={{ color: "#ddaa44", padding: "5px 10px" }} />}
+                              control={<Checkbox name="wallet" value="wallet" iconStyle={{ fill: "#ddaa44" }} inputStyle={{ color: '#ddaa44' }} style={{ color: "#ddaa44", padding: "5px 10px" }} />}
                               label="Porte monnaie"
                               className={style.checkBoxControlStyle}
                             />
                             <FormControlLabel
-                              control={<Checkbox name="dress" iconStyle={{ fill: "#ddaa44" }} inputStyle={{ color: '#ddaa44' }}  style={{ color: "#ddaa44", padding: "5px 10px" }} />}
+                              control={<Checkbox name="dress" value="dress" iconStyle={{ fill: "#ddaa44" }} style={{ color: "#ddaa44", padding: "5px 10px" }} />}
                               label="Robe"
                               className={style.checkBoxControlStyle}
                             />
@@ -241,11 +351,11 @@ class AllProducts extends React.Component {
               <div className="col-sm-9 padding-right" style={{ marginBottom: 20 }}>
                 <div className="row" style={{ paddingBottom: 10, borderBottom: "1px solid lightgray" }}>
                   <div className="col-sm-9" style={{ paddingLeft: 0 }}>
-                    <span style={{ fontSize: "1.2em", paddingLeft: "10px" }}>32 Produits trouvés</span>
+                    <span style={{ fontSize: "1.2em", paddingLeft: "10px" }}>{ productList.length } Produits trouvé{ productList.length > 1 ? 's': '' }</span>
                   </div>
                   <div className="col-sm-3"></div>
                 </div>
-                <FeatureHome products={ products } />
+                <FeatureHome products={ productList } />
                 { products.length >= 9 && <PaginationButtons />}
               </div>
             </div>

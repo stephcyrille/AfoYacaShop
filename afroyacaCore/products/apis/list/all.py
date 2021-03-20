@@ -16,6 +16,10 @@ one_month_ago = datetime.today() - timedelta(days=30)
 class ProductSerializer(serializers.ModelSerializer):
     product_url = serializers.SerializerMethodField()
     pictures = serializers.SerializerMethodField()
+    category = serializers.SerializerMethodField()
+
+    def get_category(self, instance):
+        return instance.category.slug
 
     def get_product_url(self, instance):
         product_url = get_upload_host(self.context["request"]) + instance.get_absolute_url()
@@ -43,7 +47,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ["id", "title", "slug", "price", "pictures", "product_url"]
+        fields = ["id", "title", "slug", "price", "pictures", "product_url", "category"]
 
 
 class AllProductsAPIView(APIView):
@@ -52,7 +56,7 @@ class AllProductsAPIView(APIView):
 
     def get_queryset(self, menu):
         if 'trending' == menu:
-            return Product.objects.filter()
+            return Product.objects.filter(is_archived=False, trending=True)
         elif 'clothing' == menu:
             return Product.objects.filter()
         elif 'shoes' == menu:
