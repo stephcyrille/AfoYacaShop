@@ -41,6 +41,7 @@ class SingleProduct extends React.Component {
     super(props)
     this.state = {
       dialogOpen: false,
+      myBoxDialogOpen: false,
       quantity: 0,
       product: {}, // Product pass to model when with click onaddToCart button
     }
@@ -133,6 +134,20 @@ class SingleProduct extends React.Component {
   }
 
 
+  _handleAddToMyBox(formValues){
+    console.log("Product added to cart!!!!!!!!!!!!", formValues.quantity)
+    // Call api to adding cart item on cart now
+    this.props.dispatch(singleProductCStoreActions.setLoading(true))
+
+    const { stock_quantity, single_product, variety_id , product_slug } = this.props.singleProductCStore
+    var result = stock_quantity - formValues.quantity
+
+    this.handleSetBoxDialogOpen(single_product, formValues.quantity)
+
+    this.props.dispatch(singleProductCStoreActions.setLoading(false))
+  }
+
+
   _handleAddToWhishList(){
     console.log("Product added to whishlist!!!!!!!!!!!!")
   }
@@ -182,14 +197,23 @@ class SingleProduct extends React.Component {
   }
 
   handleSetDialogClose(){
+    // Refresh the page
+    window.location.reload()
+
     this.setState({
       dialogOpen: false,
+      myBoxDialogOpen: false,
       product: {},
       quantity: 0,
     })
+  }
 
-    // Refresh the page
-    window.location.reload()
+  handleSetBoxDialogOpen(element, qty){
+    this.setState({
+      myBoxDialogOpen: true,
+      product: element,
+      quantity: qty,
+    })
   }
 
   handleGotoCart(){
@@ -286,7 +310,7 @@ class SingleProduct extends React.Component {
                           (single_product.varieties)
                             .map((val, key) => {
                               return (
-                                <a href="#" key={key}>{val.size.name} &nbsp;</a>
+                                <a href="#" key={key}>{val.size?val.size.name:''} &nbsp;</a>
                               )
                             }) : null
                         }
@@ -371,7 +395,7 @@ class SingleProduct extends React.Component {
                           <button
                             type="button"
                             className="btn btn-default gift_btn full-cart"
-                            onClick={this.props.handleSubmit( this._handleAddToCart.bind(this))}
+                            onClick={this.props.handleSubmit( this._handleAddToMyBox.bind(this))}
                             disabled={ stock_quantity < 1 ?true:false }
                           >
                             <i className="fa fa-gift"></i>
@@ -451,7 +475,8 @@ class SingleProduct extends React.Component {
                 >
                   <i className="far fa-check-circle fa-4x text-success" style={{ display: "block", textAlign: "center", marginBottom: 20 }}></i>
                   <h4 className="text-center" style={{ marginBottom: 20 }}>
-                  { prodQuantity } { this.state.product ? this.state.product.title : "" }  bien ajouté au panier!</h4>
+                    { prodQuantity } { this.state.product ? this.state.product.title : "" }  bien ajouté au panier!
+                  </h4>
                   <div className={` mr-auto mx-auto`} style={{ textAlign: "center", marginTop: 20 }}>
                     <Button
                       onClick={ this.handleGotoCart.bind(this) }
@@ -462,6 +487,41 @@ class SingleProduct extends React.Component {
                     </Button>
                     &nbsp;
                     &nbsp;
+                    <Button
+                      onClick={ this.handleSetDialogClose.bind(this) }
+                      className=""
+                      variant="outlined"
+                      color="primary"
+                    >
+                      continuer vos achats
+                    </Button>
+                  </div>
+                </div>
+              </Grow>
+
+          </Paper>
+        </Dialog>
+
+
+        <Dialog
+          title={ "" }
+          isOpen={ this.state.myBoxDialogOpen }
+          onClose={ this.handleSetDialogClose.bind(this) }
+          style={{ width: "350px" }}
+        >
+          <Paper style={{ padding: '2em' }}>
+              <Grow
+                in={success}
+              >
+                <div
+                  style={{ transformOrigin: '0 0 0', width: 544 }}
+                  {...(success ? { timeout: 1500 } : {})}
+                >
+                  <i className="far fa-heart fa-4x text-warning" style={{ display: "block", textAlign: "center", marginBottom: 20 }}></i>
+                  <h4 className="text-center" style={{ marginBottom: 20 }}>
+                    { prodQuantity } { this.state.product ? this.state.product.title : "" }  ajouté dans dans votre Box!
+                  </h4>
+                  <div className={` mr-auto mx-auto`} style={{ textAlign: "center", marginTop: 20 }}>
                     <Button
                       onClick={ this.handleSetDialogClose.bind(this) }
                       className=""
