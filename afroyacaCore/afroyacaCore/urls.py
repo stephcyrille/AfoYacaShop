@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from products.apis import *
 from cart.apis import *
+from mybox.apis import *
 
 from .views import home
 
@@ -20,6 +21,7 @@ urlpatterns = [
     path('api/products/', AllProductsAPIView.as_view(), name='api_all_products'),
     path('api/products/<str:slug>/', ProductSingleAPIView.as_view(), name='api_single_product'),
     path('api/cart/add_item/', AddCartItemAPIView.as_view(), name='api_cart_add_item'),
+    path('api/oh-my-box/my/', MyBoxAPIView.as_view(), name='api_my_box'),
     path('api/account/', include('account.api_url')),
 ]
 

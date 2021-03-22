@@ -32,11 +32,6 @@ class MyBox extends React.Component {
           price: 15000
         }
       ],
-      categories_data: [],
-
-      snack_open: false,
-      snack_message: null,
-      snack_color: null,
     }
   }
 
@@ -44,15 +39,15 @@ class MyBox extends React.Component {
   componentWillMount(){
     this.props.dispatch(myBoxCStoreActions.setLoading(true))
 
-    this._fetchUserOrders()
+    this._fetchUserBox()
 
     setTimeout(() => {
       this.props.dispatch(myBoxCStoreActions.setLoading(false))
     }, 2000);
   }
 
-  _fetchUserOrders(){
-    const url = `api/account/my/box`
+  _fetchUserBox(){
+    const url = `api/oh-my-box/my/`
 
     window.axios
     .get(`${url}`)
@@ -76,9 +71,9 @@ class MyBox extends React.Component {
     })
   }
 
-  renderTotalAmount = () => {
+  renderTotalAmount = (price) => {
     return (
-      <h5>Montant total : 120000FCFA</h5>
+      <h5>Montant total : {price} FCFA</h5>
     )
   }
 
@@ -93,16 +88,17 @@ class MyBox extends React.Component {
       {
         title: 'Photo',
         field: 'picture',
-        render: rowData => <img src={rowData.picture} style={{ width: 140, height: 180 }} />
+        render: rowData => <img src={rowData.pictures[0]} style={{ width: 140, height: 180 }} />
       },
-      { title: 'Nom du produit', field: 'product' },
+      { title: 'Nom du produit', field: 'title' },
+      { title: 'Qté', field: 'selected_quantity' },
       {
         title: 'Prix',
         field: 'price',
         render: rowData => <span>{rowData.price} FCFA</span>
       },
     ];
-    const title = this.renderTotalAmount()
+    const title = this.renderTotalAmount(box.box_price?box.box_price:0)
 
     const actions = [
       {
@@ -123,7 +119,7 @@ class MyBox extends React.Component {
 
           <section>
             <MaterialTable
-              data={this.state.data}
+              data={ box ? box.box_items?box.box_items:[] : this.state.data}
               columns={columns}
               actions={actions}
               title={title}

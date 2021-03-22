@@ -1,3 +1,4 @@
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import serializers
@@ -8,7 +9,7 @@ from utils.custom_libs import get_upload_host
 exclude_fields = ["is_archived", "created_date", "modified_date", "is_published"]
 
 
-class CartSerializer(serializers.ModelSerializer):
+class MyBoxSerializer(serializers.ModelSerializer):
     box_items = serializers.SerializerMethodField()
     box_price = serializers.SerializerMethodField()
     box_quantity = serializers.SerializerMethodField()
@@ -17,10 +18,10 @@ class CartSerializer(serializers.ModelSerializer):
         model = MyBox
         exclude = exclude_fields
 
-    def get_cart_items(self, instance):
+    def get_box_items(self, instance):
         items = []
-        cart_items = BoxItems.objects.filter(cart=instance, is_archived=False)
-        for i in cart_items:
+        box_items = BoxItems.objects.filter(box=instance, is_archived=False)
+        for i in box_items:
             item_product_pictures = []
             if i.variety.picture1:
                 item_product_pictures.append(get_upload_host(self.context["request"]) + i.variety.picture1.url)
@@ -47,10 +48,10 @@ class CartSerializer(serializers.ModelSerializer):
         return items
 
     @staticmethod
-    def get_cart_price(instance):
+    def get_box_price(instance):
         total_price = 0
-        cart_items = CartItem.objects.filter(cart=instance, is_archived=False)
-        for i in cart_items:
+        box_items = BoxItems.objects.filter(box=instance, is_archived=False)
+        for i in box_items:
             quantity = i.quantity
             product_price = i.variety.product.price
             line_total = product_price * quantity
@@ -60,23 +61,19 @@ class CartSerializer(serializers.ModelSerializer):
         return total_price
 
     @staticmethod
-    def get_cart_quantity(instance):
+    def get_box_quantity(instance):
         total_quantity = 0
-        cart_items = CartItem.objects.filter(cart=instance, is_archived=False)
-        for i in cart_items:
+        box_items = BoxItems.objects.filter(box=instance, is_archived=False)
+        for i in box_items:
             quantity = i.quantity
             total_quantity = total_quantity + quantity
         return total_quantity
 
-    @staticmethod
-    def get_delivery_price(instance):
-        price = 2000
-        return price
 
+class MyBoxAPIView(APIView):
+    permission_classes = (IsAuthenticated,)
 
-class CartAPIView(APIView):
-    # permission_classes = (AllowAny,)
-
-    def get(self, request, cart_id):
-        cart = Cart.objects.get(pk=cart_id)
-        return Response(CartSerializer(cart, context={"request": request}).data)
+    def get(self, request):
+        user = request.user
+        box = MyBox.objects.filter(owner=user.userprofile).first()
+        return Response(MyBoxSerializer(box, context={"request": request}).data)
