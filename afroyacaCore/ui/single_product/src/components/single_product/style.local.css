@@ -191,6 +191,15 @@
     font-size: 15px;
     margin-bottom: 10px;
 }
+.gift_btn {
+    background: #fff;
+    border: 1px solid #ddaa44;
+    border-radius: 0;
+    color: #ddaa44;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
 
 .shop-details-tab {
     border: 1px solid #F7F7F0;

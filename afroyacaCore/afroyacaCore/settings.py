@@ -48,7 +48,8 @@ INSTALLED_APPS += (
     "payment",
     "products",
     "settings",
-    "services"
+    "services",
+    "mybox",
 )
 
 MIDDLEWARE = [

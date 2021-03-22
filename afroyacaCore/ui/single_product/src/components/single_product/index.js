@@ -356,24 +356,37 @@ class SingleProduct extends React.Component {
                       </div>
 
                       <div className="row whishlist-and-cart" style={{ marginLeft: "0px", marginRight: "0px" }}>
-                        <div className="col-sm-2 add-to-wishlist-wrapper" style={{ paddingLeft: "0px", paddingRight: "0px" }}>
+                        <div className="col-sm-12 add-to-cart-wrapper" style={{ paddingLeft: "0px", paddingRight: "0px" }}>
                           <button
                             type="button"
-                            className="btn btn-outline-secondary wishbutton"
-                            onClick={this._handleAddToWhishList.bind(this)}
-                          >
-                            <i className="fa fa-heart"></i>
-                          </button>
-                        </div>
-                        <div className="col-sm-10 add-to-cart-wrapper" style={{ paddingLeft: "0px", paddingRight: "0px" }}>
-                          <button
-                            type="button"
-                            className="btn btn-fefault cart full-cart"
+                            className="btn btn-default cart full-cart"
                             onClick={this.props.handleSubmit( this._handleAddToCart.bind(this))}
                             disabled={ stock_quantity < 1 ?true:false }
                           >
                             <i className="fa fa-shopping-cart"></i>
                             &nbsp; Ajouter au panier
+                          </button>
+                        </div>
+                        <div className="col-sm-12 add-to-cart-wrapper" style={{ paddingLeft: "0px", paddingRight: "0px" }}>
+                          <button
+                            type="button"
+                            className="btn btn-default gift_btn full-cart"
+                            onClick={this.props.handleSubmit( this._handleAddToCart.bind(this))}
+                            disabled={ stock_quantity < 1 ?true:false }
+                          >
+                            <i className="fa fa-gift"></i>
+                            &nbsp; Ajouter à ma box
+                          </button>
+                        </div>
+                        <div className="col-sm-12 add-to-wishlist-wrapper" style={{ paddingLeft: "0px", paddingRight: "0px" }}>
+                          <button
+                            type="button"
+                            className="btn btn-outline-secondary wishbutton"
+                            style={{ width: "100%", marginBottom: 10 }}
+                            onClick={this._handleAddToWhishList.bind(this)}
+                          >
+                            <i className="fa fa-heart"></i>
+                            &nbsp; Mettre en favoris
                           </button>
                         </div>
                         <div style={{ paddingTop: "20px" }}>
