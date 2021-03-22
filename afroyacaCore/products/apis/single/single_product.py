@@ -1,10 +1,10 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import serializers
-from products.apis.utils import get_upload_host
 from products.models import Product, Variety, Color, Size
 
 # from rest_framework.permissions import IsAuthenticated
+from utils.custom_libs import get_upload_host
 
 exclude_fields = ["is_archived", "created_by", "modified_by", "created_date", "modified_date", "is_published"]
 exclude_fields_variety = ["is_archived", "created_by", "modified_by", "created_date", "modified_date", "picture1",

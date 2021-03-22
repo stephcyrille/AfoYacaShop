@@ -5,8 +5,9 @@ from rest_framework import serializers
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from products.apis.utils import get_upload_host
+
 from products.models import Product, Variety
+from utils.custom_libs import get_upload_host
 
 exclude_fields = ["is_archived", "created_by", "modified_by", "created_date", "modified_date"]
 one_week_ago = datetime.today() - timedelta(days=7)

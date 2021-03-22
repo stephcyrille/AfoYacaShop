@@ -7,7 +7,7 @@ from django.conf import settings
 import os
 
 from account.forms import AddEndUserForm
-from libs import file_reader
+from utils.libs import file_reader
 
 BASE_DIR = settings.BASE_DIR
 
