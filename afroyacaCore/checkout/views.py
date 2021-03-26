@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 from account.models import Contact
 from cart.models import Cart, CartItem
+from operations.models import PaymentOperation
 from .models import Order
 
 
@@ -86,7 +87,7 @@ def checkout(request):
                     tax_total=tax_total,
                     delivery_fees=delivery_fees,
                     final_total=final_total,
-                    payment_method='pay_to_go'
+                    payment_method='CASH'
                   )
         session_order.save()
         request.session['order_id'] = session_order.id
@@ -137,6 +138,14 @@ def checkout(request):
 
         try:
             if "Terminer" == request.POST['next']:
+                # TODO Create payment operation there
+                my_payment = PaymentOperation(
+                    purpuse="PRODUCT",
+                    value=session_order.final_total,
+                    method=session_order.payment_method,
+                    buyer=request.user.userprofile
+                )
+                my_payment.save()
                 del request.session['checkout_step']
                 del request.session['cart_id']
                 del request.session['order_id']
