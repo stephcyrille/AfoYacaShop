@@ -101,7 +101,7 @@
             {% if not "/auth/web/login" == request.path %}
             <div class="shop-menu clearfix pull-right">
               <ul class="nav navbar-nav">
-                <li><a href="/favorites/"><i class="far fa-heart fa-2x"></i> <span class="heart-custom-badge badge badge-secondary">{{ favourite_items_quantity }}</span></a></li>
+                <li><a href="#"><i class="far fa-heart fa-2x"></i> <span class="heart-custom-badge badge badge-secondary">{{ favourite_items_quantity }}</span></a></li>
                 <li class="dropdown cart-link">
                   <a href="{% url 'my_cart' %}" class="nav-link">
                     <i class="fa fa-shopping-cart fa-2x"></i> <span class="custom-badge badge badge-secondary">{{ cart_items_quantity }}</span>
@@ -746,11 +746,8 @@
     })
   </script>
 
-  {% comment %}
-    <!-- TODO We will put the compiled file here, when we will moving to production -->
-    {% render_bundle 'loader' 'js' %}
-    {% render_bundle 'mobile_navbar' 'js' %}
-  {% endcomment %}
+  {% render_bundle 'loader' 'js' %}
+  {% render_bundle 'mobile_navbar' 'js' %}
 
   {% block custom_js %}
   {% endblock %}

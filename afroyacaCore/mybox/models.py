@@ -8,6 +8,12 @@ BOX_STATUS = (
     ("ACTIVATE", "Activate"),
     ("DEACTIVATE", "deactivate"),
 )
+SUBSCRIPTION_PLAN = (
+    ("FREE", "free"),
+    ("BRONZE", "bronze"),
+    ("SILVER", "silver"),
+    ("GOLD", "gold"),
+)
 
 
 class MyBox(models.Model):
@@ -37,3 +43,14 @@ class BoxItems(models.Model):
 
     def __str__(self):
         return "Box %s" % self.id
+
+
+class BoxSubscriptionPlan(models.Model):
+    name = models.CharField(max_length=50, choices=SUBSCRIPTION_PLAN, default="FREE")
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField(blank=True, editable=False ,default=timezone.now)
+    price = models.IntegerField(default=0)
+    subscriber = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return "%s Plan" % self.name

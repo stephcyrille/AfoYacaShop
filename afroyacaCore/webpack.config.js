@@ -12,6 +12,7 @@ module.exports = {
     mobile_navbar: './ui/mobile_navbar/src/index.js',
     all_products: './ui/all_products/src/index.js',
     single_product: './ui/single_product/src/index.js',
+    my_box: './ui/my_box/src/index.js',
     horizontal_scroll: './ui/horizontal_scroll/src/index.js'
   },
   output: {
@@ -82,6 +83,7 @@ module.exports = {
                 path.resolve(__dirname, './ui/horizontal_scroll/src'),
                 path.resolve(__dirname, './ui/single_product/src'),
                 path.resolve(__dirname, './ui/all_products/src'),
+                path.resolve(__dirname, './ui/my_box/src'),
                 path.resolve(__dirname, './ui/mobile_navbar/src')
              ],
     extensions: ['.js', '.jsx', '.json'],

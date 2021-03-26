@@ -21,6 +21,7 @@ urlpatterns = [
     path('api/products/', AllProductsAPIView.as_view(), name='api_all_products'),
     path('api/products/<str:slug>/', ProductSingleAPIView.as_view(), name='api_single_product'),
     path('api/cart/add_item/', AddCartItemAPIView.as_view(), name='api_cart_add_item'),
+    path('api/box/my/add_item/', AddBoxItemAPIView.as_view(), name='api_box_add_item'),
     path('api/oh-my-box/my/', MyBoxAPIView.as_view(), name='api_my_box'),
     path('api/account/', include('account.api_url')),
 ]

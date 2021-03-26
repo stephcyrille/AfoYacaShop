@@ -38,8 +38,6 @@ class MyBoxSerializer(serializers.ModelSerializer):
                 "title": "%s - %s" % (i.variety.product.title, i.variety.color.title),
                 "description": i.variety.product.description,
                 "price": i.variety.product.price,
-                "color": i.variety.color.title,
-                "size": i.variety.size.name,
                 "selected_quantity": i.quantity,
                 "line_total": (i.variety.product.price * i.quantity),
                 "pictures": item_product_pictures

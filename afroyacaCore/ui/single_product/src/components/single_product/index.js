@@ -98,8 +98,6 @@ class SingleProduct extends React.Component {
 
     this.handleSetDialogOpen(single_product, formValues.quantity)
 
-    this.props.dispatch(singleProductCStoreActions.setStockQuantity(result))
-
     if (result < 0){
       this.props.change('quantity', 0);
     } else {
@@ -121,6 +119,7 @@ class SingleProduct extends React.Component {
       .then(response => {
         // Toggle state of navbar to true an set time out to reback to false after 3000
         this.props.dispatch(singleProductCStoreActions.setLoading(false))
+        this.props.dispatch(singleProductCStoreActions.setStockQuantity(result))
       })
       .catch(err => {
         this.props.dispatch(singleProductCStoreActions.setLoading(false))
@@ -139,12 +138,33 @@ class SingleProduct extends React.Component {
     // Call api to adding cart item on cart now
     this.props.dispatch(singleProductCStoreActions.setLoading(true))
 
-    const { stock_quantity, single_product, variety_id , product_slug } = this.props.singleProductCStore
-    var result = stock_quantity - formValues.quantity
+    const { single_product, variety_id } = this.props.singleProductCStore
 
-    this.handleSetBoxDialogOpen(single_product, formValues.quantity)
+    var box_item = {
+      variety : single_product.varieties[variety_id].id,
+      quantity : formValues.quantity
+    }
 
-    this.props.dispatch(singleProductCStoreActions.setLoading(false))
+    var csrftoken = getCookie('csrftoken');
+    var headers = {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken
+    }
+
+    window.axios
+    .post(`/api/box/my/add_item/`, {data: box_item}, {headers: headers})
+    .then(response => {
+      // Toggle state of navbar to true an set time out to reback to false after 3000
+      this.props.dispatch(singleProductCStoreActions.setLoading(false))
+      this.handleSetBoxDialogOpen(single_product, formValues.quantity)
+    })
+    .catch(err => {
+      this.props.dispatch(singleProductCStoreActions.setLoading(false))
+      console.error("Error when adding item to box", err)
+    })
+
+    this.props.change('quantity', 1);
   }
 
 
