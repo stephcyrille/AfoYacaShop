@@ -140,10 +140,11 @@ def checkout(request):
             if "Terminer" == request.POST['next']:
                 # TODO Create payment operation there
                 my_payment = PaymentOperation(
-                    purpuse="PRODUCT",
+                    purpose="PRODUCT",
                     value=session_order.final_total,
                     method=session_order.payment_method,
-                    buyer=request.user.userprofile
+                    buyer=request.user.userprofile,
+                    order=session_order
                 )
                 my_payment.save()
                 del request.session['checkout_step']

@@ -12,8 +12,8 @@ OPERATION_METHOD = (
     ("MASTERCARD", "mastercard"),
 )
 OPERATION_PURPOSE = (
-    ("SERVICE", "free"),
-    ("PRODUCT", "bronze"),
+    ("SERVICE", "service"),
+    ("PRODUCT", "product"),
     ("REVERSE_PAYMENT", "reverse_payment"),
 )
 
