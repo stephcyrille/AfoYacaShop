@@ -3,3 +3,4 @@ from .models import *
 
 admin.site.register(MyBox)
 admin.site.register(BoxItems)
+admin.site.register(BoxSubscriptionPlan)

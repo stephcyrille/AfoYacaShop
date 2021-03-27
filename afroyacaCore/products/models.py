@@ -4,8 +4,6 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
 
-from account.models import UserProfile
-
 catalog_upload_path = "catalogs"
 category_upload_path = "categories"
 collection_upload_path = "collections"
@@ -27,9 +25,9 @@ class Catalog(models.Model):
     is_published = models.BooleanField(default=True, blank=True)
     created_date = models.DateTimeField(blank=True, editable=False, default=timezone.now)
     modified_date = models.DateTimeField(null=True, editable=False, blank=True)
-    created_by = models.ForeignKey(UserProfile, null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
+    created_by = models.ForeignKey('account.UserProfile', null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
                                    related_name="+")
-    modified_by = models.ForeignKey(UserProfile, null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
+    modified_by = models.ForeignKey('account.UserProfile', null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
                                     related_name="+")
 
     def __str__(self):
@@ -50,9 +48,9 @@ class Collection(models.Model):
     is_published = models.BooleanField(default=True, blank=True)
     created_date = models.DateTimeField(blank=True, editable=False, default=timezone.now)
     modified_date = models.DateTimeField(null=True, editable=False, blank=True)
-    created_by = models.ForeignKey(UserProfile, null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
+    created_by = models.ForeignKey('account.UserProfile', null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
                                    related_name="+")
-    modified_by = models.ForeignKey(UserProfile, null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
+    modified_by = models.ForeignKey('account.UserProfile', null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
                                     related_name="+")
 
     def __str__(self):
@@ -72,9 +70,9 @@ class Category(models.Model):
     is_published = models.BooleanField(default=True, blank=True)
     created_date = models.DateTimeField(blank=True, editable=False, default=timezone.now)
     modified_date = models.DateTimeField(null=True, editable=False, blank=True)
-    created_by = models.ForeignKey(UserProfile, null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
+    created_by = models.ForeignKey('account.UserProfile', null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
                                    related_name="+")
-    modified_by = models.ForeignKey(UserProfile, null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
+    modified_by = models.ForeignKey('account.UserProfile', null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
                                     related_name="+")
 
     def __str__(self):
@@ -100,9 +98,9 @@ class Group(models.Model):
     is_published = models.BooleanField(default=True, blank=True)
     created_date = models.DateTimeField(blank=True, editable=False, default=timezone.now)
     modified_date = models.DateTimeField(null=True, editable=False, blank=True)
-    created_by = models.ForeignKey(UserProfile, null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
+    created_by = models.ForeignKey('account.UserProfile', null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
                                    related_name="+")
-    modified_by = models.ForeignKey(UserProfile, null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
+    modified_by = models.ForeignKey('account.UserProfile', null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
                                     related_name="+")
 
     def __str__(self):
@@ -133,9 +131,9 @@ class Product(models.Model):
     is_published = models.BooleanField(default=True, blank=True)
     created_date = models.DateTimeField(blank=True, editable=False, default=timezone.now)
     modified_date = models.DateTimeField(null=True, editable=False, blank=True)
-    created_by = models.ForeignKey(UserProfile, null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
+    created_by = models.ForeignKey('account.UserProfile', null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
                                    related_name="+")
-    modified_by = models.ForeignKey(UserProfile, null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
+    modified_by = models.ForeignKey('account.UserProfile', null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
                                     related_name="+")
 
     def __str__(self):
@@ -214,9 +212,9 @@ class Variety(models.Model):
     is_published = models.BooleanField(default=True, blank=True)
     created_date = models.DateTimeField(blank=True, editable=False, default=timezone.now)
     modified_date = models.DateTimeField(null=True, editable=False, blank=True)
-    created_by = models.ForeignKey(UserProfile, null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
+    created_by = models.ForeignKey('account.UserProfile', null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
                                    related_name="+")
-    modified_by = models.ForeignKey(UserProfile, null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
+    modified_by = models.ForeignKey('account.UserProfile', null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
                                     related_name="+")
 
     def __str__(self):
@@ -258,9 +256,9 @@ class Size(models.Model):
     is_published = models.BooleanField(default=True, blank=True)
     created_date = models.DateTimeField(blank=True, editable=False, default=timezone.now)
     modified_date = models.DateTimeField(null=True, editable=False, blank=True)
-    created_by = models.ForeignKey(UserProfile, null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
+    created_by = models.ForeignKey('account.UserProfile', null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
                                    related_name="+")
-    modified_by = models.ForeignKey(UserProfile, null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
+    modified_by = models.ForeignKey('account.UserProfile', null=True, editable=False, blank=True, on_delete=models.DO_NOTHING,
                                     related_name="+")
 
     def __str__(self):

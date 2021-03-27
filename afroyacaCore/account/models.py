@@ -4,6 +4,8 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.db import models
 
+from mybox.models import BoxSubscriptionPlan
+
 
 class UserProfile(models.Model):
     gender = models.CharField(max_length=10, null=True, blank=True)
@@ -17,6 +19,7 @@ class UserProfile(models.Model):
     birth_date = models.DateField(null=True, blank=True)
     created_date = models.DateTimeField(blank=True, editable=False, default=timezone.now)
     modified_date = models.DateTimeField(null=True, editable=False, blank=True)
+    plan = models.ForeignKey(BoxSubscriptionPlan, on_delete=models.CASCADE, null=True, blank=True)
 
     def save(self, *args, **kwargs):
         """ On save, update timestamps """

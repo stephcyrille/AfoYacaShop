@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils import timezone
 
-from account.models import UserProfile
 from products.models import Variety
 
 BOX_STATUS = (
@@ -17,7 +16,7 @@ SUBSCRIPTION_PLAN = (
 
 
 class MyBox(models.Model):
-    owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True, blank=True)
+    owner = models.ForeignKey('account.UserProfile', on_delete=models.CASCADE, null=True, blank=True)
     total = models.IntegerField(default=0)
     status = models.CharField(choices=BOX_STATUS, default="DEACTIVATE", max_length=30)
 
@@ -47,10 +46,9 @@ class BoxItems(models.Model):
 
 class BoxSubscriptionPlan(models.Model):
     name = models.CharField(max_length=50, choices=SUBSCRIPTION_PLAN, default="FREE")
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField(blank=True, editable=False ,default=timezone.now)
+    start_date = models.DateTimeField(blank=True, null=True, default=timezone.now)
+    end_date = models.DateTimeField(blank=True, null=True)
     price = models.IntegerField(default=0)
-    subscriber = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return "%s Plan" % self.name
