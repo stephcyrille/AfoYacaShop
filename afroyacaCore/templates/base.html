@@ -141,12 +141,14 @@
                         >
                           <a href="{% url 'my_orders' %}">Mes commandes</a>
                         </li>
-                        <li
-                          class="user_middle_nav_li"
-                          style="padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid lightgrey"
-                        >
-                          <a href="{% url 'my_box' %}">Ma Box</a>
-                        </li>
+                        {% if current_plan != 'FREE' %}
+                          <li
+                            class="user_middle_nav_li"
+                            style="padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid lightgrey"
+                          >
+                            <a href="{% url 'my_box' %}">Ma Box</a>
+                          </li>
+                        {% endif %}
                         <li
                           class="user_middle_nav_li"
                           style="padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid lightgrey"

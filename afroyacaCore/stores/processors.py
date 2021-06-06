@@ -28,6 +28,16 @@ def cart_items_number(request):
 
     main_nav_pic = MainMenuNavPicture.objects.filter().first()
 
+    if request.user.is_authenticated:
+        try:
+            current_plan = request.user.userprofile.plan.name
+            print('My current plan', current_plan)
+        except Exception as e:
+            current_plan = ''
+            print('Exception due to user plan', e.__str__())
+    else:
+        current_plan = ''
+
     context = {
         "cart_items_quantity": total_quantity,
         "favourite_items_quantity": 0,
@@ -39,6 +49,7 @@ def cart_items_number(request):
         "jewelries_groups": jewelries_groups,
         "beauty_groups": beauty_groups,
         "main_nav_pic": main_nav_pic,
+        "current_plan": current_plan,
     }
     return context
 

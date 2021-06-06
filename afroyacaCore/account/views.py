@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.generic import TemplateView
 from django.contrib.auth import authenticate, login
 from django.conf import settings
@@ -92,10 +93,21 @@ def my_orders(request):
 
 @login_required
 def my_box(request):
-    template_name = "account/dashboard/my_box.html"
-    context = {}
+    try:
+        current_plan = request.user.userprofile.plan.name
+    except:
+        current_plan = ''
 
-    return render(request, template_name, context)
+    if current_plan:
+        if current_plan == 'FREE':
+            # TODO Return an unauthorized custom page here
+            return redirect(reverse('home'))
+        else:
+            template_name = "account/dashboard/my_box.html"
+            context = {}
+            return render(request, template_name, context)
+    else:
+        return redirect(reverse('home'))
 
 
 @login_required
