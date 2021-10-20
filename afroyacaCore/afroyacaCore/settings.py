@@ -21,7 +21,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = os.environ.get('DEBUG', True)
+ENV = os.environ.get('PROD', 'DEV')
+if "DEV" == ENV:
+    DEBUG = True
+else:
+    DEBUG = False
 
 if DEBUG:
     ALLOWED_HOSTS = ['*']
@@ -116,7 +120,6 @@ else:
             'PORT': '',
         }
     }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
