@@ -2,7 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import MyBox from './components/my_box/index'
-import { clearUser, initAxios, getUser } from "./utils/auth_utils";
+import { initAxios } from "./utils/auth_utils";
+import { StylesProvider, createGenerateClassName } from '@material-ui/core/styles';
+
+
+const generateClassName = createGenerateClassName({
+  seed: 'my_box',
+});
 
 
 initAxios()
@@ -14,9 +20,11 @@ class App extends Component {
   render() {
 
     return (
+    <StylesProvider generateClassName={generateClassName}>
         <div>
           <MyBox />
         </div>
+    </StylesProvider>
 
     );
   }

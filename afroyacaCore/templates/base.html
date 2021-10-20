@@ -15,6 +15,7 @@
     {% endblock %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/fontawesome/all.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'css/antd.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'css/base_custom.css' %}" />
     <!--[if lt IE 9]>
@@ -53,691 +54,698 @@
   </head>
 
   <body>
-    <div id="page_loader"></div>
+    <main>
+      <div id="page_loader"></div>
 
-    <header id="header">
-    <div class="header_top">
-      <div class="container">
-        <div class="row" style="margin-left: 0px; margin-right: 0px">
-          <div class="col-sm-6">
-            <div class="contactinfo">
-              <ul class="nav nav-pills">
-                <li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
-                <li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
-              </ul>
+      <header id="header">
+      <div class="header_top">
+        <div class="container">
+          <div class="row" style="margin-left: 0px; margin-right: 0px">
+            <div class="col-sm-6">
+              <div class="contactinfo">
+                <ul class="nav nav-pills">
+                  <li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
+                  <li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
+                </ul>
+              </div>
             </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="social-icons pull-right">
-              <ul class="nav navbar-nav">
-                <li><a href="#"><i class="fab fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
-                <li><a href="#"><i class="fab fa-google-plus"></i></a></li>
-              </ul>
+            <div class="col-sm-6">
+              <div class="social-icons pull-right">
+                <ul class="nav navbar-nav">
+                  <li><a href="#"><i class="fab fa-facebook"></i></a></li>
+                  <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                  <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                  <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
+                  <li><a href="#"><i class="fab fa-google-plus"></i></a></li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="header-middle">
-      <div class="container">
-        <div class="row" style="padding-top: 0; padding-bottom: 0 ">
-          <div class="col-md-4 clearfix">
-            <div class="logo pull-left">
-              <a href="{% url 'home' %}"><img class="img-fluid" width="120px" src="/static/images/logo.jpg" alt="" /></a>
+      <div class="header-middle">
+        <div class="container">
+          <div class="row" style="padding-top: 0; padding-bottom: 0 ">
+            <div class="col-md-4 clearfix">
+              <div class="logo pull-left">
+                <a href="{% url 'home' %}"><img class="img-fluid" width="120px" src="/static/images/logo.jpg" alt="" /></a>
+              </div>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="open_day_wrapper">
-              <span class="open_day_title">Heures d'ouverture</span> <br />
-              <span class="open_day">Lundi à Vendredi: 8h - 20h</span> <br />
-              <span class="open_day">Samedi: 8h - 20h</span> <br />
+            <div class="col-md-4">
+              <div class="open_day_wrapper">
+                <span class="open_day_title">Heures d'ouverture</span> <br />
+                <span class="open_day">Lundi à Vendredi: 8h - 20h</span> <br />
+                <span class="open_day">Samedi: 8h - 20h</span> <br />
+              </div>
             </div>
-          </div>
-          <div class="col-md-4 clearfix shop-menu-clear">
-            {% if not "/auth/web/login" == request.path %}
-            <div class="shop-menu clearfix pull-right">
-              <ul class="nav navbar-nav">
-                <li><a href="#"><i class="far fa-heart fa-2x"></i> <span class="heart-custom-badge badge badge-secondary">{{ favourite_items_quantity }}</span></a></li>
-                <li class="dropdown cart-link">
-                  <a href="{% url 'my_cart' %}" class="nav-link">
-                    <i class="fa fa-shopping-cart fa-2x"></i> <span class="custom-badge badge badge-secondary">{{ cart_items_quantity }}</span>
-                  </a>
+            <div class="col-md-4 clearfix shop-menu-clear">
+              {% if not "/auth/web/login" == request.path %}
+              <div class="shop-menu clearfix pull-right">
+                <ul class="nav navbar-nav">
+                  <!--li><a href="#"><i class="far fa-heart fa-2x"></i> <span class="heart-custom-badge badge badge-secondary">{{ favourite_items_quantity }}</span></a></li-->
+                  <li class="dropdown cart-link">
+                    <a href="{% url 'my_cart' %}" class="nav-link">
+                      <i class="fa fa-shopping-cart fa-2x"></i> <span class="custom-badge badge badge-secondary">{{ cart_items_quantity }}</span>
+                    </a>
 
 
-                  <!--div class={`shopping-cart_item_add_wrapper ${ new_item ? 'active' : null }`}-->
-                  <div class="shopping-cart_item_add_wrapper">
-                    <i class="fa fa-chevron-up fa-2x custom-fa"></i>
-                    <div class="shopping-cart_item_add">
-                      <div class="img-wrapper">
-                        <img src="/static/images/dress2.png"  class="cart_flash_add_image" alt="" />
-                      </div>
-                      <div class="btn-wrapper">
-                        <Button
-                          type="submit"
-                          fullWidth
-                          variant="contained"
-                          color="secondary"
-                        >
-                          Retirer du panier
-                        </Button>
+                    <!--div class={`shopping-cart_item_add_wrapper ${ new_item ? 'active' : null }`}-->
+                    <div class="shopping-cart_item_add_wrapper">
+                      <i class="fa fa-chevron-up fa-2x custom-fa"></i>
+                      <div class="shopping-cart_item_add">
+                        <div class="img-wrapper">
+                          <img src="/static/images/dress2.png"  class="cart_flash_add_image" alt="" />
+                        </div>
+                        <div class="btn-wrapper">
+                          <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="secondary"
+                          >
+                            Retirer du panier
+                          </Button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </li>
-                <li>
-                  {% if user.is_authenticated %}
-                    <div class="logged_in_bloc">
-                      <span class="dropdown-toggle user_middle_nav" data-toggle="dropdown">
-                        <i class="fa fa-user fa-2x"></i>
-                      </span>
-                      <ul class="dropdown-menu" style="z-index : 2000">
-                        <li
-                          class="user_middle_nav_li"
-                          style="border-bottom: 1px solid lightgrey; padding-bottom: 10px"
-                        >
-                          <a href="{% url 'my_orders' %}">Mes commandes</a>
-                        </li>
-                        {% if current_plan != 'FREE' %}
+                  </li>
+                  <li>
+                    {% if user.is_authenticated %}
+                      <div class="logged_in_bloc">
+                        <span class="dropdown-toggle user_middle_nav" data-toggle="dropdown">
+                          <i class="fa fa-user fa-2x"></i>
+                        </span>
+                        <ul class="dropdown-menu" style="z-index : 2000">
+                          <li
+                            class="user_middle_nav_li"
+                            style="border-bottom: 1px solid lightgrey; padding-bottom: 10px"
+                          >
+                            <a href="{% url 'my_orders' %}">Mes commandes</a>
+                          </li>
+                          {% if current_plan != 'FREE' %}
+                            <li
+                              class="user_middle_nav_li"
+                              style="padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid lightgrey"
+                            >
+                              <a href="{% url 'my_box' %}">Ma Box</a>
+                            </li>
+                          {% endif %}
                           <li
                             class="user_middle_nav_li"
                             style="padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid lightgrey"
                           >
-                            <a href="{% url 'my_box' %}">Ma Box</a>
+                            <a href="{% url 'settings' %}">Préférences</a>
                           </li>
-                        {% endif %}
-                        <li
-                          class="user_middle_nav_li"
-                          style="padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid lightgrey"
-                        >
-                          <a href="{% url 'settings' %}">Préférences</a>
-                        </li>
-                        <li
-                          class="user_middle_nav_li"
-                          style="padding-top: 10px"
-                        >
-                          <a href="{% url 'logout' %}">Se déconnecter</a>
-                        </li>
-                      </ul>
-                    </div>
+                          <li
+                            class="user_middle_nav_li"
+                            style="padding-top: 10px"
+                          >
+                            <a href="{% url 'logout' %}">Se déconnecter</a>
+                          </li>
+                        </ul>
+                      </div>
 
-                  {% else %}
-                    <a href="{% url 'signin' %}">
-                      <img
-                        src="/static/images/icons/login.png"
-                        alt="Icon login"
-                        style="width: 30px; margin-bottom: 15px"
-                      />
-                    </a>
-                  {% endif %}
-                </li>
-              </ul>
+                    {% else %}
+                      <a href="{% url 'signin' %}">
+                        <img
+                          src="/static/images/icons/login.png"
+                          alt="Icon login"
+                          style="width: 30px; margin-bottom: 15px"
+                        />
+                      </a>
+                    {% endif %}
+                  </li>
+                </ul>
+              </div>
+              {% endif %}
             </div>
-            {% endif %}
           </div>
         </div>
       </div>
+
+      {% if not "/auth/web/login" == request.path  %}
+        {% block navbar  %}
+        <div>
+          <nav class="middle-nav navbar navbar-expand-md shadow-sm navbar-dark sticky-top">
+            <div class="container">
+              <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#main-nav-1" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="navbar-collapse collapse" id="main-nav-1">
+                <ul class="navbar-nav">
+                  <li class="nav-item active">
+                    <a title="A la une" href="/" class="nav-link">A la une</a>
+                  </li>
+                  <li class="nav-item dropdown position-static">
+                    <a href="{% url 'trending_products' %}" title="Nouveautés" class="nav-link dropdown-toggle">Nouveautés
+                    </a>
+                    <div class="dropdown-menu w-100 top-auto catalogue_menu">
+                      <div class="container">
+                        <div class="row w-100">
+                          <div class="col-sm-3">
+                            <h3 class="">Parcourir par</h3>
+                            <a title="Mois" href="{% url 'trending_products' %}?sort=month"  class="dropdown-item">Mois</a>
+                            <a title="Weekend" href="{% url 'trending_products' %}?sort=weekend" class="dropdown-item">Weekend</a>
+                            <a title="Articles d'été" href="{% url 'trending_products' %}?sort=summer_collection" class="dropdown-item">Articles d'été</a>
+                            <a title="Meilleures ventes" href="{% url 'trending_products' %}?sort=best_sales" class="dropdown-item">Meilleures ventes</a>
+                          </div>
+                          <div class="col-sm-9 nav_tendencies">
+                            <h4 class="maintitle_actual">Tendance actuelle</h4>
+                            <div class="row">
+                              {% if trending_products  %}
+                                {% for product in trending_products  %}
+                                  <div class="col-sm-3">
+                                    <a href="{{ product.get_absolute_url }}" class="">
+                                      <div class="img_wrapper">
+                                        <img src="{{ product.get_single_picture }}" class="nav_picture" />
+                                      </div>
+                                      <div class="img_legend">
+                                        <h4 class="mega_nav_pic_title">{{ product.title }}</h4>
+                                          <span class="text_legend">
+                                          {{ product.price }} FCFA
+                                          </span>
+                                      </div>
+                                    </a>
+                                  </div>
+                                {% endfor  %}
+                              {% endif  %}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="nav-item dropdown position-static">
+                    <a href="{% url 'clothing_products' %}"  title="Vêtements" class="nav-link dropdown-toggle">
+                      Vêtements
+                    </a>
+                    <div class="dropdown-menu w-100 top-auto catalogue_menu">
+                      <div class="container">
+                        <div class="row w-100 designers">
+                          <div class="col-sm-3">
+                            <h4 class="">Filtrer par</h4>
+                            <a title="Mois" href="{% url 'clothing_products' %}?sort=month" class="dropdown-item">Mois</a>
+                            <a title="Weekend" href="{% url 'clothing_products' %}?sort=weekend" class="dropdown-item">Weekend</a>
+                            <a title="Articles d'été" href="{% url 'clothing_products' %}?sort=ete" class="dropdown-item">Articles d'été</a>
+                            <a title="Meilleures ventes" href="{% url 'clothing_products' %}?sort=meilleures_ventes" class="dropdown-item">Meilleures ventes</a>
+                            <a title="Pour enfants" href="{% url 'children_products' %}" class="dropdown-item">Pour enfants</a>
+                          </div>
+                          <div class="col-sm-9">
+                            <div class="row">
+                              <div class="col-sm-6">
+                                <h4 class="">Vêtements</h4>
+                                <ul class="feature_designer">
+                                  <li>
+                                    <a href="{% url 'clothing_products' %}">
+                                      Tous les vêtements
+                                    </a>
+                                  </li>
+                                  {% if clothing_groups  %}
+                                    {% for group in clothing_groups  %}
+                                      <li>
+                                        <a href="{% url 'clothing_products' %}?sort={{ group.slug }}">
+                                          {{ group.title }}
+                                        </a>
+                                      </li>
+                                    {% endfor  %}
+                                  {% endif  %}
+                                </ul>
+                              </div>
+                              <div class="col-sm-6">
+                                <a href="" class="">
+                                  <div class="designer_img_wrapper">
+                                    <img src="{% if main_nav_pic  %}{{ main_nav_pic.get_clothing_picture }}{% else  %}{% static 'images/logo.jpg'  %}{% endif  %}" class="designer_picture" />
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="nav-item dropdown position-static">
+                    <a title="Chaussures" href="{% url 'shoes_products' %}" class="nav-link dropdown-toggle">Chaussures</a>
+                    <div class="dropdown-menu w-100 top-auto catalogue_menu">
+                      <div class="container">
+                        <div class="row w-100 designers">
+                          <div class="col-sm-3">
+                            <h4 class="">Filtrer par</h4>
+                            <a title="Nouveautés" href="{% url 'shoes_products' %}?sort=nouveautes" class="dropdown-item">Nouveautés</a>
+                            <a title="tendance" href="{% url 'shoes_products' %}?sort=tendances" class="dropdown-item">Tendence</a>
+                            <a title="Essentiel" href="{% url 'shoes_products' %}?sort=essentiels" class="dropdown-item">Essentiel</a>
+                            <a title="Mariage" href="{% url 'shoes_products' %}?sort=mariages" class="dropdown-item">Mariage</a>
+                            <a title="Meilleures ventes" href="{% url 'shoes_products' %}?sort=meilleures_ventes" class="dropdown-item">Meilleures ventes</a>
+                          </div>
+                          <div class="col-sm-9">
+                            <div class="row">
+                              <div class="col-sm-6">
+                                <h4 class="">Chaussures</h4>
+                                <ul class="feature_designer">
+                                  <li>
+                                    <a href="{% url 'shoes_products' %}">
+                                      Toutes
+                                    </a>
+                                  </li>
+                                  {% if shoes_groups  %}
+                                    {% for group in shooes_groups  %}
+                                      <li>
+                                        <a href="{% url 'shoes_products' %}?sort={{ group.slug }}">
+                                          {{ group.title }}
+                                        </a>
+                                      </li>
+                                    {% endfor  %}
+                                  {% endif  %}
+                                </ul>
+                              </div>
+                              <div class="col-sm-6">
+                                <a href="" class="">
+                                  <div class="designer_img_wrapper">
+                                    <img src="{% if main_nav_pic  %}{{ main_nav_pic.get_shoe_picture }}{% else  %}{% static 'images/logo.jpg'  %}{% endif  %}" class="designer_picture" />
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="nav-item dropdown position-static">
+                    <a href="{% url 'bags_products' %}" title="Sacs" class="nav-link dropdown-toggle">Sacs</a>
+                    <div class="dropdown-menu w-100 top-auto catalogue_menu">
+                      <div class="container">
+                        <div class="row w-100 designers">
+                          <div class="col-sm-3">
+                            <h4 class="">Filtrer par</h4>
+                            <a title="Nouveautés" href="{% url 'bags_products' %}?sort=nouveautes" class="dropdown-item">Nouveautés</a>
+                            <a title="Classiques" href="{% url 'bags_products' %}?sort=classiques" class="dropdown-item">Classiques</a>
+                            <a title="Meilleures ventes" href="{% url 'bags_products' %}?sort=meilleures_ventes" class="dropdown-item">Meilleures ventes</a>
+                            <a title="Sacs d'été" href="{% url 'bags_products' %}?sort=ete" class="dropdown-item">Sacs d'été</a>
+                          </div>
+                          <div class="col-sm-9">
+                            <div class="row">
+                              <div class="col-sm-6">
+                                <h4 class="">Sacs</h4>
+                                <ul class="feature_designer">
+                                  <li>
+                                    <a href="{% url 'bags_products' %}">
+                                      Toutes
+                                    </a>
+                                  </li>
+                                  {% if bags_groups  %}
+                                    {% for group in bags_groups  %}
+                                      <li>
+                                        <a href="{% url 'bags_products' %}?sort={{ group.slug }}">
+                                          {{ group.title }}
+                                        </a>
+                                      </li>
+                                    {% endfor  %}
+                                  {% endif  %}
+                                </ul>
+                              </div>
+                              <div class="col-sm-6">
+                                <a href="" class="">
+                                  <div class="designer_img_wrapper">
+                                    <img src="{% if main_nav_pic  %}{{ main_nav_pic.get_bag_picture }}{% else  %}{% static 'images/logo.jpg'  %}{% endif  %}" class="designer_picture" />
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="nav-item dropdown position-static">
+                    <a title="Accessoires" href="{% url 'accessories_products' %}" class="nav-link dropdown-toggle">Accessoires</a>
+                    <div class="dropdown-menu w-100 top-auto catalogue_menu">
+                      <div class="container">
+                        <div class="row w-100 designers">
+                          <div class="col-sm-3">
+                            <h4 class="">Filtrer par</h4>
+                            <a title="Nouveautés" href="{% url 'accessories_products' %}?sort=nouveautes" class="dropdown-item">Nouveautés</a>
+                            <a title="Cartes cadeaux" href="{% url 'accessories_products' %}?sort=cartes_cadeau" class="dropdown-item">Cartes cadeaux</a>
+                            <a title="Accéssoires d'été" href="{% url 'accessories_products' %}?sort=ete" class="dropdown-item">Accessoires d'été</a>
+                          </div>
+                          <div class="col-sm-9">
+                            <div class="row">
+                              <div class="col-sm-6">
+                                <h4 class="">Accessoires</h4>
+                                <ul class="feature_designer">
+                                  <li>
+                                    <a href="{% url 'accessories_products' %}">
+                                      Toutes
+                                    </a>
+                                  </li>
+                                  {% if accessories_groups  %}
+                                    {% for group in accessories_groups  %}
+                                      <li>
+                                        <a href="{% url 'accessories_products' %}?sort={{ group.slug }}">
+                                          {{ group.title }}
+                                        </a>
+                                      </li>
+                                    {% endfor  %}
+                                  {% endif  %}
+                                </ul>
+                              </div>
+                              <div class="col-sm-6">
+                                <a href="" class="">
+                                  <div class="designer_img_wrapper">
+                                    <img src="{% if main_nav_pic  %}{{ main_nav_pic.get_accessory_picture }}{% else  %}{% static 'images/logo.jpg'  %}{% endif  %}" class="designer_picture" />
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="nav-item dropdown position-static">
+                    <a title="Bijoux" href="{% url 'jewelries_products' %}" class="nav-link dropdown-toggle">Bijoux</a>
+                    <div class="dropdown-menu w-100 top-auto catalogue_menu">
+                      <div class="container">
+                        <div class="row w-100 designers">
+                          <div class="col-sm-3">
+                            <h4 class="">Filtrer par</h4>
+                            <a title="Nouveautés" href="{% url 'jewelries_products' %}?sort=nouveautes" class="dropdown-item">Nouveautés</a>
+                            <a title="Excliusivités" href="{% url 'jewelries_products' %}?sort=exclusivites" class="dropdown-item">Exclusivités</a>
+                            <a title="Bijoux Afro YACA" href="{% url 'jewelries_products' %}?sort=afro_yaca_drum" class="dropdown-item">Bijoux Afro YACA</a>
+                            <a title="Bijoux d'évènements" href="{% url 'jewelries_products' %}?sort=evenements" class="dropdown-item">Bijoux d'évènement</a>
+                            <a title="Bijoux du quotidien" href="{% url 'jewelries_products' %}?sort=quotidien" class="dropdown-item">Bijoux du quotidien</a>
+                            <a title="Cadeaux" href="{% url 'jewelries_products' %}?sort=cadeaux" class="dropdown-item">Cadeaux</a>
+                          </div>
+                          <div class="col-sm-9">
+                            <div class="row">
+                              <div class="col-sm-6">
+                                <h4 class="">Bijoux</h4>
+                                <ul class="feature_designer">
+                                  <li>
+                                    <a href="{% url 'jewelries_products' %}">
+                                      Toutes
+                                    </a>
+                                  </li>
+                                  {% if jewelries_groups  %}
+                                    {% for group in jewelries_groups  %}
+                                      <li>
+                                        <a href="{% url 'jewelries_products' %}?sort={{ group.slug }}">
+                                          {{ group.title }}
+                                        </a>
+                                      </li>
+                                    {% endfor  %}
+                                  {% endif  %}
+                                </ul>
+                              </div>
+                              <div class="col-sm-6">
+                                <a href="" class="">
+                                  <div class="designer_img_wrapper">
+                                    <img src="{% if main_nav_pic  %}{{ main_nav_pic.get_jewelry_picture }}{% else  %}{% static 'images/logo.jpg'  %}{% endif  %}" class="designer_picture" />
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="nav-item dropdown position-static">
+                    <a title="Beauté" href="{% url 'beauty_products' %}" class="nav-link dropdown-toggle">Beauté</a>
+                    <div class="dropdown-menu w-100 top-auto catalogue_menu">
+                      <div class="container">
+                        <div class="row w-100 designers">
+                          <div class="col-sm-3">
+                            <h4 class="">Filtrer par</h4>
+                            <a title="Nouveautés" href="{% url 'beauty_products' %}?sort=nouveautes" class="dropdown-item">Nouveautés</a>
+                            <a title="Meilleures ventes" href="{% url 'beauty_products' %}?sort=meilleures_ventes" class="dropdown-item">Meilleures ventes</a>
+                          </div>
+                          <div class="col-sm-9">
+                            <div class="row">
+                              <div class="col-sm-6">
+                                <h4 class="">Beauté</h4>
+                                <ul class="feature_designer">
+                                  <li>
+                                    <a href="{% url 'beauty_products' %}">
+                                      Toutes
+                                    </a>
+                                  </li>
+                                  {% if beauty_groups  %}
+                                    {% for group in beauty_groups  %}
+                                      <li>
+                                        <a href="{% url 'beauty_products' %}?sort={{ group.slug }}">
+                                          {{ group.title }}
+                                        </a>
+                                      </li>
+                                    {% endfor  %}
+                                  {% endif  %}
+                                </ul>
+                              </div>
+                              <div class="col-sm-6">
+                                <a href="" class="">
+                                  <div class="designer_img_wrapper">
+                                    <img src="{% if main_nav_pic  %}{{ main_nav_pic.get_beauty_picture }}{% else  %}{% static 'images/logo.jpg'  %}{% endif  %}" class="designer_picture" />
+                                  </div>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="nav-item dropdown position-static"><a title="Editorial" href="{% url 'editorial' %}" class="nav-link dropdown-toggle">Editorial</a>
+                    <div class="dropdown-menu w-100 top-auto catalogue_menu">
+                      <div class="container">
+                        <div class="row w-100">
+                          <div class="col-sm-2">
+                            <h3 class="">Editorial</h3>
+                            <a title="Mois" href="#" class="dropdown-item">Nouveautés</a>
+                            <a title="Femmes influentes" href={`${urls.EDITORIAL}`} class="dropdown-item">Femmes influentes</a>
+                            <a title="Grand titre" href={`${urls.EDITORIAL}`} class="dropdown-item">Grand titre</a>
+                            <a title="Mode de vie" href={`${urls.EDITORIAL}`} class="dropdown-item">Mode de vie</a>
+                            <a title="Tendance" href={`${urls.EDITORIAL}`} class="dropdown-item">Tendance</a>
+                            <a title="Beauté" href={`${urls.EDITORIAL}`} class="dropdown-item">Beauté</a>
+                          </div>
+                          <div class="col-sm-3 nav_cover">
+                            <h5 class="">A l'affiche</h5>
+                            <a href="" class={`${urls.EDITORIAL}`}>
+                              <div class="edito_img_wrapper">
+                                <img src="/static/images/cover1.jpg" class="edito_picture" />
+                              </div>
+                              <div class="edito_img_legend">
+                                <span class="text_legend">
+                                  Edition des femmes influentes
+                                </span>
+                                <br />
+                                <span class="text_legend_date">
+                                  Juillet 2020
+                                </span>
+                              </div>
+                            </a>
+                          </div>
+                          <div class="col-sm-4 nav_cover">
+                            <h5 class="">Parue aujourd'hui</h5>
+                            <a href={`${urls.EDITORIAL}`}>
+                              <div class="row">
+                                <div class="col-sm-5">
+                                  <div class="today_edito_img_wrapper_1">
+                                    <img src="/static/images/cover2.jpg" class="today_edito_picture" />
+                                  </div>
+                                </div>
+                                <div class="col-sm-7">
+                                  <h6 class="today_post_title">Contenu exclusif à diffuser</h6>
+                                  <p class="today_post_text">Détails du contenu exclusif à lire et a commenter encore et voila</p>
+                                </div>
+                              </div>
+                            </a>
+                            <a href={`${urls.EDITORIAL}`}>
+                              <div class="row">
+                                <div class="col-sm-5">
+                                  <div class="today_edito_img_wrapper">
+                                    <img src="/static/images/cover3.jpg" class="today_edito_picture" />
+                                  </div>
+                                </div>
+                                <div class="col-sm-7">
+                                  <h6 class="today_post_title">Contenu exclusif à diffuser</h6>
+                                  <p class="today_post_text">Détails du contenu exclusif à lire et a commenter encore et voila</p>
+                                </div>
+                              </div>
+                            </a>
+                          </div>
+                          <div class="col-sm-4">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="nav-item dropdown position-static">
+                    <a title="A porter" href="{% url 'beauty_products' %}" class="nav-link dropdown-toggle">A porter</a>
+                    <div class="dropdown-menu w-100 top-auto catalogue_menu">
+                      <div class="container">
+                        <div class="row w-100">
+                          <div class="col-sm-3">
+                            <h3 class="">Parcourir par</h3>
+                            <a title="Mois" href="{% url 'beauty_products' %}?sort=month"  class="dropdown-item">Mois</a>
+                            <a title="Weekend" href="{% url 'beauty_products' %}?sort=weekend" class="dropdown-item">Weekend</a>
+                            <a title="Articles d'été" href="{% url 'beauty_products' %}?sort=summer_collection" class="dropdown-item">Articles d'été</a>
+                            <a title="Meilleures ventes" href="{% url 'beauty_products' %}?sort=best_sales" class="dropdown-item">Meilleures ventes</a>
+                          </div>
+                          <div class="col-sm-9 nav_tendencies">
+                            <h4 class="">Ce qu'il faut porter aujourd'hui</h4>
+                            <div class="row">
+                              {% if trending_products  %}
+                                {% for product in trending_products  %}
+                                  <div class="col-sm-3">
+                                    <a href="{{ product.get_absolute_url }}" class="">
+                                      <div class="img_wrapper">
+                                        <img src="{{ product.get_single_picture }}" class="nav_picture" />
+                                      </div>
+                                      <div class="img_legend">
+                                        <h4 class="mega_nav_pic_title">{{ product.title }}</h4>
+                                          <span class="text_legend">
+                                          {{ product.price }} FCFA
+                                          </span>
+                                      </div>
+                                    </a>
+                                  </div>
+                                {% endfor  %}
+                              {% endif  %}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+
+                  <li class="nav-item"><a title="Editorial" href="{% url 'oh_my_box' %}" class="nav-link">OH! My Box</a>
+                    <div class="dropdown-menu w-100 top-auto catalogue_menu">
+                      <div class="container">
+                        <div class="row w-100">
+                          <div class="col-sm-4">
+                            <h3 class="">Nos services</h3>
+                            <a title="Mois" href="#" class="dropdown-item">OH! My Box</a>
+                          </div>
+                          <div class="col-sm-3 nav_cover">
+                          </div>
+                          <div class="col-sm-4 nav_cover">
+                          </div>
+                          <div class="col-sm-4">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      {% endblock %}
+    {% endif %}
+    </header>
+
+    <div class="drawer_menu">
+      <div id="mobile_navbar"></div>
     </div>
 
-    {% if not "/auth/web/login" == request.path  %}
-      {% block navbar  %}
-      <div>
-        <nav class="middle-nav navbar navbar-expand-md shadow-sm navbar-dark sticky-top">
+
+      {% block content %}
+      {% endblock %}
+
+      <footer id="footer">
+        <div class="footer-widget">
           <div class="container">
-            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#main-nav-1" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse" id="main-nav-1">
-              <ul class="navbar-nav">
-                <li class="nav-item active">
-                  <a title="A la une" href="/" class="nav-link">A la une</a>
-                </li>
-                <li class="nav-item dropdown position-static">
-                  <a href="{% url 'trending_products' %}" title="Nouveautés" class="nav-link dropdown-toggle">Nouveautés
-                  </a>
-                  <div class="dropdown-menu w-100 top-auto catalogue_menu">
-                    <div class="container">
-                      <div class="row w-100">
-                        <div class="col-sm-3">
-                          <h3 class="">Parcourir par</h3>
-                          <a title="Mois" href="{% url 'trending_products' %}?sort=month"  class="dropdown-item">Mois</a>
-                          <a title="Weekend" href="{% url 'trending_products' %}?sort=weekend" class="dropdown-item">Weekend</a>
-                          <a title="Articles d'été" href="{% url 'trending_products' %}?sort=summer_collection" class="dropdown-item">Articles d'été</a>
-                          <a title="Meilleures ventes" href="{% url 'trending_products' %}?sort=best_sales" class="dropdown-item">Meilleures ventes</a>
-                        </div>
-                        <div class="col-sm-9 nav_tendencies">
-                          <h4 class="maintitle_actual">Tendance actuelle</h4>
-                          <div class="row">
-                            {% if trending_products  %}
-                              {% for product in trending_products  %}
-                                <div class="col-sm-3">
-                                  <a href="{{ product.get_absolute_url }}" class="">
-                                    <div class="img_wrapper">
-                                      <img src="{{ product.get_single_picture }}" class="nav_picture" />
-                                    </div>
-                                    <div class="img_legend">
-                                      <h4 class="mega_nav_pic_title">{{ product.title }}</h4>
-                                        <span class="text_legend">
-                                        {{ product.price }} FCFA
-                                        </span>
-                                    </div>
-                                  </a>
-                                </div>
-                              {% endfor  %}
-                            {% endif  %}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="nav-item dropdown position-static">
-                  <a href="{% url 'clothing_products' %}"  title="Vêtements" class="nav-link dropdown-toggle">
-                    Vêtements
-                  </a>
-                  <div class="dropdown-menu w-100 top-auto catalogue_menu">
-                    <div class="container">
-                      <div class="row w-100 designers">
-                        <div class="col-sm-3">
-                          <h4 class="">Filtrer par</h4>
-                          <a title="Mois" href="{% url 'clothing_products' %}?sort=month" class="dropdown-item">Mois</a>
-                          <a title="Weekend" href="{% url 'clothing_products' %}?sort=weekend" class="dropdown-item">Weekend</a>
-                          <a title="Articles d'été" href="{% url 'clothing_products' %}?sort=ete" class="dropdown-item">Articles d'été</a>
-                          <a title="Meilleures ventes" href="{% url 'clothing_products' %}?sort=meilleures_ventes" class="dropdown-item">Meilleures ventes</a>
-                          <a title="Pour enfants" href="{% url 'children_products' %}" class="dropdown-item">Pour enfants</a>
-                        </div>
-                        <div class="col-sm-9">
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <h4 class="">Vêtements</h4>
-                              <ul class="feature_designer">
-                                <li>
-                                  <a href="{% url 'clothing_products' %}">
-                                    Tous les vêtements
-                                  </a>
-                                </li>
-                                {% if clothing_groups  %}
-                                  {% for group in clothing_groups  %}
-                                    <li>
-                                      <a href="{% url 'clothing_products' %}?sort={{ group.slug }}">
-                                        {{ group.title }}
-                                      </a>
-                                    </li>
-                                  {% endfor  %}
-                                {% endif  %}
-                              </ul>
-                            </div>
-                            <div class="col-sm-6">
-                              <a href="" class="">
-                                <div class="designer_img_wrapper">
-                                  <img src="{% if main_nav_pic  %}{{ main_nav_pic.get_clothing_picture }}{% else  %}{% static 'images/logo.jpg'  %}{% endif  %}" class="designer_picture" />
-                                </div>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="nav-item dropdown position-static">
-                  <a title="Chaussures" href="{% url 'shoes_products' %}" class="nav-link dropdown-toggle">Chaussures</a>
-                  <div class="dropdown-menu w-100 top-auto catalogue_menu">
-                    <div class="container">
-                      <div class="row w-100 designers">
-                        <div class="col-sm-3">
-                          <h4 class="">Filtrer par</h4>
-                          <a title="Nouveautés" href="{% url 'shoes_products' %}?sort=nouveautes" class="dropdown-item">Nouveautés</a>
-                          <a title="tendance" href="{% url 'shoes_products' %}?sort=tendances" class="dropdown-item">Tendence</a>
-                          <a title="Essentiel" href="{% url 'shoes_products' %}?sort=essentiels" class="dropdown-item">Essentiel</a>
-                          <a title="Mariage" href="{% url 'shoes_products' %}?sort=mariages" class="dropdown-item">Mariage</a>
-                          <a title="Meilleures ventes" href="{% url 'shoes_products' %}?sort=meilleures_ventes" class="dropdown-item">Meilleures ventes</a>
-                        </div>
-                        <div class="col-sm-9">
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <h4 class="">Chaussures</h4>
-                              <ul class="feature_designer">
-                                <li>
-                                  <a href="{% url 'shoes_products' %}">
-                                    Toutes
-                                  </a>
-                                </li>
-                                {% if shoes_groups  %}
-                                  {% for group in shooes_groups  %}
-                                    <li>
-                                      <a href="{% url 'shoes_products' %}?sort={{ group.slug }}">
-                                        {{ group.title }}
-                                      </a>
-                                    </li>
-                                  {% endfor  %}
-                                {% endif  %}
-                              </ul>
-                            </div>
-                            <div class="col-sm-6">
-                              <a href="" class="">
-                                <div class="designer_img_wrapper">
-                                  <img src="{% if main_nav_pic  %}{{ main_nav_pic.get_shoe_picture }}{% else  %}{% static 'images/logo.jpg'  %}{% endif  %}" class="designer_picture" />
-                                </div>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="nav-item dropdown position-static">
-                  <a href="{% url 'bags_products' %}" title="Sacs" class="nav-link dropdown-toggle">Sacs</a>
-                  <div class="dropdown-menu w-100 top-auto catalogue_menu">
-                    <div class="container">
-                      <div class="row w-100 designers">
-                        <div class="col-sm-3">
-                          <h4 class="">Filtrer par</h4>
-                          <a title="Nouveautés" href="{% url 'bags_products' %}?sort=nouveautes" class="dropdown-item">Nouveautés</a>
-                          <a title="Classiques" href="{% url 'bags_products' %}?sort=classiques" class="dropdown-item">Classiques</a>
-                          <a title="Meilleures ventes" href="{% url 'bags_products' %}?sort=meilleures_ventes" class="dropdown-item">Meilleures ventes</a>
-                          <a title="Sacs d'été" href="{% url 'bags_products' %}?sort=ete" class="dropdown-item">Sacs d'été</a>
-                        </div>
-                        <div class="col-sm-9">
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <h4 class="">Sacs</h4>
-                              <ul class="feature_designer">
-                                <li>
-                                  <a href="{% url 'bags_products' %}">
-                                    Toutes
-                                  </a>
-                                </li>
-                                {% if bags_groups  %}
-                                  {% for group in bags_groups  %}
-                                    <li>
-                                      <a href="{% url 'bags_products' %}?sort={{ group.slug }}">
-                                        {{ group.title }}
-                                      </a>
-                                    </li>
-                                  {% endfor  %}
-                                {% endif  %}
-                              </ul>
-                            </div>
-                            <div class="col-sm-6">
-                              <a href="" class="">
-                                <div class="designer_img_wrapper">
-                                  <img src="{% if main_nav_pic  %}{{ main_nav_pic.get_bag_picture }}{% else  %}{% static 'images/logo.jpg'  %}{% endif  %}" class="designer_picture" />
-                                </div>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="nav-item dropdown position-static">
-                  <a title="Accessoires" href="{% url 'accessories_products' %}" class="nav-link dropdown-toggle">Accessoires</a>
-                  <div class="dropdown-menu w-100 top-auto catalogue_menu">
-                    <div class="container">
-                      <div class="row w-100 designers">
-                        <div class="col-sm-3">
-                          <h4 class="">Filtrer par</h4>
-                          <a title="Nouveautés" href="{% url 'accessories_products' %}?sort=nouveautes" class="dropdown-item">Nouveautés</a>
-                          <a title="Cartes cadeaux" href="{% url 'accessories_products' %}?sort=cartes_cadeau" class="dropdown-item">Cartes cadeaux</a>
-                          <a title="Accéssoires d'été" href="{% url 'accessories_products' %}?sort=ete" class="dropdown-item">Accessoires d'été</a>
-                        </div>
-                        <div class="col-sm-9">
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <h4 class="">Accessoires</h4>
-                              <ul class="feature_designer">
-                                <li>
-                                  <a href="{% url 'accessories_products' %}">
-                                    Toutes
-                                  </a>
-                                </li>
-                                {% if accessories_groups  %}
-                                  {% for group in accessories_groups  %}
-                                    <li>
-                                      <a href="{% url 'accessories_products' %}?sort={{ group.slug }}">
-                                        {{ group.title }}
-                                      </a>
-                                    </li>
-                                  {% endfor  %}
-                                {% endif  %}
-                              </ul>
-                            </div>
-                            <div class="col-sm-6">
-                              <a href="" class="">
-                                <div class="designer_img_wrapper">
-                                  <img src="{% if main_nav_pic  %}{{ main_nav_pic.get_accessory_picture }}{% else  %}{% static 'images/logo.jpg'  %}{% endif  %}" class="designer_picture" />
-                                </div>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="nav-item dropdown position-static">
-                  <a title="Bijoux" href="{% url 'jewelries_products' %}" class="nav-link dropdown-toggle">Bijoux</a>
-                  <div class="dropdown-menu w-100 top-auto catalogue_menu">
-                    <div class="container">
-                      <div class="row w-100 designers">
-                        <div class="col-sm-3">
-                          <h4 class="">Filtrer par</h4>
-                          <a title="Nouveautés" href="{% url 'jewelries_products' %}?sort=nouveautes" class="dropdown-item">Nouveautés</a>
-                          <a title="Excliusivités" href="{% url 'jewelries_products' %}?sort=exclusivites" class="dropdown-item">Exclusivités</a>
-                          <a title="Bijoux Afro YACA" href="{% url 'jewelries_products' %}?sort=afro_yaca_drum" class="dropdown-item">Bijoux Afro YACA</a>
-                          <a title="Bijoux d'évènements" href="{% url 'jewelries_products' %}?sort=evenements" class="dropdown-item">Bijoux d'évènement</a>
-                          <a title="Bijoux du quotidien" href="{% url 'jewelries_products' %}?sort=quotidien" class="dropdown-item">Bijoux du quotidien</a>
-                          <a title="Cadeaux" href="{% url 'jewelries_products' %}?sort=cadeaux" class="dropdown-item">Cadeaux</a>
-                        </div>
-                        <div class="col-sm-9">
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <h4 class="">Bijoux</h4>
-                              <ul class="feature_designer">
-                                <li>
-                                  <a href="{% url 'jewelries_products' %}">
-                                    Toutes
-                                  </a>
-                                </li>
-                                {% if jewelries_groups  %}
-                                  {% for group in jewelries_groups  %}
-                                    <li>
-                                      <a href="{% url 'jewelries_products' %}?sort={{ group.slug }}">
-                                        {{ group.title }}
-                                      </a>
-                                    </li>
-                                  {% endfor  %}
-                                {% endif  %}
-                              </ul>
-                            </div>
-                            <div class="col-sm-6">
-                              <a href="" class="">
-                                <div class="designer_img_wrapper">
-                                  <img src="{% if main_nav_pic  %}{{ main_nav_pic.get_jewelry_picture }}{% else  %}{% static 'images/logo.jpg'  %}{% endif  %}" class="designer_picture" />
-                                </div>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="nav-item dropdown position-static">
-                  <a title="Beauté" href="{% url 'beauty_products' %}" class="nav-link dropdown-toggle">Beauté</a>
-                  <div class="dropdown-menu w-100 top-auto catalogue_menu">
-                    <div class="container">
-                      <div class="row w-100 designers">
-                        <div class="col-sm-3">
-                          <h4 class="">Filtrer par</h4>
-                          <a title="Nouveautés" href="{% url 'beauty_products' %}?sort=nouveautes" class="dropdown-item">Nouveautés</a>
-                          <a title="Meilleures ventes" href="{% url 'beauty_products' %}?sort=meilleures_ventes" class="dropdown-item">Meilleures ventes</a>
-                        </div>
-                        <div class="col-sm-9">
-                          <div class="row">
-                            <div class="col-sm-6">
-                              <h4 class="">Beauté</h4>
-                              <ul class="feature_designer">
-                                <li>
-                                  <a href="{% url 'beauty_products' %}">
-                                    Toutes
-                                  </a>
-                                </li>
-                                {% if beauty_groups  %}
-                                  {% for group in beauty_groups  %}
-                                    <li>
-                                      <a href="{% url 'beauty_products' %}?sort={{ group.slug }}">
-                                        {{ group.title }}
-                                      </a>
-                                    </li>
-                                  {% endfor  %}
-                                {% endif  %}
-                              </ul>
-                            </div>
-                            <div class="col-sm-6">
-                              <a href="" class="">
-                                <div class="designer_img_wrapper">
-                                  <img src="{% if main_nav_pic  %}{{ main_nav_pic.get_beauty_picture }}{% else  %}{% static 'images/logo.jpg'  %}{% endif  %}" class="designer_picture" />
-                                </div>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="nav-item dropdown position-static"><a title="Editorial" href="{% url 'editorial' %}" class="nav-link dropdown-toggle">Editorial</a>
-                  <div class="dropdown-menu w-100 top-auto catalogue_menu">
-                    <div class="container">
-                      <div class="row w-100">
-                        <div class="col-sm-2">
-                          <h3 class="">Editorial</h3>
-                          <a title="Mois" href="#" class="dropdown-item">Nouveautés</a>
-                          <a title="Femmes influentes" href={`${urls.EDITORIAL}`} class="dropdown-item">Femmes influentes</a>
-                          <a title="Grand titre" href={`${urls.EDITORIAL}`} class="dropdown-item">Grand titre</a>
-                          <a title="Mode de vie" href={`${urls.EDITORIAL}`} class="dropdown-item">Mode de vie</a>
-                          <a title="Tendance" href={`${urls.EDITORIAL}`} class="dropdown-item">Tendance</a>
-                          <a title="Beauté" href={`${urls.EDITORIAL}`} class="dropdown-item">Beauté</a>
-                        </div>
-                        <div class="col-sm-3 nav_cover">
-                          <h5 class="">A l'affiche</h5>
-                          <a href="" class={`${urls.EDITORIAL}`}>
-                            <div class="edito_img_wrapper">
-                              <img src="/static/images/cover1.jpg" class="edito_picture" />
-                            </div>
-                            <div class="edito_img_legend">
-                              <span class="text_legend">
-                                Edition des femmes influentes
-                              </span>
-                              <br />
-                              <span class="text_legend_date">
-                                Juillet 2020
-                              </span>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="col-sm-4 nav_cover">
-                          <h5 class="">Parue aujourd'hui</h5>
-                          <a href={`${urls.EDITORIAL}`}>
-                            <div class="row">
-                              <div class="col-sm-5">
-                                <div class="today_edito_img_wrapper_1">
-                                  <img src="/static/images/cover2.jpg" class="today_edito_picture" />
-                                </div>
-                              </div>
-                              <div class="col-sm-7">
-                                <h6 class="today_post_title">Contenu exclusif à diffuser</h6>
-                                <p class="today_post_text">Détails du contenu exclusif à lire et a commenter encore et voila</p>
-                              </div>
-                            </div>
-                          </a>
-                          <a href={`${urls.EDITORIAL}`}>
-                            <div class="row">
-                              <div class="col-sm-5">
-                                <div class="today_edito_img_wrapper">
-                                  <img src="/static/images/cover3.jpg" class="today_edito_picture" />
-                                </div>
-                              </div>
-                              <div class="col-sm-7">
-                                <h6 class="today_post_title">Contenu exclusif à diffuser</h6>
-                                <p class="today_post_text">Détails du contenu exclusif à lire et a commenter encore et voila</p>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="col-sm-4">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="nav-item dropdown position-static">
-                  <a title="A porter" href="{% url 'beauty_products' %}" class="nav-link dropdown-toggle">A porter</a>
-                  <div class="dropdown-menu w-100 top-auto catalogue_menu">
-                    <div class="container">
-                      <div class="row w-100">
-                        <div class="col-sm-3">
-                          <h3 class="">Parcourir par</h3>
-                          <a title="Mois" href="{% url 'beauty_products' %}?sort=month"  class="dropdown-item">Mois</a>
-                          <a title="Weekend" href="{% url 'beauty_products' %}?sort=weekend" class="dropdown-item">Weekend</a>
-                          <a title="Articles d'été" href="{% url 'beauty_products' %}?sort=summer_collection" class="dropdown-item">Articles d'été</a>
-                          <a title="Meilleures ventes" href="{% url 'beauty_products' %}?sort=best_sales" class="dropdown-item">Meilleures ventes</a>
-                        </div>
-                        <div class="col-sm-9 nav_tendencies">
-                          <h4 class="">Ce qu'il faut porter aujourd'hui</h4>
-                          <div class="row">
-                            {% if trending_products  %}
-                              {% for product in trending_products  %}
-                                <div class="col-sm-3">
-                                  <a href="{{ product.get_absolute_url }}" class="">
-                                    <div class="img_wrapper">
-                                      <img src="{{ product.get_single_picture }}" class="nav_picture" />
-                                    </div>
-                                    <div class="img_legend">
-                                      <h4 class="mega_nav_pic_title">{{ product.title }}</h4>
-                                        <span class="text_legend">
-                                        {{ product.price }} FCFA
-                                        </span>
-                                    </div>
-                                  </a>
-                                </div>
-                              {% endfor  %}
-                            {% endif  %}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-
-                <li class="nav-item"><a title="Editorial" href="{% url 'oh_my_box' %}" class="nav-link">OH! My Box</a>
-                  <div class="dropdown-menu w-100 top-auto catalogue_menu">
-                    <div class="container">
-                      <div class="row w-100">
-                        <div class="col-sm-4">
-                          <h3 class="">Nos services</h3>
-                          <a title="Mois" href="#" class="dropdown-item">OH! My Box</a>
-                        </div>
-                        <div class="col-sm-3 nav_cover">
-                        </div>
-                        <div class="col-sm-4 nav_cover">
-                        </div>
-                        <div class="col-sm-4">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-      </div>
-    {% endblock %}
-  {% endif %}
-  </header>
-
-  <div class="drawer_menu">
-    <div id="mobile_navbar"></div>
-  </div>
-
-
-    {% block content %}
-    {% endblock %}
-
-    <footer id="footer">
-      <div class="footer-widget">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-2 footer_item_one">
-              <div class="single-widget">
-                <h2>Navigation </h2>
-                <ul class="nav nav-pills nav-stacked custom">
-                  <li><a href="{% url 'home' %}">Accueil</a></li>
-                  <li><a href="{% url 'editorial' %}">Editorial</a></li>
-                  <li><a href="{% url 'oh_my_box' %}">Oh my box</a></li>
-                  <li><a href="{% url 'home' %}">A propos</a></li>
-                  <li><a href="{% url 'home' %}">Contact’s</a></li>
-                </ul>
+            <div class="row">
+              <div class="col-sm-2 footer_item_one">
+                <div class="single-widget">
+                  <h2>Navigation </h2>
+                  <ul class="nav nav-pills nav-stacked custom">
+                    <li><a href="{% url 'home' %}">Accueil</a></li>
+                    <li><a href="{% url 'editorial' %}">Editorial</a></li>
+                    <li><a href="{% url 'oh_my_box' %}">Oh my box</a></li>
+                    <li><a href="{% url 'home' %}">A propos</a></li>
+                    <li><a href="{% url 'home' %}">Contact’s</a></li>
+                  </ul>
+                </div>
               </div>
-            </div>
-            <div class="col-sm-2 footer_item">
-              <div class="single-widget">
-                <h2>A la une</h2>
-                <ul class="nav nav-pills nav-stacked custom">
-                  <li><a href="{% url 'clothing_products' %}">Vêtements</a></li>
-                  <li><a href="{% url 'shoes_products' %}">Chaussures</a></li>
-                  <li><a href="{% url 'bags_products' %}">Sacs</a></li>
-                  <li><a href="{% url 'accessories_products' %}">Accessoires</a></li>
-                  <li><a href="{% url 'jewelries_products' %}">Bijoux</a></li>
-                </ul>
+              <div class="col-sm-2 footer_item">
+                <div class="single-widget">
+                  <h2>A la une</h2>
+                  <ul class="nav nav-pills nav-stacked custom">
+                    <li><a href="{% url 'clothing_products' %}">Vêtements</a></li>
+                    <li><a href="{% url 'shoes_products' %}">Chaussures</a></li>
+                    <li><a href="{% url 'bags_products' %}">Sacs</a></li>
+                    <li><a href="{% url 'accessories_products' %}">Accessoires</a></li>
+                    <li><a href="{% url 'jewelries_products' %}">Bijoux</a></li>
+                  </ul>
+                </div>
               </div>
-            </div>
-            <div class="col-sm-2 footer_item">
-              <div class="single-widget">
-                <h2>Achat rapide</h2>
-                <ul class="nav nav-pills nav-stacked custom">
-                  <li><a href="{% url 'accessories_products' %}">Accéssoires tendances</a></li>
-                  <li><a href="{% url 'trending_products' %}">Articles de l'été</a></li>
-                  <li><a href="{% url 'jewelries_products' %}">Bijoux éssentiels</a></li>
-                  <li><a href="{% url 'to_wear_products' %}">Découverte du mois</a></li>
-                </ul>
+              <div class="col-sm-2 footer_item">
+                <div class="single-widget">
+                  <h2>Achat rapide</h2>
+                  <ul class="nav nav-pills nav-stacked custom">
+                    <li><a href="{% url 'accessories_products' %}">Accéssoires tendances</a></li>
+                    <li><a href="{% url 'trending_products' %}">Articles de l'été</a></li>
+                    <li><a href="{% url 'jewelries_products' %}">Bijoux éssentiels</a></li>
+                    <li><a href="{% url 'to_wear_products' %}">Découverte du mois</a></li>
+                  </ul>
+                </div>
               </div>
-            </div>
-            <div class="col-sm-2 footer_item">
-              <div class="single-widget">
-                <h2>Afro Yaca Drum</h2>
-                <ul class="nav nav-pills nav-stacked custom">
-                  <li><a href="{% url 'home' %}">Blog</a></li>
-                  <li><a href="{% url 'home' %}">Emploie</a></li>
-                  <li><a href="{% url 'home' %}">FAQ</a></li>
-                  <li><a href="{% url 'home' %}">CGV</a></li>
-                </ul>
+              <div class="col-sm-2 footer_item">
+                <div class="single-widget">
+                  <h2>Afro Yaca Drum</h2>
+                  <ul class="nav nav-pills nav-stacked custom">
+                    <li><a href="{% url 'home' %}">Blog</a></li>
+                    <li><a href="{% url 'home' %}">Emploie</a></li>
+                    <li><a href="{% url 'home' %}">FAQ</a></li>
+                    <li><a href="{% url 'home' %}">CGV</a></li>
+                  </ul>
+                </div>
               </div>
-            </div>
-            <div class="col-sm-3 offset-sm-1 footer_item">
-              <div class="single-widget">
-                <h2>Nous contacter</h2>
-                <form action="#" class="searchform">
-                  <input type="text" placeholder="Your email address" />
-                  <button type="submit" class="btn btn-default"><i class="fas fa-paper-plane"></i></button>
-                </form>
+              <div class="col-sm-3 offset-sm-1 footer_item">
+                <div class="single-widget">
+                  <h2>Nous contacter</h2>
+                  <form action="#" class="searchform">
+                    <input type="text" placeholder="Your email address" />
+                    <button type="submit" class="btn btn-default"><i class="fas fa-paper-plane"></i></button>
+                  </form>
+                </div>
+                <div class="text_contact_form">
+                  <p>Soyez à l'afût des dernières nouvelles<br />Inscrivez-vous à la newsletter et ne rattez aucune information</p>
+                </div>
               </div>
-              <div class="text_contact_form">
-                <p>Soyez à l'afût des dernières nouvelles<br />Inscrivez-vous à la newsletter et ne rattez aucune information</p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-6">
-              <p class="footer_copyright">Copyright © 2020 MASC Intelligence - Tous les droits reservés (+237 693 458 540).</p>
-            </div>
-            <div class="col-sm-6">
 
             </div>
           </div>
         </div>
-      </div>
 
-    </footer>
+        <div class="footer-bottom">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-6">
+                <p class="footer_copyright">Copyright © 2020 MASC Intelligence - Tous les droits reservés (+237 693 458 540).</p>
+              </div>
+              <div class="col-sm-6">
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </footer>
+    </main>
   </body>
 
   <script src="{% static 'js/jquery3.js' %}"></script>
   <script src="{% static 'js/popper.js' %}"></script>
   <script src="{% static 'js/bootstrap.js' %}"></script>
+  <script src="{% static 'ui/vendors.min.js' %}"></script>
+
+  <script src="{% static 'ui/loader.min.js' %}"></script>
+  <script src="{% static 'ui/mobile_navbar.min.js' %}"></script>
+
 
   {% block bundle %}
   {% endblock %}
@@ -748,8 +756,6 @@
     })
   </script>
 
-  {% render_bundle 'loader' 'js' %}
-  {% render_bundle 'mobile_navbar' 'js' %}
 
   {% block custom_js %}
   {% endblock %}

@@ -1,18 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Helmet } from "react-helmet";
 import { PulseLoader } from 'react-spinners';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import { withStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
+import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
@@ -22,27 +18,17 @@ import _ from "underscore";
 
 import { orderCStoreActions } from './store'
 import { getUser } from '../../utils/auth_utils'
-import appConfig from '../../config/index'
 import './style.local.css';
 
 
-const useRowStyles = makeStyles({
-  root: {
-    '& > *': {
-      borderBottom: 'unset',
-    },
-  },
-});
 
-
-function Row(props) {
+function CustomRow(props) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
-  const classes = useRowStyles();
 
   return (
     <React.Fragment>
-      <TableRow className={classes.root}>
+      <TableRow>
         <TableCell>
           <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
@@ -123,7 +109,6 @@ const useStyles = theme => ({
 
 
 export default
-@withStyles(useStyles)
 @connect((state, props) => ({
   orderCStore: state.orderCStore
 }))
@@ -161,7 +146,6 @@ class MyOrders extends React.Component {
 
 
   render() {
-    const { classes } = this.props
     const { loading, orders } = this.props.orderCStore
 
     return (
@@ -169,7 +153,7 @@ class MyOrders extends React.Component {
       <div className="" style={{ backgroundColor: "white" }}>
           <div className="container">
             <h3 className="text-center" style={{ marginBottom: 20 }}>Mes commandes</h3>
-            <div className={classes.tableWrapper}>
+            <div>
               <TableContainer component={Paper}>
                 <Table aria-label="collapsible table">
                   <TableHead>
@@ -184,7 +168,7 @@ class MyOrders extends React.Component {
                   </TableHead>
                   <TableBody>
                     {orders.map((row, key) => (
-                      <Row key={key} row={row} />
+                      <CustomRow key={key} row={row} />
                     ))}
                   </TableBody>
                 </Table>

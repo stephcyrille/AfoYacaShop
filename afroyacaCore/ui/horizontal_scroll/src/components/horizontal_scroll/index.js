@@ -44,7 +44,7 @@ class HorizontalScroll extends Component {
   }
 
   _fetchProductFlashSale(){
-    fetch('http://localhost:8000/api/list/products/flash_sales/'
+    fetch('/api/list/products/flash_sales/'
       ,{
         headers : {
           'Content-Type': 'application/json',

@@ -1,0 +1,22 @@
+.nav-tabs.setting {
+    border-bottom: 1px solid #ddaa44;
+}
+
+.setting.nav-item .nav-link{
+  color: #ddaa44 !important;
+  width: 150px;
+  text-align: center;
+  border: 1px solid rgba(0,0,0,0) !important;
+  transition: ease-out 0.3s;
+}
+
+.setting.nav-item .nav-link:hover{
+  border: 1px solid #ddaa44 !important;
+  transition: ease-in 0.3s;
+}
+
+.setting.nav-item .nav-link.active{
+  background-color: #ddaa44 !important;
+  color: #fff !important;
+}
+

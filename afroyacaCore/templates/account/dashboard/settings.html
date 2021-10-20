@@ -17,11 +17,79 @@
 {% block custom_style %}
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/account/settings.css' %}?version=1" />
 {% endblock %}
 
 {% block content %}
   <section style="padding-top: 50px; padding-bottom: 50px; background-color: white !important">
-
+    <div class="container justify-content-center mt-20">
+      <div class="offset-lg-1 col-lg-10 offset-md-1 col-md-10 col-sm-12 col-xs-12">
+          <div class="tab-vertical">
+              <ul class="nav nav-tabs setting" id="myTab3" role="tablist">
+                  <li class="setting nav-item"> <a class="nav-link active" id="home-vertical-tab" data-toggle="tab" href="#home-vertical" role="tab" aria-controls="home" aria-selected="true">Profil</a> </li>
+                  <li class="setting nav-item"> <a class="nav-link" id="profile-vertical-tab" data-toggle="tab" href="#profile-vertical" role="tab" aria-controls="profile" aria-selected="false">Adresses</a> </li>
+                  <li class="setting nav-item"> <a class="nav-link" id="contact-vertical-tab" data-toggle="tab" href="#contact-vertical" role="tab" aria-controls="contact" aria-selected="false">Paiements</a> </li>
+              </ul>
+              <div class="tab-content" id="myTabContent3" style="padding: 20px 0">
+                  <div class="tab-pane fade show active" id="home-vertical" role="tabpanel" aria-labelledby="home-vertical-tab">
+                      <div class="container rounded bg-white mb-5">
+                        <div class="row">
+                            <div class="col-md-2 border-right">
+                                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQF2psCzfbB611rnUhxgMi-lc2oB78ykqDGYb4v83xQ1pAbhPiB&usqp=CAU"><span class="font-weight-bold">Amelly</span><span class="text-black-50">amelly12@bbb.com</span><span> </span></div>
+                            </div>
+                            <div class="col-md-6 border-right">
+                                <div class="p-3 py-5">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h4 class="text-right">Informations sur le profil</h4>
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col-md-6"><label class="labels">Nom(s)</label><input type="text" class="form-control" placeholder="Nom de famille" value=""></div>
+                                        <div class="col-md-6"><label class="labels">Prénom(s)</label><input type="text" class="form-control" value="" placeholder="Prénom"></div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="Adresse mail" value=""></div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
+                                            <label class="labels">Date de naissance</label>
+                                            <input type="date" class="form-control" placeholder="Date de naissance" value="">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-12"><label class="labels">Genre</label>
+                                            <select name="gender" id="gender-id" class="form-control">
+                                                <option value=""></option>
+                                                <option value="female">Femme</option>
+                                                <option value="male">Homme</option>
+                                                <option value="binary">Binaire</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 py-5">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <h5 class="text-right">Centres d'intérêt</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane fade" id="profile-vertical" role="tabpanel" aria-labelledby="profile-vertical-tab">
+                      <h3>Tab Content 1</h3>
+                      <p>Integer malesuada nunc vel risus commodo. Enim eu turpis egestas pretium aenean pharetra magna. Feugiat in fermentum posuere urna nec tincidunt praesent semper feugiat. Diam vulputate ut pharetra sit amet. At ultrices mi tempus imperdiet.</p>
+                  </div>
+                  <div class="tab-pane fade" id="contact-vertical" role="tabpanel" aria-labelledby="contact-vertical-tab">
+                      <h3>Tab Heading</h3>
+                      <p>Sit amet nisl suscipit adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras pulvinar mattis. Amet risus nullam eget felis eget nunc lobortis mattis. Lacus viverra vitae congue eu. Eu tincidunt tortor aliquam nulla facilisi cras fermentum odio eu. Est placerat in egestas erat imperdiet sed euismod.</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
   </section>
 {% endblock %}
 

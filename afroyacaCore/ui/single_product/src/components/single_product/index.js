@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { withTranslation } from 'react-i18next';
 import _ from "underscore";
 import { BeatLoader, RotateLoader } from 'react-spinners';
 import { Collapse } from 'antd';
@@ -31,7 +30,6 @@ const { Panel } = Collapse;
 
 
 export default
-@withTranslation()
 @connect((state, props) => ({
   singleProductCStore: state.singleProductCStore,
 }))
