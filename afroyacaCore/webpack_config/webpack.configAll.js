@@ -21,7 +21,8 @@ module.exports = {
   },
 
   plugins: [
-    new BundleTracker({filename: './webpack_stats/webpack-stats.json'}), new WebpackBundleAnalyzer()
+    new BundleTracker({filename: './webpack_stats/webpack-stats.json'}),
+    //new WebpackBundleAnalyzer()
   ],
 
   module: {
