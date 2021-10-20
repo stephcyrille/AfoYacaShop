@@ -17,7 +17,7 @@
 {% block custom_style %}
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-  <link rel="stylesheet" type="text/css" href="{% static 'css/account/settings.css' %}?version=1" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/account/settings.css' %}?{% now 'U' %}" />
 {% endblock %}
 
 {% block content %}
@@ -31,61 +31,111 @@
                   <li class="setting nav-item"> <a class="nav-link" id="contact-vertical-tab" data-toggle="tab" href="#contact-vertical" role="tab" aria-controls="contact" aria-selected="false">Paiements</a> </li>
               </ul>
               <div class="tab-content" id="myTabContent3" style="padding: 20px 0">
-                  <div class="tab-pane fade show active" id="home-vertical" role="tabpanel" aria-labelledby="home-vertical-tab">
-                      <div class="container rounded bg-white mb-5">
-                        <div class="row">
-                            <div class="col-md-2 border-right">
-                                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQF2psCzfbB611rnUhxgMi-lc2oB78ykqDGYb4v83xQ1pAbhPiB&usqp=CAU"><span class="font-weight-bold">Amelly</span><span class="text-black-50">amelly12@bbb.com</span><span> </span></div>
-                            </div>
-                            <div class="col-md-6 border-right">
-                                <div class="p-3 py-5">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h4 class="text-right">Informations sur le profil</h4>
-                                    </div>
-                                    <div class="row mt-2">
-                                        <div class="col-md-6"><label class="labels">Nom(s)</label><input type="text" class="form-control" placeholder="Nom de famille" value=""></div>
-                                        <div class="col-md-6"><label class="labels">Prénom(s)</label><input type="text" class="form-control" value="" placeholder="Prénom"></div>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" placeholder="Adresse mail" value=""></div>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col-md-12">
-                                            <label class="labels">Date de naissance</label>
-                                            <input type="date" class="form-control" placeholder="Date de naissance" value="">
-                                        </div>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col-md-12"><label class="labels">Genre</label>
-                                            <select name="gender" id="gender-id" class="form-control">
-                                                <option value=""></option>
-                                                <option value="female">Femme</option>
-                                                <option value="male">Homme</option>
-                                                <option value="binary">Binaire</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="p-3 py-5">
-                                    <div class="d-flex justify-content-between align-items-center mb-3">
-                                        <h5 class="text-right">Centres d'intérêt</h5>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="tab-pane show active" id="home-vertical" role="tabpanel" aria-labelledby="home-vertical-tab">
+                  <h3 class="text-center pt-0 mb-0 display-4">Mes informations personnelles</h3>
+                  <div class="container rounded bg-white mb-5">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                          <img class="rounded-circle mt-5 img-fluid" src="{% static 'images/logo.jpg' %}">
+                          <span class="font-weight-bold">{{ request.user.username }}</span>
+                          <span class="text-black-50">{{ request.user.email }}</span>
                         </div>
+                      </div>
+
+                      <div class="col-md-8">
+                        <div class="p-3 py-5">
+                          <div class="d-flex justify-content-between align-items-center mb-3">
+                          </div>
+                          <div class="row mt-2">
+                            <div class="col-md-6">
+                              <label class="labels">Nom(s)</label>
+                              <input readonly="1" type="text" class="form-control" placeholder="Nom de famille" value="{{ request.user.userprofile.first_name }}">
+                            </div>
+                            <div class="col-md-6">
+                              <label class="labels">Prénom(s)</label>
+                              <input readonly="1" type="text" class="form-control" value="{{ request.user.userprofile.last_name }}" placeholder="Prénom">
+                            </div>
+                          </div>
+                          <div class="row mt-3">
+                              <div class="col-md-12">
+                                <label class="labels">Email</label>
+                                <input readonly="1" type="text" class="form-control" placeholder="Adresse mail" value="{{ request.user.email }}">
+                              </div>
+                          </div>
+                          <div class="row mt-3">
+                            <div class="col-md-12">
+                              <label class="labels">Date de naissance</label>
+                              <input readonly="1" type="date" class="form-control" placeholder="Date de naissance" value="">
+                            </div>
+                          </div>
+                          <div class="row mt-3">
+                            <div class="col-md-12">
+                              <label class="labels">Genre</label>
+                              <select readonly="1" name="gender" id="gender-id" class="form-control">
+                                {% if request.user.userprofile.gender == "Male" %}
+                                  <option value=""></option>
+                                  <option value="female">Femme</option>
+                                  <option value="male" selected>Homme</option>
+                                  <option value="binary">Binaire</option>
+                                {% elif request.user.userprofile.gender == "Female" %}
+                                  <option value=""></option>
+                                  <option value="female" selected>Femme</option>
+                                  <option value="male">Homme</option>
+                                  <option value="binary">Binaire</option>
+                                {% else %}
+                                  <option value=""></option>
+                                  <option value="female">Femme</option>
+                                  <option value="male">Homme</option>
+                                  <option value="binary">Binaire</option>
+                                {% endif %}
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="tab-pane fade" id="profile-vertical" role="tabpanel" aria-labelledby="profile-vertical-tab">
-                      <h3>Tab Content 1</h3>
-                      <p>Integer malesuada nunc vel risus commodo. Enim eu turpis egestas pretium aenean pharetra magna. Feugiat in fermentum posuere urna nec tincidunt praesent semper feugiat. Diam vulputate ut pharetra sit amet. At ultrices mi tempus imperdiet.</p>
+                </div>
+
+                <div class="tab-pane fade" id="profile-vertical" role="tabpanel" aria-labelledby="profile-vertical-tab">
+                  <h3 class="pt-4 display-4">Mes contacts</h3>
+
+                  <div class="row" style="margin: 0px">
+                    {% if contacts %}
+                      {% for contact in contacts %}
+                        <div class="col-6" style="padding-left: 0">
+                          <div id="address_radioboxes">
+                            {% if contact.main is True %}
+                              <input type="radio" name="address_entry" value="{{ contact.id }}" id="contact_{{ contact.id }}" checked required />
+                            {% else %}
+                              <input type="radio" name="address_entry" value="{{ contact.id }}" id="contact_{{ contact.id }}" required />
+                            {% endif %}
+                            <label for="contact_{{ contact.id }}" class="address_entry">
+                              <div
+                                class="address_bloc"
+                              >
+                                <div class="add_address_bloc">
+                                  <h5 style="text-transform: uppercase">
+                                    {{ contact.profile.last_name }} {{ contact.profile.first_name }}
+                                  </h5>
+                                  <h5>{{ contact.city }}, {{ contact.country }}</h5>
+                                  <h6>{{ contact.address }}, {{ contact.address_precision }}</h6>
+                                  <h6>Tél: (+237) {{ contact.phone }}</h6>
+                                </div>
+                              </div>
+                            </label>
+                          </div>
+
+                        </div>
+                      {% endfor %}
+                    {% endif %}
                   </div>
-                  <div class="tab-pane fade" id="contact-vertical" role="tabpanel" aria-labelledby="contact-vertical-tab">
-                      <h3>Tab Heading</h3>
-                      <p>Sit amet nisl suscipit adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras pulvinar mattis. Amet risus nullam eget felis eget nunc lobortis mattis. Lacus viverra vitae congue eu. Eu tincidunt tortor aliquam nulla facilisi cras fermentum odio eu. Est placerat in egestas erat imperdiet sed euismod.</p>
-                  </div>
+                </div>
+
+                <div class="tab-pane fade" id="contact-vertical" role="tabpanel" aria-labelledby="contact-vertical-tab">
+                  <h3 class="pt-4 display-4 text-center">Aucun paiement pour l'instant</h3>
+                </div>
               </div>
           </div>
       </div>

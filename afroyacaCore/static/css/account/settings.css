@@ -20,3 +20,30 @@
   color: #fff !important;
 }
 
+.address_entry, .add_ddress_bloc_new{
+  height: 200px;
+  border: 1px solid lightgray;
+  margin: 20px 0;
+  padding: 10px 20px;
+  display: block;
+  width: 100%;
+  transition: 0.3s ease-in;
+}
+
+.plus_box i{
+  color: black;
+}
+
+.address_entry:hover, .add_ddress_bloc_new:hover{
+  cursor: pointer;
+  border: 1px solid black;
+  transition: 0.3s ease-out;
+}
+
+#address_radioboxes input[type=radio]{
+  display: none;
+}
+
+#address_radioboxes input[type=radio]:checked + .address_entry{
+  border: 1px solid black;
+}

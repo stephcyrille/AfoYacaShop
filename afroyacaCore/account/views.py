@@ -8,6 +8,7 @@ from django.conf import settings
 import os
 
 from account.forms import AddEndUserForm
+from account.models import Contact
 from utils.libs import file_reader
 
 BASE_DIR = settings.BASE_DIR
@@ -113,6 +114,10 @@ def my_box(request):
 @login_required
 def settings(request):
     template_name = "account/dashboard/settings.html"
-    context = {}
 
+    contacts_list = Contact.objects.filter(profile=request.user.userprofile, is_archived=False)
+
+    context = {
+        "contacts": contacts_list
+    }
     return render(request, template_name, context)
