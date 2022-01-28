@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ENV = os.environ.get('PROD', 'DEV')
+ENV = os.environ.get('ENV', 'DEV')
 if "DEV" == ENV:
     DEBUG = True
 else:
@@ -33,7 +33,7 @@ if DEBUG:
     SECRET_KEY = 't_aj0((akg4d05nt=(hha)m-2)^p)1w0qv=(-km^5yo2dr&(7c'
 else:
     ALLOWED_HOSTS = ['66.29.149.214', 'afroyacadrum.cm']
-    SECRET_KEY = os.environ.get('AYD_PROD_SECRET_KEY', True)
+    SECRET_KEY = os.environ.get('AYD_PROD_SECRET_KEY', "")
 
 # Application definition
 

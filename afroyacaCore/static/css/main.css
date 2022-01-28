@@ -797,6 +797,12 @@ a#scrollUp i {
     .drawer_menu{
         display: block;
     }
+    .nav.nav-pills.custom{
+      padding-bottom: 10px;
+    }
+    .nav.nav-pills.custom li a span.pipe_one{
+      display: none;
+    }
 }
 
 
