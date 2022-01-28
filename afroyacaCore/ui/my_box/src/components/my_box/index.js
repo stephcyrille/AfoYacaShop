@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { PulseLoader } from 'react-spinners';
 import MaterialTable from "material-table";
 import { Add as AddIcon } from "@material-ui/icons";
 import _ from "underscore";

@@ -26,9 +26,10 @@
     </section>
 {% endblock %}
 
-{% block bundle %}
+{% comment %}
   {% render_bundle 'all_products' 'js' %}
-{% endblock %}
+{% endcomment %}
 
 {% block custom_js %}
+  <script src="{% static 'ui/all_products.min.js' %}"></script>
 {% endblock %}

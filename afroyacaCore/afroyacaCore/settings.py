@@ -18,13 +18,22 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 't_aj0((akg4d05nt=(hha)m-2)^p)1w0qv=(-km^5yo2dr&(7c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ENV = os.environ.get('ENV', 'DEV')
+if "DEV" == ENV:
+    DEBUG = True
+else:
+    DEBUG = False
+
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+    # SECURITY WARNING: keep the secret key used in production secret!
+    SECRET_KEY = 't_aj0((akg4d05nt=(hha)m-2)^p)1w0qv=(-km^5yo2dr&(7c'
+else:
+    ALLOWED_HOSTS = ['66.29.149.214', 'afroyacadrum.cm']
+    SECRET_KEY = os.environ.get('AYD_PROD_SECRET_KEY', "")
 
 # Application definition
 
@@ -89,16 +98,28 @@ WSGI_APPLICATION = 'afroyacaCore.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'afroyacadrum_dev',
-        'USER': 'afroyacadrum',
-        'PASSWORD': 'afroyacadrum',
-        'HOST': 'localhost',
-        'PORT': '',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'afroyacadrum_dev',
+            'USER': 'afroyacadrum',
+            'PASSWORD': 'afroyacadrum',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ.get('AYD_PROD_DATABASE', ''),
+            'USER': os.environ.get('AYD_PROD_USER', ''),
+            'PASSWORD': os.environ.get('AYD_PROD_PASSWORD', ''),
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators

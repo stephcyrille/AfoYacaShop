@@ -25,7 +25,7 @@ const useStyles = theme => ({
   formControl: {
     margin: theme.spacing(0),
   },
-});
+}, { index : 1 });
 const { Panel } = Collapse;
 export default
 @connect((state, props) => ({

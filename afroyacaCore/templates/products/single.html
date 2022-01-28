@@ -21,9 +21,10 @@
   </div>
 {% endblock %}
 
-{% block bundle %}
+{% comment %}
   {% render_bundle 'single_product' 'js' %}
-{% endblock %}
+{% endcomment %}
 
 {% block custom_js %}
+  <script src="{% static 'ui/single_product.min.js' %}"></script>
 {% endblock %}

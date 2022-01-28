@@ -41,10 +41,11 @@ class HorizontalScroll extends Component {
     )
 
     this.container = null
+    this.handleSetDialogOpen = this.handleSetDialogOpen.bind(this);
   }
 
   _fetchProductFlashSale(){
-    fetch('http://localhost:8000/api/list/products/flash_sales/'
+    fetch('/api/list/products/flash_sales/'
       ,{
         headers : {
           'Content-Type': 'application/json',
@@ -105,31 +106,6 @@ class HorizontalScroll extends Component {
     this.container.scrollBy({ left: distance, behavior: 'smooth' })
   }
 
-  buildItems() {
-    var products = this.state.products ? this.state.products : []
-
-    return products.map((val, key) => {
-      return (
-        <li className="item" key={key}>
-          <div className='showcase-whole-content'>
-            <div className='showcase-pic-wrapper'>
-              <a href={`/shop/products/${val.slug}`}>
-                <img src={`${val.pictures[0]}`} className='' />
-              </a>
-            </div>
-            <div className='showcase-pic-legend'>
-              <h5 className="categories_home ttle" style={{ marginBottom: 5, paddingBottom: 5 }}>{val.title}</h5>
-              <p>
-                {/* The call list of products in the specific place */}
-                <a href="" className="horizontal_scroll_country">Cameroun</a><br />
-                <a href="#" className="horizontal_scroll_add_to_cart" onClick={ this.handleSetDialogOpen.bind(this, val)}>Ajouter au panier</a>
-              </p>
-            </div>
-          </div>
-        </li>
-      )
-    })
-  }
 
   buildControls() {
     return (
@@ -198,6 +174,33 @@ class HorizontalScroll extends Component {
   }
 
 
+  buildItems() {
+    var products = this.state.products ? this.state.products : []
+
+    return products.map((val, key) => {
+      return (
+        <li className="item" key={key}>
+          <div className='showcase-whole-content'>
+            <div className='showcase-pic-wrapper'>
+              <a href={`/shop/products/women/single/${val.slug}`}>
+                <img src={`${val.pictures[0]}`} className='' />
+              </a>
+            </div>
+            <div className='showcase-pic-legend'>
+              <h5 className="categories_home ttle" style={{ marginBottom: 5, paddingBottom: 5 }}>{val.title}</h5>
+              <p>
+                {/* The call list of products in the specific place */}
+                <a href="" className="horizontal_scroll_country">Cameroun</a><br />
+                {/*<a className="horizontal_scroll_add_to_cart" onClick={ this.handleSetDialogOpen.bind(this) }>Ajouter au panier</a> */}
+              </p>
+            </div>
+          </div>
+        </li>
+      )
+    })
+  }
+
+
   render() {
     const { success, dialogOpen, quantity } = this.state
 
@@ -220,3 +223,4 @@ class HorizontalScroll extends Component {
     );
   }
 }
+

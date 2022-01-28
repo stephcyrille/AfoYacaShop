@@ -18,7 +18,10 @@ def cart_items_number(request):
 
     # Only get fours randomly
     trending_products = list(Product.objects.filter(is_archived=False))
-    trending = random.sample(trending_products, 4)
+    if trending_products:
+        trending = random.sample(trending_products, 4)
+    else:
+        trending = []
     clothing_groups = Group.objects.filter(category__slug="vetements")
     shoes_groups = Group.objects.filter(category__slug="chaussures")
     bags_groups = Group.objects.filter(category__slug="sacs")

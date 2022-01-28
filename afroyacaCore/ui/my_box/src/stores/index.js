@@ -6,7 +6,7 @@ import thunk from "redux-thunk";
 import { connectRouter } from "connected-react-router";
 import { createBrowserHistory } from "history";
 import { routerMiddleware } from "connected-react-router";
-import { reducer as formReducer } from "redux-form";
+
 import { myBoxCStore } from '../components/my_box/store'
 
 
@@ -15,8 +15,6 @@ export const history = createBrowserHistory();
 const cstore = history =>
   combineReducers({
     router: connectRouter(history),
-    form: formReducer,
-
     myBoxCStore: myBoxCStore,
   });
 

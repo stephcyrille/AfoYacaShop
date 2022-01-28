@@ -205,9 +205,10 @@
 
 {% endblock %}
 
-{% block bundle %}
+{% comment %}
   {% render_bundle 'horizontal_scroll' 'js' %}
-{% endblock %}
+{% endcomment %}
 
 {% block custom_js %}
+  <script src="{% static 'ui/horizontal_scroll.min.js' %}"></script>
 {% endblock %}

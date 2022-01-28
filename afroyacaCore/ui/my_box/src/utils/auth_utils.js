@@ -1,33 +1,5 @@
 const axios = require("axios");
 
-export const saveToken = token => {
-  localStorage.setItem("appToken", token);
-};
-
-export const getToken = () => {
-  return localStorage.getItem("appToken");
-};
-
-export const clearToken = () => {
-  return localStorage.removeItem("appToken");
-};
-
-
-
-// LOCALSTORAGE FOR MANAGE USER
-export const saveUser = user => {
-  localStorage.setItem("user", user);
-};
-
-export const clearUser = () => {
-  return localStorage.removeItem("user");
-};
-
-export const getUser = () => {
-  let user = JSON.parse(localStorage.getItem("user"));
-  return user;
-};
-
 
 export const initAxios = () => {
 
@@ -63,14 +35,3 @@ export const initAxios = () => {
     });
   }
 };
-
-
-export const isLoggedIn = () => {
-  // We will first check token validity 
-  if(getToken()){
-    return true
-  }
-  else {
-    return false
-  }
-}

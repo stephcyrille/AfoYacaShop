@@ -20,6 +20,7 @@ class UserProfile(models.Model):
     created_date = models.DateTimeField(blank=True, editable=False, default=timezone.now)
     modified_date = models.DateTimeField(null=True, editable=False, blank=True)
     plan = models.ForeignKey(BoxSubscriptionPlan, on_delete=models.CASCADE, null=True, blank=True)
+    profile_complete = models.BooleanField(default=False) # Pass to true when the user fill all his profiles informations
 
     def save(self, *args, **kwargs):
         """ On save, update timestamps """
