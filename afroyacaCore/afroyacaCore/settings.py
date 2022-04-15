@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+from .secretKey import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,20 +22,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-ENV = os.environ.get('ENV', 'DEV')
-if "DEV" == ENV:
-    DEBUG = True
-else:
+if "PROD" == AYD_ENV:
     DEBUG = False
+else:
+    DEBUG = True
 
 if DEBUG:
     ALLOWED_HOSTS = ['*']
     # SECURITY WARNING: keep the secret key used in production secret!
     SECRET_KEY = 't_aj0((akg4d05nt=(hha)m-2)^p)1w0qv=(-km^5yo2dr&(7c'
 else:
-    ALLOWED_HOSTS = ['66.29.149.214', 'afroyacadrum.cm']
-    SECRET_KEY = os.environ.get('AYD_PROD_SECRET_KEY', "")
-
+    ALLOWED_HOSTS = ['173.212.211.177', 'afroyacadrum.cm']
+    SECRET_KEY = AYD_SECRET_KEY
 # Application definition
 
 INSTALLED_APPS = [
@@ -113,9 +112,9 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': os.environ.get('AYD_PROD_DATABASE', ''),
-            'USER': os.environ.get('AYD_PROD_USER', ''),
-            'PASSWORD': os.environ.get('AYD_PROD_PASSWORD', ''),
+            'NAME': AYD_DB_NAME,
+            'USER': AYD_DB_USER,
+            'PASSWORD': AYD_DB_PASSWORD,
             'HOST': 'localhost',
             'PORT': '',
         }

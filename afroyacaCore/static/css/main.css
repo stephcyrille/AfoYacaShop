@@ -805,4 +805,5 @@ a#scrollUp i {
     }
 }
 
+$ sudo useradd -m -d /opt/afroyacadrum -U -r -s /bin/bash afroyacadrum
 
