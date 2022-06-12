@@ -12,15 +12,23 @@ def home(request):
     banner = Banner.objects.filter(is_home=True, is_published=True).first()
     cover = Article.objects.filter(is_home=True, is_published=True).first()
     trending_products = list(Product.objects.filter(is_archived=False, trending=True))
-    if trending_products:
-        feature_products = random.sample(trending_products, 2)
-    else:
+    try:
+        if trending_products:
+            feature_products = random.sample(trending_products, 2)
+        else:
+            feature_products = []
+    except Exception as e:
         feature_products = []
+        print("Feature errrors", e.__str__())
     categories_list = list(Category.objects.filter(is_archived=False))
-    if categories_list:
-        categories = random.sample(categories_list, 3)
-    else:
+    try:
+        if categories_list:
+            categories = random.sample(categories_list, 3)
+        else:
+            categories = []
+    except Exception as e:
         categories = []
+        print("Categories errrors", e.__str__())
 
     context = {
         "banner": banner,
